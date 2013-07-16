@@ -194,3 +194,9 @@ a.more{ color:#ff3300}
 
 .pagination_book{ text-align:center; padding:5px 0 10px}
 .pagination_book a{ font-weight:bold; color:#212121; padding: 0 3px}
+tr.odd {
+	background-color: #f9f9f9;
+}
+tr.odd {
+/* 	background-color: #E4DFDF; */
+}
