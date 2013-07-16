@@ -1,15 +1,21 @@
 <div class="box-item1">
     <?php if(is_array($this->banner)) {
     	foreach($this->banner as $banner) :
-    	if(!$banner['video']) {?>
-        <a href="<?php echo $banner['link']?>" target="_blank">
-        	<img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 
-        			width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>"/>
-        </a>
-    <?php } else {?>
-         <iframe width="<?php echo $banner['width']?>" height="<?php echo $banner['height']?>"
-			src="<?php echo $banner['link']?>" frameborder="0"
+    	if($banner['video']) {?>
+        <iframe width="<?php echo $this->banner['width']?>" height="<?php echo $this->banner['height']?>"
+			src="<?php echo $this->banner['link']?>" frameborder="0"
 			allowfullscreen></iframe>
+    <?php } elseif($this->banner['flash']) {?>
+         <embed src="<?php echo $this->banner['link']; ?>" 
+        height="<?php echo $this->banner['height'];?>" alt="http://admicro2.vcmedia.vn/images/08va980x90bk.jpg" align="middle" 
+        width="<?php echo $this->banner['width'];?>" 
+            pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" 
+            allowscriptaccess="always" wmode="transparent" quality="high">
+    <?php } else {?>
+         <a href="<?php echo $this->banner['link']?>" target="_blank">
+    	    <img src="<?php echo $this->staticUrl . $this->banner['hash_folder'] . '/' . $this->banner['image'];?>" 
+    			width="<?php echo $this->banner['width'];?>" height="<?php echo $this->banner['height'];?>"/>
+        </a>
     <?php }?>
     <?php endforeach;?>
     <?php }?>

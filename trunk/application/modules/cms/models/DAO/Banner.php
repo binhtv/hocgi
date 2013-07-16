@@ -28,7 +28,7 @@ class Cms_Model_DAO_Banner
      * */
 	public function getBanner($options=array()) {
 		$sql = "SELECT `image`, `link`, `name`, `note`,
-						`width`, `height`, `hash_folder`,`video` ";
+						`width`, `height`, `hash_folder`,`video`,`flash` ";
 		$from = " FROM `banner` INNER JOIN `position_banner` ON `banner`.`id` = `position_banner`.`banner_id` ";
 		$where = " WHERE active = 1 ";
 		

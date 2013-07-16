@@ -59,7 +59,7 @@ class Admin_Model_DAO_Course
 	public function getCourses($options = array()) {
 		$sql = "SELECT `id`, `name`, `name_seo`, `image`, `active`, `order`,
 		                `content`, `best`, `promotion`, `hash_folder`, `opening_date`, `tuition`, 
-		                `course_link`, `hot`, `category`, `center_id` ";
+		                `course_link`, `hot`, `category`, `center_id`, `schedule` ";
 		$from = " FROM `course` ";
 		$where = " WHERE 1 = 1 ";
 		if($options['top']) {

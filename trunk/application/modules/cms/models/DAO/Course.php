@@ -27,7 +27,7 @@ class Cms_Model_DAO_Course
      * @return array
      * */
 	public function getCourses($options = array()) {
-		$sql = "SELECT `course`.`id`, `course`.`name`, `name_seo`, `course`.`image`, `content`, `course`.`hash_folder`,`tuition`, `course_link`, `category`,
+		$sql = "SELECT `course`.`id`, `course`.`name`, `name_seo`, `course`.`image`, `content`, `course`.`hash_folder`,`tuition`, `course_link`, `category`, `schedule`, `view_count`, `register_count`,
 		                    `opening_date`, `city`, `center`.`name` `center_name`, `center`.`image` `center_logo`, `center`.`hash_folder` `chash_folder`, `contact_info` ";
 		$from = " FROM `course` INNER JOIN `center` ON `course`.`center_id` = `center`.`id` ";
 		$where = " WHERE active = 1 ";

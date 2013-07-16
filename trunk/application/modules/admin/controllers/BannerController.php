@@ -90,10 +90,14 @@ class Admin_BannerController extends Zend_Controller_Action
 	     $width = Utils_Global::$params['width'];
 	     $height = Utils_Global::$params['height'];
 	     $video = Utils_Global::$params['video'];
+	     $flash = Utils_Global::$params['flash'];
 	     $active = Utils_Global::$params['active'];
 	     $note = Utils_Global::$params['note'];
 	     if($video) {
 	         $video = 1;
+	     }
+	     if($flash) {
+	         $flash = 1;
 	     }
 	     if($active) {
 	         $active = 1;
@@ -122,6 +126,7 @@ class Admin_BannerController extends Zend_Controller_Action
             		'width' => $width,
             		'height' => $height,
             		'video' => $video,
+                    'flash' => $flash,
             		'active' => $active,
                     'note' => $note,
             		'last_update' => time(),

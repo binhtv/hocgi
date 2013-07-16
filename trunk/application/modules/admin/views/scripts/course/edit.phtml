@@ -25,6 +25,14 @@
                  </td>
              </tr>
               <tr>
+                 <td>Schedule</td>
+                 <td>
+                     <textarea type="text" name="schedule" id="schedule" cols="200" rows="5" class="mceEditor">
+                         <?php echo $this->course['schedule'];?>
+                     </textarea>
+                 </td>
+             </tr>
+              <tr>
                  <td>Image
                      <?php if($this->course['image']) {?>
                          <img src="<?php echo Utils_Global::get('staticUrl') . '/course/' . $this->course['hash_folder'] . '/' . $this->course['image']?>" alt="<?php echo $this->course['image']?>" width="50" height="50">
@@ -64,7 +72,7 @@
                  </td>
              </tr>
              <tr>
-                 <td>Opening date</td>
+                 <td>Khai giảng</td>
                  <td>
                      <input type="text" name="opening_date" id="opening_date" value="<?php echo date('Y-m-d', $this->course['opening_date'])?>"/> YYYY-MM-DD
                  </td>

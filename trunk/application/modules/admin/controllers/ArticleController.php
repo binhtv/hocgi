@@ -168,7 +168,7 @@ class Admin_ArticleController extends Zend_Controller_Action
     		$imageFileName      = '';
     		if($files['file']) {
     			//Check file valid
-    			if(!$files['file']['name'] || !preg_match('/jpg|jpeg|gif|png|bmp/', $files['file']['name'])) {
+    			if(!$files['file']['name'] || !preg_match('/jpg|jpeg|gif|png|bmp/', strtolower($files['file']['name']))) {
     				return -1;
     			}
     			 

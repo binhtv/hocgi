@@ -5,36 +5,66 @@
 <div class="box_compare" id="box_compare_course_<?php echo $this->course['id'] .'_' . $this->course2['id']?>" title="So sánh khóa học">
 <table width="100%" border="0" cellspacing="1" cellpadding="1" class="table_comparese">
   <tbody>
-  <tr>
+  <tr class="odd">
     <td valign="top" width="50%">
         <div class="course-title-detail clearfix">
-       		<h1 class="fl"><?php echo $this->course['name']?></h1>
+       		<h1 class="fl" style="max-width: 420px;"><?php echo $this->course['name']?></h1>
             <a href="<?php echo $this->course['course_link']?>" class="register_course" target="_blank">ĐĂNG KÝ HỌC</a>
       	</div>
-        <div class="educator_div clearfix">
-        <div class="educator_logo fr"><img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->course['chash_folder'] . DS .  $this->course['center_logo']?>" width="77" height="88" /></div>
-            <?php echo $this->course['contact_info'];?>            	
-        </div>
-        <!-- text-->
-        <div class="mid-content">
-        	<?php echo $this->course['content']; ?>
-        </div>
     </td>  
-
     <td valign="top" width="50%">
         <div class="course-title-detail clearfix">
-           		<h1 class="fl"><?php echo $this->course2['name']?></h1>
+           		<h1 class="fl" style="max-width: 420px;"><?php echo $this->course2['name']?></h1>
                 <a href="<?php echo $this->course2['course_link']?>" class="register_course" target="_blank">ĐĂNG KÝ HỌC</a>
       	</div>
-        <div class="educator_div clearfix">
-        <div class="educator_logo fr"><img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->course2['chash_folder'] . DS .  $this->course2['center_logo']?>" width="77" height="88" /></div>
-            <?php echo $this->course2['contact_info'];?>            	
-        </div>
-        <!-- text-->
-        <div class="mid-content">
-        	<?php echo $this->course2['content']; ?>
-        </div>
     </td>
   </tr>
-</tbody></table>
+  <tr class="even">
+      <td valign="top" width="50%">
+        <div class="educator_div clearfix">
+        <div class="educator_logo fr">
+            <img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->course['chash_folder'] . DS .  $this->course['center_logo']?>" width="77" height="88" /></div>
+            <?php echo $this->course['contact_info'];?>            	
+        </div>
+      </td>
+      <td valign="top" width="50%">
+        <div class="educator_div clearfix">
+        <div class="educator_logo fr">
+            <img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->course2['chash_folder'] . DS .  $this->course2['center_logo']?>" width="77" height="88" /></div>
+            <?php echo $this->course2['contact_info'];?>            	
+        </div>
+      </td>
+  </tr>
+  <tr class="odd">
+      <td valign="top" width="50%">
+        <span style="font-weight: bold;">Học phí: </span>
+        <?php echo number_format($this->course['tuition'], 0, ',', '.'); ?> VNĐ
+      </td>
+      <td valign="top" width="50%">
+        <span style="font-weight: bold;">Học phí: </span>
+        <?php echo number_format($this->course2['tuition'], 0, ',', '.');?> VNĐ
+      </td>
+  </tr>
+  <tr class="even">
+      <td valign="top" width="50%">
+        <span style="font-weight: bold;">Đã đăng ký: </span>
+        <?php echo number_format($this->course['register_count'], 0, ',', '.'); ?>
+      </td>
+      <td valign="top" width="50%">
+        <span style="font-weight: bold;">Đã đăng ký: </span>
+        <?php echo number_format($this->course2['register_count'], 0, ',', '.');?>
+      </td>
+  </tr>
+  <tr class="odd">
+      <td valign="top" width="50%">
+        <span style="font-weight: bold;">Lịch học: </span><br/>
+        <?php echo $this->course['schedule']?>
+      </td>
+      <td valign="top" width="50%">
+        <span style="font-weight: bold;">Lịch học: </span><br/>
+        <?php echo $this->course2['schedule']?>
+      </td>
+  </tr>
+</tbody>
+</table>
 </div>
