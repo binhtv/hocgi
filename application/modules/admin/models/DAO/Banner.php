@@ -63,7 +63,7 @@ class Admin_Model_DAO_Banner
      * @return array
      * */
 	public function getBanners($options = array()) {
-		$sql = "SELECT `id`, `name`, `image`, `link`, `last_update`, `dateline`, `active`, `width`, `height`, `video`,`note`,`hash_folder` ";
+		$sql = "SELECT `id`, `name`, `image`, `link`, `last_update`, `dateline`, `active`, `width`, `height`, `video`,`flash`,`note`,`hash_folder` ";
 		$from = " FROM `banner` ";
 		$where = " WHERE 1 = 1 ";
 		if($options['id']) {

@@ -65,6 +65,7 @@ class Admin_CourseController extends Zend_Controller_Action
         $nameSeo = Utils_CommonFunction::getNameSeo($name);
         $link = Utils_Global::$params['course_link'];
         $content = Utils_Global::$params['content'];
+        $schedule = Utils_Global::$params['schedule'];
         $tuition = Utils_Global::$params['tuition'];
         $order = Utils_Global::$params['order'];
         $best = trim(Utils_Global::$params['best']);
@@ -120,6 +121,11 @@ class Admin_CourseController extends Zend_Controller_Action
             $this->_forward('edit', 'course', 'admin');
             return;
         }
+        if(!$schedule) {
+            Utils_Global::$params['errMessage'] = 'Vui lòng nhập nội dung khóa học!';
+            $this->_forward('edit', 'course', 'admin');
+            return;
+        }
         if(!$tuition) {
             Utils_Global::$params['errMessage'] = 'Vui lòng nhập học phí!';
             $this->_forward('edit', 'course', 'admin');
@@ -130,6 +136,7 @@ class Admin_CourseController extends Zend_Controller_Action
             $data = array('name' => $name,
             		'name_seo' => $nameSeo,
             		'content' => $content,
+                    'schedule' => $schedule,
                     'tuition' => $tuition,
                     'opening_date' => strtotime($openingDate),
                     'course_link' => $link,
