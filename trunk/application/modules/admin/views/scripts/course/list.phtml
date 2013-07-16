@@ -1,0 +1,82 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<a href="/admin/course/edit" style="font-weight: bold">Tạo mới</a>
+<?php if(is_array($this->courses)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Link</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Center</th>
+                <th>Tuition</th>
+                <th>Hot</th>
+                <th>Promotion</th>
+                <th>Best</th>
+                <th>Active</th>
+                <th>Order</th>
+                <th>Opening date</th>
+                <th>Action</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->courses as $course) :?>
+             <tr>
+                 <td><?php echo $course['id']?></td>
+                 <td><?php echo $course['name']?></td>
+                 <td><a href="<?php echo $course['course_link']?>" target="_blank">Link</a></td>
+                 <td><img alt="<?php echo $course['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/course/' . $course['hash_folder'] . '/' . $course['image']?>"></td>
+                 <td><?php echo $course['category']?></td>
+                 <td><a href="javascript:void(0)" onclick="alert('under construction');">View detail</a></td>
+                 <td><?php echo number_format($course['tuition'], 0, ',', '.');?></td>
+                 <td>
+                     <?php if($course['hot']) {?>
+                     YES
+                     <?php } else {?>
+                     NO
+                     <?php }?>
+                 </td>
+                 <td>
+                     <?php if($course['promotion']) {?>
+                     YES
+                     <?php } else {?>
+                     NO
+                     <?php }?>
+                 </td>
+                 <td>
+                     <?php if($course['best']) {?>
+                     YES
+                     <?php } else {?>
+                     NO
+                     <?php }?>
+                 </td>
+                 <td>
+                     <?php if($course['active']) {?>
+                     <i class="icon-ok"></i>
+                     <?php } else {?>
+                     <i class="icon-lock"></i>
+                     <?php }?>
+                 </td>
+                 <td>
+                     <?php echo $course['order'];?>
+                 </td>
+                 <td><?php echo date('d/m/Y', $course['opening_date'])?></td>
+                 <td>
+                     <a href="/admin/course/edit/id/<?php echo $course['id']?>">
+                         <i class="icon-edit"></i>
+                     </a>
+                     <a href="/admin/course/delete/id/<?php echo $course['id']?>" onclick="return confirm('sure?');">
+                         <i class="icon-remove"></i>
+                     </a>
+                 </td>
+             </tr>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+      <?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'pagination.phtml', $this->currentUrl);?>
+</div>
+<?php } else {?>
+<div>Không có khóa học nào!</div>
+<?php }?>

@@ -1,0 +1,22 @@
+<div class="bestseller">
+<div class="book_title">
+	<a href="javascript:void(0)">Sách bán chạy</a>
+</div>
+<?php if(is_array($this->books)) {?>
+<div class="row_book clearfix">
+	<ul id="bestseller">
+	<?php foreach($this->books as $book) :?>
+		<li class="book_item">
+			<a class="aImg73" href="<?php echo $this->serverUrl() . $this->url(array('book_id' => $book['id'], 'name_seo' => $book['name_seo']), 'thu_vien_detail')?>">
+				<img src="<?php echo $this->staticUrl . $book['hash_folder'] . '/' . $book['image'];?>" width="65" height="91" />
+			</a>
+			<h2 class="title">
+				<a class="link-title14" href="<?php echo $this->serverUrl() . $this->url(array('book_id' => $book['id'], 'name_seo' => $book['name_seo']), 'thu_vien_detail')?>"><?php echo $book['name']?></a>
+			</h2>
+			<div class="price"><?php echo number_format($book['price'], 0, ',', '.')?> vnđ</div>
+		</li>
+	<?php endforeach;?>
+	</ul>
+</div>
+<?php }?>
+</div>

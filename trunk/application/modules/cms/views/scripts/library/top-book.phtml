@@ -1,0 +1,33 @@
+<div class="book_title">Mỗi ngày một cuốn sách</div>
+<?php if(is_array($this->books)) {?>
+<div class="list_book_content clearfix">
+	<div class="book_focus fl">
+		<div class="img_book">
+			<a href="<?php echo $this->serverUrl() . $this->url(array('book_id' => $this->books[0]['id'], 'name_seo' => $this->books[0]['name_seo']), 'thu_vien_detail')?>" target="_blank">
+				<img src="<?php echo $this->staticUrl . $this->books[0]['hash_folder'] . '/' . $this->books['0']['image'] ?>" width="246" height="358" alt="<?php echo $this->books[0]['image']?>"/>
+			</a>
+		</div>
+		<h2 class="title">
+			<a target="_blank" class="link-title" href="<?php echo $this->serverUrl() . $this->url(array('book_id' => $this->books[0]['id'], 'name_seo' => $this->books[0]['name_seo']), 'thu_vien_detail')?>" 
+			            title="<?php echo $this->books[0]['name']?>"><?php echo $this->books[0]['name']?></a>
+		</h2>
+	</div>
+	<div class="list_book fr">
+	<?php $count = count($this->books);
+		for($i = 1; $i<$count; $i+=4) {?>
+		<div class="row_book clearfix">
+			<?php for($j = $i; ($j<$i+4) && ($j<$count); $j++) {?>
+			<div class="book_item">
+				<a class="aImg103" href="<?php echo $this->serverUrl() . $this->url(array('book_id' => $this->books[0]['id'], 'name_seo' => $this->books[0]['name_seo']), 'thu_vien_detail')?>" target="_blank" title="<?php echo $this->books[$j]['name']?>">
+					<img src="<?php echo $this->staticUrl . $this->books[$j]['hash_folder'] . '/' . $this->books[$j]['image']?>" width="103" height="144" alt="<?php echo $this->books[$j]['image'];?>"/>
+				</a>
+				<h2 class="title">
+					<a class="link-title14" href="<?php echo $this->serverUrl() . $this->url(array('book_id' => $this->books[0]['id'], 'name_seo' => $this->books[0]['name_seo']), 'thu_vien_detail')?>" target="_blank"><?php echo $this->books[$j]['name']?></a>
+				</h2>
+			</div>
+			<?php }?>
+		</div>
+		<?php }?>
+	</div>
+</div>
+<?php }?>

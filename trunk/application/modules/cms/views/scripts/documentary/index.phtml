@@ -1,0 +1,17 @@
+<?php if($this->type == 1) {
+		$class = 'box-documentary-news fl';
+		$id = 'box-latest-documentary';
+	} else if($this->type == 2) {
+		$class = 'box-documentary-download fr';
+		$id = 'box-most-download-documentary';
+	}?>
+<div class="block-documentary <?php echo $class;?>">
+	<?php if($this->type == 1) {?>
+		<div class="book_title">Tài liệu mới nhất</div>
+	<?php } else if($this->type == 2) {?>
+		<div class="book_title">Tài liệu download nhiều nhất</div>
+	<?php }?>
+	<div class="box-content" id="<?php echo $id;?>">
+		<?php echo $this->content;?>
+	</div>
+</div>

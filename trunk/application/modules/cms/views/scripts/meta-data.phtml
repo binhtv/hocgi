@@ -1,0 +1,16 @@
+<meta charset="utf-8">
+<?php 
+if(is_array($this->metadata)){
+    if(is_array($this->metadata['metadata'])){
+        foreach ($this->metadata['metadata'] as $key => $value) {
+            if($key == 'title'){
+                echo $this->headTitle($value);
+            } else {
+                $this->headMeta($value, $key);
+            }
+        }
+    }
+    echo $this->headMeta();
+    echo '<link rel="canonical" href="' . $this->metadata['canonical'] . '"/>';
+}
+?>

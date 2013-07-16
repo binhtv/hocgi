@@ -1,0 +1,24 @@
+<div class="toplist fl">
+        <div class="toplist-content2" id="scrollbar1">
+        	<div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div>
+            <div class="viewport">
+			 <div class="overview">
+        		
+              <ul class="ulTopList">
+              <?php if(is_array($this->articles)) {
+              	foreach($this->articles as $article) :?>
+                <li>
+                  <h2>
+                  	<a title="<?php echo $this->readArticle . $article['title']?>"
+                  			href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>" class="link-title">
+        		  	<?php echo $article['title'];?></a>
+                  </h2>
+                </li>
+                <?php endforeach;}?>
+              </ul>
+        	
+            </div>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,43 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<a href="/admin/position/edit" style="font-weight: bold">Tạo mới</a>
+<?php if(is_array($this->positions)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>Id</th>
+                <th>Position Name</th>
+                <th>Last update</th>
+                <th>Created date</th>
+                <th>Banner</th>
+                <th>Action</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->positions as $position) :?>
+             <tr>
+                 <td><?php echo $position['id']?></td>
+                 <td><?php echo $position['position_name']?></td>
+                 <td><?php echo date('d/m/Y h:i:s', $position['last_update'])?></td>
+                 <td><?php echo date('d/m/Y h:i:s', $position['dateline'])?></td>
+                 <td>
+                     <a href="/admin/banner/list/position/<?php echo $position['id']?>" >View</a>
+                 </td>
+                 <td>
+                     <a href="/admin/position/edit/id/<?php echo $position['id']?>">
+                         <i class="icon-edit"></i>
+                     </a>
+                     <a href="/admin/position/delete/id/<?php echo $position['id']?>" onclick="return confirm('sure?');">
+                         <i class="icon-remove"></i>
+                     </a>
+                 </td>
+             </tr>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+      <?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'pagination.phtml', $this->currentUrl);?>
+</div>
+<?php } else {?>
+<div>Không có dữ liệu!</div>
+<?php }?>

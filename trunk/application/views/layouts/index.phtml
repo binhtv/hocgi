@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Giai bai tap Online</title>
+  <meta name="description" content="website description" />
+  <meta name="keywords" content="website keywords, website keywords" />
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+  <?php require 'style.phtml';?>
+</head>
+
+<body>
+  <div id="container">
+    <img src="<?php echo Zend_Registry::get('imgUrl')?>/images/sun.png" alt="sunshine" />
+    <div id="main">
+      <header>
+        <div id="logo">
+          <div id="logo_text">
+            <h1><a href="index.html">GIẢI BÀI TẬP<span class="logo_colour">_ONLINE</span></a></h1>
+            <h2>Giải càng nhanh. Học càng giỏi.</h2>
+          </div>
+          <div id="logo_text2">
+            <h3>Telephone</h3>
+            <h4>0100 123 456</h4>
+          </div>
+        </div>
+        <nav>
+          <ul class="sf-menu" id="nav">
+            <li><a href="<?php echo $this->serverUrl() . $this->url(array(), 'index');?>">Trang chủ</a></li>
+            <li><a href="<?php echo $this->serverUrl() . $this->url(array(), 'submit');?>">Giải bài tập</a></li>
+            <li><a href="<?php echo $this->serverUrl() . $this->url(array(), 'exam');?>">Thư viện đề thi</a>
+              <ul>               
+                <li><a href="#">Toán</a>
+                  <ul>
+                    <li><a href="#">Đại số</a></li>
+                    <li><a href="#">Hình học</a></li>
+                    <li><a href="#">Toán cao cấp</a></li>                 
+                  </ul>
+                </li>
+                <li><a href="#">Lý</a></li>
+                <li><a href="#">Hóa</a></li>
+                <li><a href="#">Anh Văn</a></li>
+                <li><a href="#">Văn</a></li>
+              </ul>            
+            </li>
+            <li><a  href="<?php echo $this->serverUrl() . $this->url(array(), 'document');?>">Tài liệu</a>
+             <ul>
+                <li><a href="#">Drop Down One</a></li>
+                <li><a href="#">Drop Down Two</a>
+                  <ul>
+                    <li><a href="#">Sub Drop Down One</a></li>
+                    <li><a href="#">Sub Drop Down Two</a></li>
+                    <li><a href="#">Sub Drop Down Three</a></li>
+                    <li><a href="#">Sub Drop Down Four</a></li>
+                    <li><a href="#">Sub Drop Down Five</a></li>
+                  </ul>
+                </li>
+                <li><a href="#">Drop Down Three</a></li>
+                <li><a href="#">Drop Down Four</a></li>
+                <li><a href="#">Drop Down Five</a></li>
+              </ul>
+            </li>
+            <li><a  href="<?php echo $this->serverUrl() . $this->url(array(), 'help');?>">Hướng dẫn</a></li>     
+            <li><a  href="<?php echo $this->serverUrl() . $this->url(array(), 'contact');?>">Liên hệ</a></li>
+            <li><a  href="<?php echo $this->serverUrl() . $this->url(array(), 'profile');?>">Trang cá nhân</a></li>
+           
+          </ul>
+        </nav>
+      </header>
+      <div id="site_content">
+        <div id="sidebar_container">
+          <div class="sidebar">
+            <h4>Đăng nhập</h4>
+            Username:<input type=textbox />
+            Password:<input type=password />
+            <p><a href="#">Đăng ký</a> | <a href="#">Quên mật khẩu?</a></p>
+          </div>
+          <div class="sidebar">
+            <h4>20% Discount</h4>
+            <p>For the month of March 2012, we are offering a 20% discount for all new customers.</p>
+          </div>
+          <div class="sidebar">
+            <h4>Hỗ trợ trực tuyến</h4>
+            <p>Yahoo!<a href="#">tvkha</a></p>
+            <p>Skype<a href="#">tvkha</a></p>
+            <p>Hotline<a href="#">0839898999</a></p>
+          </div>                     
+        </div>
+        <div id="content">
+        	<?php echo $this->layout()->content;?>
+        </div>
+      </div>
+      <footer>
+        <p><a href="index.html">Trang chủ</a> | <a href="examples.html">Giải bài tập</a> | <a href="page.html">Thư viện đề thi</a> | <a href="another_page.html">Tài liệu</a> | <a href="another_page.html">Hướng dẫn</a> |  <a href="contact.php">Liên hệ</a></p>
+        <p>Copyright &copy; GiaiBaiTapOnline | <a href="http://www.giaibaitaponline.com.vn">design from giaibaitaponlime.com.vn</a></p>
+      </footer>
+    </div>
+  </div>
+  <div id="grass"></div>
+  <!-- javascript at the bottom for fast page loading -->
+  <?php require 'script.phtml';?>
+</body>
+</html>

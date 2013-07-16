@@ -1,0 +1,13 @@
+@CHARSET "ISO-8859-1";
+div.upload-image {
+	border: 1px solid #fbeed5;
+	border-radius: 4px;
+	padding: 10px 10px 10px 30px;
+}
+
+.optionGroup {
+	color: black;
+}
+.optionChild {
+	color: blue;
+}

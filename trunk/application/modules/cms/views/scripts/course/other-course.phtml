@@ -1,0 +1,20 @@
+<div class="box-title">Các khóa học khác</div>
+<?php if(is_array($this->courses)) {?>
+<div class="box-list-course">
+	<a class="ads_hocgi" href="javascript:void(0);">ads hocgi.net</a>
+	<ul class="list_item_course">
+		<?php foreach ($this->courses as $course) :?>
+		<li class="clearfix">
+			<a class="aImg59" href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>">
+				<img src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image']?>" width="59" height="48" alt="<?php echo $course['image'];?>"/>
+			</a>
+			<div class="course_place fl">
+				<a href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>" class="title">
+					<?php echo $course['name']?></a>
+				<p><?php echo $course['center_name']?></p>
+			</div>
+		</li>
+		<?php endforeach;?>
+	</ul>
+</div>
+<?php }?>

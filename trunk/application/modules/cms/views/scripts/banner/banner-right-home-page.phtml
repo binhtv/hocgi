@@ -1,0 +1,11 @@
+<?php if(is_array($this->banners)) {?>
+<div class="adv_item_right">
+<?php foreach ($this->banners as $banner) :?>
+	<a href="<?php echo $banner['link']?>" target="_blank">
+	
+		<img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 
+				width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>"/>
+	</a>
+<?php endforeach;?>
+</div>
+<?php }?>

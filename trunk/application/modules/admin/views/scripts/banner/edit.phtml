@@ -1,0 +1,70 @@
+<h3><?php echo $this->title?></h3>
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<div class="upload-image">
+<form action="/admin/banner/save" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-striped">
+        <tbody>
+             <tr>
+                 <td>Name</td>
+                 <td>
+                     <input type="text" name="name" id="name" value="<?php echo $this->banner['name'];?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Link</td>
+                 <td>
+                     <input type="text" name="link" id="link" value="<?php echo $this->banner['link']?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Width</td>
+                 <td>
+                    <input type="number" name="width" id="width" value="<?php echo $this->banner['width']?>"/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Height</td>
+                 <td>
+                     <input type="number" name="height" id="height" value="<?php echo $this->banner['height']?>"/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Image
+                     <?php if($this->banner['image']) {?>
+                         <img src="<?php echo Utils_Global::get('staticUrl') . '/banner/' . $this->banner['hash_folder'] . '/' . $this->banner['image']?>" alt="<?php echo $this->banner['image']?>" width="50" height="50">
+                     <?php }?>
+                 </td>
+                 <td>
+                     <input type="file" name="file" id="file" accept="image/*" title="Chỉ chấp nhận các định dạng hình ảnh (png, jpg, jpge, gif)">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Video</td>
+                 <td>
+                     <input type="checkbox" name="video" id="video" <?php echo $this->banner['video']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+             <tr>
+                 <td>Active</td>
+                 <td>
+                     <input type="checkbox" name="active" id="active" <?php echo $this->banner['active']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+             <tr>
+                 <td>Note</td>
+                 <td>
+                     <textarea rows="5" cols="10" name="note" id="note"><?php echo $this->banner['note']?></textarea>
+                 </td>
+             </tr>
+             <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save"/>
+                    <a href="/admin/banner/list/position/<?php echo $this->positionId?>">Cancel</a>
+                </td> 
+             </tr>
+        </tbody>
+      </table>
+      <input type="hidden" value="<?php echo $this->positionId?>" name="position" id="position"/>
+      <input type="hidden" value="<?php echo $this->banner['id']?>" name="id" id="id"/>
+</form>
+</div>

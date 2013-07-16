@@ -1,0 +1,110 @@
+<script>
+  $(document).ready(function()
+  {
+    $("#frmView").validate();
+  });
+</script>
+
+<div id="centerCont"> 
+<strong>ExtView >> </strong> Edit
+<br />
+<br />
+<form name="frmView" id="frmView" action="/admin/extview/save" method="post">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="mainTab">
+<tr>
+ <td class="hligh2" width="20%"><label for="viewname">ExtView Name</label><span class="require">*</span></td>
+ <td class="hligh2">   
+   <input type="text" name="viewname" id="viewname" 
+   value="<?php echo $this->objView->extviewname; ?>" style="width:200px" maxlength="50"
+   title="Bạn phải nhập tên View" class="required">
+   </td>
+</tr>
+<tr>
+ <td class="hligh1" width="20%"><label for="module">Callback</label><span class="require">*</span></td>
+ <td class="hligh1">   
+   <input type="text" name="callback" id="callback" 
+   value="<?php echo $this->objView->callback; ?>" style="width:200px" maxlength="100"
+   title="Bạn phải nhập ham callback" class="required">
+   </td>
+</tr>    
+<tr>
+ <td class="hligh1" width="20%"><label for="module">Require Option</label></td>
+ <td class="hligh1">   
+   <input type="text" name="require_option" id="require_option" 
+   value="<?php echo $this->objView->require_option; ?>" style="width:500px" maxlength="200"
+   title="nhập ham require_option">
+   </td>
+</tr>
+<tr>
+ <td class="hligh2" width="20%"><label for="params">Params</label></td>
+ <td class="hligh2"><a href="javascript:void(0);" onclick="addParam(this); return false;" title="Add Param">Add Param</a> 
+</tr>        
+<?php
+	if($this->objView->params != ''){		
+	$arrParams = unserialize($this->objView->params);
+	if(is_array($arrParams)){
+		$i = 0;
+		foreach($arrParams as $key => $value){
+?>
+<tr id="block_param_<?php echo ($i + 1);?>">
+ <td class="hligh1" width="20%">&nbsp;</td>
+ <td class="hligh1"> Key  
+   <input type="text" name="key[]"
+   value="<?php echo $key;?>" style="width:100px">
+   &nbsp;&nbsp; Value 
+   <input type="text" name="value[]"
+   value="<?php echo $value;?>" style="width:100px">
+   <a href="javascript:void(0);" onclick="removeParam(this);" title="Remove" id="remove_1">Remove</a>
+   </td>
+</tr>
+<?php
+		$i++;
+		} // end foreach
+	}		
+	}else{
+		echo "here 2";
+		$i = 1;
+?>
+<tr id="block_param_1">
+ <td class="hligh1" width="20%">&nbsp;</td>
+ <td class="hligh1"> Key  
+   <input type="text" name="key[]"
+   value="" style="width:100px" maxlength="50">
+   &nbsp;&nbsp; Value 
+   <input type="text" name="value[]"
+   value="" style="width:100px" maxlength="50">
+   <a href="javascript:void(0);" onclick="removeParam(this);" title="Remove" id="remove_1" 
+   style="display:none;"
+   >Remove</a>
+   </td>
+</tr>
+<?php	
+	}
+?>
+
+</table>
+<br />
+<p>
+<input type="button" name="cancel" value="Cancel" onclick="onClickCancel()" class="button"/>
+<input type="submit" name="submit" value="Submit" onclick="onClickSubmit()" class="button"/>
+<input type="hidden" name="id" value="<?php echo $this->objView->extviewid; ?>" />
+<input type="hidden" name="counter" value="<?php echo $i;?>" id="counter"/></td>
+</p>
+</form>
+
+<script src="/js/admin/jquery.cookie.js"></script>
+<script type="text/javascript">
+	function onClickCancel()
+	{
+		window.location='/admin/extview/list';
+		$.cookie('edit', 'true',{ path: '/admin/extview' });
+	}
+	function onClickSubmit()
+	{		
+		$.cookie('edit', 'true',{ path: '/admin/extview' });
+		$("form#frmView").submit();
+	}
+	$(document).ready(function(){  
+ 
+	});   
+</script>

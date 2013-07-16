@@ -1,0 +1,29 @@
+   <?php if(is_array($this->articles)) {
+   		foreach($this->articles as $article) :?>
+        <div class="folder-news clearfix">
+        	<div class="left-fnews fl">
+                <a class="aImg136" href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>" 
+                	title="<?php echo $this->readArticle . $article['title']?>">
+                	<img width="137" height="102" alt="<?php echo $article['title']?>" src="<?php echo $this->staticUrl . $article['hash_folder'] . '/' . $article['image']?>" class="img-subject">
+               	</a>
+            </div>
+            <div class="right-fnews fr">
+            <h2 class="h2Title-14">
+            	<a class="link-title14" title="<?php echo $this->readArticle . $article['title']?>" 
+            		href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>"> <?php echo $article['title']?></a>
+            </h2>            
+            <h3 class="h3Lead"><?php echo $article['short_description']?></h3>
+            </div>
+        </div>
+        <?php endforeach;?>
+        <!-- end list folder-news-->
+        <!-- phan trang-->
+        <div class="pagination"> 
+        	<?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforarticle.phtml', $this->category);?>
+        </div>
+        <!-- end phan trang-->
+<?php } else {?>
+	<div>Chưa có tin nào</div>
+<?php }?>

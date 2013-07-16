@@ -1,0 +1,125 @@
+<h3><?php echo $this->title?></h3>
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<div class="upload-image">
+<form action="/admin/course/save" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-striped">
+        <tbody>
+             <tr>
+                 <td>Name</td>
+                 <td>
+                     <input type="text" name="name" id="name" value="<?php echo $this->course['name'];?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Course Link</td>
+                 <td>
+                     <input type="text" name="course_link" id="course_link" value="<?php echo $this->course['course_link']?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Content</td>
+                 <td>
+                     <textarea type="text" name="content" id="content" cols="200" rows="5" class="mceEditor">
+                         <?php echo $this->course['content'];?>
+                     </textarea>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Image
+                     <?php if($this->course['image']) {?>
+                         <img src="<?php echo Utils_Global::get('staticUrl') . '/course/' . $this->course['hash_folder'] . '/' . $this->course['image']?>" alt="<?php echo $this->course['image']?>" width="50" height="50">
+                     <?php }?>
+                 </td>
+                 <td>
+                     <input type="file" name="file" id="file" accept="image/*" title="Chỉ chấp nhận các định dạng hình ảnh (png, jpg, jpge, gif)">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Category</td>
+                 <td>
+                     <select name="category" id="category">
+                         <?php foreach ($this->categories as $category): ?>
+                             <option value="<?php echo $category['id']?>" class="optionGroup" <?php echo $this->course['category'] == $category['id']? 'selected="selected"':""?>><?php echo $category['name']?></option>
+                             <?php foreach ($category['childs'] as $child):?>
+                                 <option value="<?php echo $child['id']?>" class="optionChild" <?php echo $this->course['category'] == $child['id']? 'selected="selected"':""?>>--<?php echo $child['name']?></option>
+                             <?php endforeach;?>
+                         <?php endforeach;?>
+                     </select>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Center</td>
+                 <td>
+                     <select name="center_id" id="center_id">
+                         <?php foreach ($this->centers as $center):?>
+                             <option value="<?php echo $center['id']?>" class="optionGroup" <?php echo $this->course['center_id'] == $center['id']? 'selected="selected"':""?>><?php echo $center['name']?></option>
+                         <?php endforeach;?>
+                     </select>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Tuition</td>
+                 <td>
+                     <input type="number" name="tuition" id="tuition" value="<?php echo $this->course['tuition']?>"/>VND
+                 </td>
+             </tr>
+             <tr>
+                 <td>Opening date</td>
+                 <td>
+                     <input type="text" name="opening_date" id="opening_date" value="<?php echo date('Y-m-d', $this->course['opening_date'])?>"/> YYYY-MM-DD
+                 </td>
+             </tr>
+              <tr>
+                 <td>Order</td>
+                 <td>
+                     <input type="number" name="order" id="order" value="<?php echo $this->course['order']?>"/>
+                 </td>
+             </tr>
+             <tr>
+                 <td>Active</td>
+                 <td>
+                     <input type="checkbox" name="active" id="active" <?php echo $this->course['active']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Best</td>
+                 <td>
+                     <input type="checkbox" name="best" id="best" <?php echo $this->course['best']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Hot</td>
+                 <td>
+                     <input type="checkbox" name="hot" id="hot" <?php echo $this->course['hot']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Promotion</td>
+                 <td>
+                     <input type="checkbox" name="promotion" id="promotion" <?php echo $this->course['promotion']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+             <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save"/>
+                    <a href="/admin/course/list">Cancel</a>
+                </td> 
+             </tr>
+        </tbody>
+      </table>
+      <input type="hidden" value="<?php echo $this->id?>" name="id" id="id"/>
+</form>
+</div>
+<script type="text/javascript">
+tinymce.init({selector:'textarea',
+	relative_urls:false,
+	remove_script_host:false,
+	plugins: [
+	          "advlist autolink lists link image charmap print preview anchor",
+	          "searchreplace visualblocks code fullscreen",
+	          "insertdatetime media table contextmenu paste moxiemanager"
+	      ],
+	      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"});
+
+
+</script>

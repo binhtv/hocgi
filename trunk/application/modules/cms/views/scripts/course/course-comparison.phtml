@@ -1,0 +1,36 @@
+<div class="compare_courses">
+	<h4 class="compare_course-title ">
+		<span>So sánh với khóa học khác</span>
+	</h4>
+	<div class="compare_courses_form">
+			<label for="text-search" class="lb-compare">Tìm kiếm: </label>
+			<input type="text" class="textfiled" name="f_name" id="f_name"/> 
+			<select class="select" name="f_tuition_from" id="f_tuition_from">
+				<option value="">Giá từ ...</option>
+				<option value="3000000">3.000.000 VNĐ</option>
+				<option value="5000000">5.000.000 VNĐ</option>
+				<option value="10000000">10.000.000 VNĐ</option>
+			</select> 
+			<select class="select" name="f_tuition_to" id="f_tuition_to">
+				<option value="">Giá đến...</option>
+				<option value="5000000">5.000.000 VNĐ</option>
+				<option value="10000000">10.000.000 VNĐ</option>
+				<option value="10000000">15.000.000 VNĐ</option>
+			</select> 
+			<select class="select"  name="f_city" id="f_city">
+				<option value="">Tỉnh Thành</option>
+				<option value="SG">Tp.HCM</option>
+				<option value="HN">Hà Nội</option>
+				<option value="BD">Bình Dương</option>
+			</select> 
+			<input type="submit" value="Lọc" class="button_filter" id="filter_chitiet_course"
+				style="margin-left: 15px" />
+	</div>
+<?php if(is_array($this->courses)) {?>
+	<ul class="list_item_course clearfix" id="course_comparison_content">
+		<?php echo $this->content;?>
+	</ul>
+<?php }?>
+    <input type="hidden" id="category" value="<?php echo $this->category;?>">
+    <input type="hidden" id="course_id" value="<?php echo $this->currentId;?>">
+</div>

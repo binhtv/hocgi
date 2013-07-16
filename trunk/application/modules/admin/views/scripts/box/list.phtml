@@ -1,0 +1,93 @@
+<div id="centerCont"> 
+<strong>Box >> </strong> List
+<br />
+<form name="frmLayout" id="frmLayout" action="/admin/box/list" method="post"  enctype="multipart/form-data">
+	<table width="100%" border="0" cellspacing="0" cellpadding="3" class="table table-bordered">
+		<tr>
+			<td width="1%"><label for="name">Name</label></td>
+			<td width="30%">   
+			   <input type="text" name="name" id="name" 
+			   value="<?php echo $this->postData['name']; ?>" style="width:200px" maxlength="50" title="Bạn phải nhập tên" class="required">
+			</td>
+		</tr>
+		<tr>
+			<td width="1%"><label for="content">Content</label></td>
+			<td width="30%">   
+			   <input type="text" name="content" id="content" 
+			   value="<?php echo $this->postData['content']; ?>" style="width:200px" maxlength="50" title="Bạn phải nhập tên" class="required">
+			</td>
+		</tr>			
+		<tr>
+			<td colspan="4" align="left">
+				<input type="submit" value="Search" />
+				<input type="reset" value="Reset" />
+			</td>
+		</tr> 
+	</table>
+<br />
+<input type="button" class="button" value=" Create New" onclick="window.location.href='/admin/box/edit/boxid'">
+<table border="0" cellspacing="0" cellpadding="0" class="table table-bordered" width="100%">
+  <tr>
+  	<td width="10%" class="tabTit">ID</td>
+    <td width="26%" class="tabTit">Name</td>
+	<td width="50%" class="tabTit">Content</td>
+    <td width="14%" class="tabTit">Action</td>
+  </tr>
+<?php 
+	if(count($this->paginator) > 0)
+	{        
+		$i = 1;
+		foreach($this->paginator as $item)
+		{
+			$cls = "hligh1";
+			if($i%2 == 0 && $i != 0)
+				$cls = "hligh2";
+			$i++;			
+?>
+  <tr>
+  	<td align="center" class="<?php echo $cls; ?>"><?php echo $item['boxid']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['boxname']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo htmlentities($item['content'], ENT_QUOTES | ENT_IGNORE, "UTF-8"); ?></td>
+	<td class="<?php echo $cls; ?>" align="center">
+     <a id="edit" onClick="onClickEdit()" href="/admin/box/edit/boxid/<?php echo $item['boxid'];?>">
+        <i class="icon-edit"></i>
+     </a> 
+     <a href="/admin/box/delete/boxid/<?php echo $item['boxid'];?>" onclick="return confirm('sure?');">
+        <i class="icon-remove"></i>
+     </a>
+	</td>
+  </tr>
+ <?php
+        }
+    }
+  ?>    
+</table>
+<br />
+<p>
+	
+</p>
+<br />
+<p style="text-align: center;">
+<?php
+	if(count($this->paginator) > 0){
+		echo $this->paginationControl($this->paginator, 'Sliding', Zend_View_Helper_PaginationControl::getDefaultViewPartial());
+	}
+?>
+</p>  
+</form>
+</div>
+<script type="text/javascript">
+	$(function(){
+		$("#paginationControl a").click(function(){
+			var href = $(this).attr('href');
+			$("form#frmLayout").attr('action', href);
+			$("form#frmLayout").submit();
+			return false;
+		});
+	});
+	function onClickEdit() {
+		$.cookie('name', '<?php echo $this->postData['name']; ?>',{ path: '/admin/box' });
+  		$.cookie('content', '<?php echo $this->postData['content']; ?>',{ path: '/admin/box' });
+  		$.cookie('page', '<?php echo $this->page; ?>',{ path: '/admin/box' });
+	}
+</script>

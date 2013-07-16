@@ -1,0 +1,22 @@
+<div class="box-item1 box_website_link">
+	<div class="box-item-title1">
+		<h2 class="h2TS">Liên kết tài trợ</h2>
+	</div>
+	<?php if(is_array($this->banners)) {
+	?>
+	<ul class="clearfix">
+	<?php foreach ($this->banners as $banner) :?>
+		<li class="clearfix">
+			<a href="<?php echo $banner['link']?>" class="aImg73" target="_blank">
+				<img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>"
+					width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>" a;lt="<?php echo $banner['name'];?>">
+			</a>
+			<h3 class="h3Lead">
+				<a class="link-othernews" href="<?php echo $banner['link']?>" target="_blank"><?php echo $banner['name']?></a>
+			</h3>
+			<div class="state"><?php echo $banner['note'];?></div>
+		</li>
+	<?php endforeach;?>
+	</ul>
+	<?php }?>
+</div>

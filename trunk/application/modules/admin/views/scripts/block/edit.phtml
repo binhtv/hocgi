@@ -1,0 +1,137 @@
+<script>
+  $(document).ready(function()
+  {
+    $("#frmBlock").validate();
+  });
+</script>
+
+<div id="centerCont"> 
+<strong>Block >> </strong> Edit
+<br />
+<br />
+<form name="frmBlock" id="frmBlock" action="/admin/block/save" method="post">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="mainTab">
+<tr>
+ <td class="hligh2"><label for="description">Description</label></td>
+ <td class="hligh2">   
+   <input type="text" name="description" id="description" 
+   value="<?php echo $this->objBlock->description; ?>" style="width:200px" maxlength="100">
+   </td>
+</tr>  
+<tr>
+ <td class="hligh2" width="20%"><label for="layout">Layout</label></td>
+ <td class="hligh2">   
+   <?php   
+    // set getUrl for ajax calling
+	$getUrl = '/admin/block/get-section-by-layout';
+	
+	echo $this->formSelect('layout', $this->objBlock->layout, array(
+						'style'=>'width:200px',
+						'onchange'=> "ajaxChangeLayout('$getUrl', this)"						
+						), $this->arrLayout) 
+   ?>
+   </td>
+</tr>
+<tr>
+ <td class="hligh1"><label for="section">Section</label></td>
+ <td class="hligh1" id="sectionBox">   
+	<?php
+	echo $this->formSelect('section', $this->objBlock->section, array(
+						'style'=>'width:100px'					
+						), $this->arrSection) 
+   ?>
+  </td>
+</tr>  
+<tr>
+ <td class="hligh2" width="20%"><label for="module">Module</label></td>
+ <td class="hligh2">   
+   <?php
+   // set getUrl for ajax calling
+	$getUrl = $this->url(array(
+		'action' => 'get-module-by-type'		
+	));
+	echo $this->formSelect('module', $this->objBlock->module, array(
+						'style'=>'width:100px',
+						'onchange'=> "ajaxChangeModule('$getUrl', this)"
+						), $this->arrModule) 
+   ?>
+   </td>
+</tr>
+<tr>
+ <td class="hligh1"><label for="delta">Delta</label></td>
+ <td class="hligh1" id="deltaBox">   
+	<?php
+	echo $this->formSelect('delta', $this->objBlock->delta, array(
+						'style'=>'width:200px'					
+						), $this->arrView) 
+   ?>
+  </td>
+</tr>      
+<tr>
+ <td class="hligh2"><label for="weight">Ordering</label></td>
+ <td class="hligh2">   
+   <input type="text" name="weight" id="weight" 
+   value="<?php echo $this->objBlock->weight; ?>" style="width:50px" maxlength="5">
+   </td>
+</tr>  
+<tr>
+ <td class="hligh1"><label for="status">Status</label></td>
+ <td class="hligh1">   
+	<?php
+	echo $this->formSelect('status', $this->objBlock->status, array(
+						'style'=>'width:100px'					
+						), $this->arrStatus) 
+   ?>
+  </td>
+</tr>  
+</table>
+<br />
+<p>
+<input type="button" name="cancel" value="Cancel" onclick="onClickCancel()" class="button"/>
+<input type="submit" name="submit" value="Submit" onclick="onClickSubmit()" class="button"/>
+<input type="hidden" name="id" value="<?php echo $this->objBlock->blockid; ?>" />
+<?php 
+if($this->objBlock->layout != ''){
+?>
+<input type="hidden" name="layout" value="<?php echo $this->objBlock->layout; ?>" />
+<?php
+}
+?>
+
+</p>
+</form>
+<script src="/js/admin/jquery.cookie.js"></script>
+<script type="text/javascript">
+	function onClickCancel()
+	{
+		$.cookie('edit', 'true',{ path: '/admin/block' });
+		window.location='/admin/block/list';		
+	}
+	function onClickSubmit()
+	{		
+		$.cookie('edit', 'true',{ path: '/admin/block' });
+		$("form#frmView").submit();
+	}
+	$(document).ready(function(){ 
+		$(function(){
+			/*
+			var getUrl = "<?php echo $this->url(array('action' => 'get-module-by-type'));?>";
+			$.ajax( {
+				// Define AJAX properties.
+				method :"get",
+				url :getUrl + '/type/view',
+				dataType :"html",
+				// Define the succss method.
+				success : function(data) {
+					$("#deltaBox").html(data);
+				},
+				// Define the error method.
+				error : function(objAJAXRequest, strError) {
+					$("#deltaBox").text("Error! Type: " + strError);
+				}
+			});
+			*/
+		});
+		
+	});   
+</script>

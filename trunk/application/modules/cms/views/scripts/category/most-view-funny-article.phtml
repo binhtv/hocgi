@@ -1,0 +1,21 @@
+<div class="TSHome" id="idContent">
+   <div class="TS-top"><h2 class="h2TS">Truyện cười đọc nhiều nhất</h2></div>
+   <?php if(is_array($this->articles)) {?>
+       <div class="TSHome-ct">
+          <ul class="ulTSHome clearfix">
+          	<?php foreach ($this->articles as $article) :?>
+               <li>
+	               <h4 class="h4Title">
+	               	<a title="<?php echo $this->readArticle . $article['title']?>"  
+	               		href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>" class="link-othernews"><?php echo $article['title']?></a>
+	               </h4>
+              </li>
+              <?php endforeach;?>
+          </ul>
+       <p class="viewMoreTS hot-link1">
+       	<a href="<?php $this->serverUrl() . $this->url(array('id' => $this->category), 'fun_category_page');?>?most_view=1" class="aViewMoreTS">&raquo; Xem hết</a>
+       </p>
+   </div>
+   <?php }?>
+</div>

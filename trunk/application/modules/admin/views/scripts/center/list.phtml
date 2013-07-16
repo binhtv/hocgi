@@ -1,0 +1,50 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<a href="/admin/center/edit" style="font-weight: bold">Tạo mới</a>
+<?php if(is_array($this->centers)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Contact Information</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>City code</th>
+                <th>Last update</th>
+                <th>Created</th>
+                <th>Action</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->centers as $center) :?>
+             <tr>
+                 <td><?php echo $center['id']?></td>
+                 <td><?php echo $center['name']?></td>
+                 <td><img width="50" height="50" alt="<?php echo $center['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $center['hash_folder'] . '/' . $center['image']?>"></td>
+                 <td><?php echo $center['contact_info']?></td>
+                 <td><?php echo $center['address']?></td>
+                 <td><?php echo $center['city']?></td>
+                 <td>
+                     <?php echo $center['city_code'];?>
+                 </td>
+                 <td><?php echo date('d/m/Y', $center['last_update'])?></td>
+                 <td><?php echo date('d/m/Y', $center['dateline'])?></td>
+                 <td>
+                     <a href="/admin/center/edit/id/<?php echo $center['id']?>">
+                         <i class="icon-edit"></i>
+                     </a>
+                     <a href="/admin/center/delete/id/<?php echo $center['id']?>" onclick="return confirm('sure?');">
+                         <i class="icon-remove"></i>
+                     </a>
+                 </td>
+             </tr>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+      <?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'pagination.phtml', $this->currentUrl);?>
+</div>
+<?php } else {?>
+<div>Không có trung tâm nào!</div>
+<?php }?>

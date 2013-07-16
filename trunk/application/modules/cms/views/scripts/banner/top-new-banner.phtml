@@ -1,0 +1,9 @@
+<div id="linksiteEH" class="linksite fr">
+	<?php if(is_array($this->banner)) { foreach($this->banner as $b) :?>      
+	<div class="box-item"> 
+		<a href="<?php echo $b['link']?>" target="_blank">
+			<img src="<?php echo $this->staticUrl . $b['hash_folder'] . '/' . $b['image'];?>" />
+		</a> 
+	</div>
+	<?php endforeach; }?>
+</div>

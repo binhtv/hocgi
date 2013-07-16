@@ -1,0 +1,40 @@
+<style>
+.table_comparese td{ padding:10px}
+.table_comparese td img{ max-width:100%}
+</style>
+<div class="box_compare" id="box_compare_course_<?php echo $this->course['id'] .'_' . $this->course2['id']?>" title="So sánh khóa học">
+<table width="100%" border="0" cellspacing="1" cellpadding="1" class="table_comparese">
+  <tbody>
+  <tr>
+    <td valign="top" width="50%">
+        <div class="course-title-detail clearfix">
+       		<h1 class="fl"><?php echo $this->course['name']?></h1>
+            <a href="<?php echo $this->course['course_link']?>" class="register_course" target="_blank">ĐĂNG KÝ HỌC</a>
+      	</div>
+        <div class="educator_div clearfix">
+        <div class="educator_logo fr"><img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->course['chash_folder'] . DS .  $this->course['center_logo']?>" width="77" height="88" /></div>
+            <?php echo $this->course['contact_info'];?>            	
+        </div>
+        <!-- text-->
+        <div class="mid-content">
+        	<?php echo $this->course['content']; ?>
+        </div>
+    </td>  
+
+    <td valign="top" width="50%">
+        <div class="course-title-detail clearfix">
+           		<h1 class="fl"><?php echo $this->course2['name']?></h1>
+                <a href="<?php echo $this->course2['course_link']?>" class="register_course" target="_blank">ĐĂNG KÝ HỌC</a>
+      	</div>
+        <div class="educator_div clearfix">
+        <div class="educator_logo fr"><img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->course2['chash_folder'] . DS .  $this->course2['center_logo']?>" width="77" height="88" /></div>
+            <?php echo $this->course2['contact_info'];?>            	
+        </div>
+        <!-- text-->
+        <div class="mid-content">
+        	<?php echo $this->course2['content']; ?>
+        </div>
+    </td>
+  </tr>
+</tbody></table>
+</div>

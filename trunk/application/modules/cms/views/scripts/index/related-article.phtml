@@ -1,0 +1,21 @@
+<div class="Div_OtherNews">
+    <div class="boxnew_header"><span>Tin liên quan</span></div>
+    <?php if(is_array($this->articles)) {?>
+    <div class="boxnew_Content clearfix">
+    	<?php foreach($this->articles as $article):?>
+	         <div class="OtherTop fl">
+	         	<a title="<?php echo $this->readArticle . $article['title']?>" 
+          			href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>" class="Other_Image">
+        		  	<img alt="<?php echo $article['image']?>" src="<?php echo $this->staticUrl . $article['hash_folder'] . '/' . $article['image']?>" width="150" height="89"/></a>
+	            <div class="title"> 
+	            	<a title="<?php echo $this->readArticle . $article['title']?>" 
+          					href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>" class="link-title">
+        		  	<?php echo $article['title'];?></a>
+        		</div>
+	         </div>
+         <?php endforeach;?>
+     </div>
+     <?php }?>
+</div>

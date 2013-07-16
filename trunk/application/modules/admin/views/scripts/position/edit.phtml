@@ -1,0 +1,23 @@
+<h3><?php echo $this->title?></h3>
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<div class="upload-image">
+<form action="/admin/position/save" method="post">
+    <table class="table table-bordered table-striped">
+        <tbody>
+             <tr>
+                 <td>Position Name</td>
+                 <td>
+                     <input type="text" name="name" id="name" value="<?php echo $this->position['position_name'];?>">
+                 </td>
+             </tr>
+             <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save"/>
+                    <a href="/admin/position/list">Cancel</a>
+                </td> 
+             </tr>
+        </tbody>
+      </table>
+      <input type="hidden" value="<?php echo $this->id?>" name="id" id="id"/>
+</form>
+</div>

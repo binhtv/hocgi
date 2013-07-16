@@ -1,0 +1,56 @@
+<div class="folder clearfix">
+<div class="folder-title"> 
+	<a href="<?php echo $this->serverUrl() . $this->url(array('name_seo' => $this->mainCategory['name_seo'], 'id' => $this->mainCategory['id']), $this->mainCategory['for_course']?'course_category_page':'category_page') ?>" class="link-folder"><?php echo $this->mainCategory['name']?></a>
+	<?php if(is_array($this->categories) && count($this->categories) > 0) {
+	        ?>
+	        <span>|</span>
+    <?php 
+			$index = 0;
+			foreach ($this->categories as $category) :
+			if($category['for_course']) {
+                $routeName = 'course_category_page';
+            } else {
+                $routeName = 'category_page';
+            }
+	?>
+		<a href="<?php echo $this->serverUrl() . $this->url(array('name_seo' => $category['name_seo'], 'id' => $category['id']), $routeName)?>" class="link-subfolder"><?php echo $category['name']?></a> 
+		<span><?php $index++; echo ($index < count($this->categories))? '|' :'' ?></span> 
+	<?php endforeach;}?>	
+</div>
+<div class="folder-content clearfix">
+	<?php if(is_array($this->articles) && count($this->articles) > 0) {?>
+            <div class="folder-topnews"> 
+            	<?php $new1 = array_shift($this->articles)?>
+            	<a title="<?php echo $this->readArticle . $new1['title']?>" 
+	          		href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $new1['title_seo'], 
+	        		  																'id' => $new1['id']), 'index_new_detail');?>" class="aImg136">
+	        		<img width="136" height="102" class="img-subject" alt="<?php echo $new1['title']?>" src="<?php echo $this->staticUrl . $new1['hash_folder'] . '/'. $new1['image'];?>" /></a>
+              	<h2 class="h2Title"><a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $new1['title_seo'], 
+	        		  																'id' => $new1['id']), 'index_new_detail');?>" 
+	        		  					class="link-title"><?php echo $new1['title'];?></a></h2>
+              <h3 class="h3Lead"><?php echo $new1['short_description']?>
+              <a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $new1['title_seo'], 
+	        		  																'id' => $new1['id']), 'index_new_detail');?>" 
+	        		  	class="more">&raquo; Đọc tiếp</a></h3>
+            </div>
+            <div class="folder-othernews"> 
+            	<?php $new2 = array_shift($this->articles);?>
+            	<a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $new2['title_seo'], 
+	        		  																'id' => $new2['id']), 'index_new_detail');?>" class="aImg43">
+            	<img width="43" height="32" src="<?php echo $this->staticUrl . $new2['hash_folder'] . '/'. $new2['image']?>" class="img-other" alt="<?php echo $new2['title']?>"></a>
+              <h3 class="h3Title">
+              	<a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $new2['title_seo'], 
+	        		  																'id' => $new2['id']), 'index_new_detail');?>" class="link-othernews">
+	        		  <?php echo $new2['title']?></a></h3>
+              <ul class="ul-other">
+              	<?php if(is_array($this->articles)) {
+              		foreach ($this->articles as $new) :?>
+                	<li><h4 class="h4Title"><a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $new['title_seo'], 
+	        		  																			'id' => $new['id']), 'index_new_detail');?>" 
+	        		  						class="link-othernews"><?php echo $new['title']?></a></h4></li>
+                <?php endforeach;}?>
+              </ul>
+            </div>
+            <?php }?>
+</div>
+</div>

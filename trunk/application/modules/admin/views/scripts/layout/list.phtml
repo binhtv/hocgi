@@ -1,0 +1,54 @@
+<div id="centerCont"> 
+<strong>Layout >> </strong> List
+<br />
+<input type="button" class="button" value=" Create New" onclick="window.location.href='/admin/layout/edit/layout'">
+<br />
+<table border="0" cellspacing="0" cellpadding="0" class="table table-bordered" width="100%">
+  <tr>
+    <td width="20%" nowrap class="tabTit">Name</td>
+	<td width="20%" nowrap class="tabTit">Folder Name</td>
+    <td width="20%" nowrap class="tabTit">Title</td>    
+	<td width="20%" nowrap class="tabTit">Section</td>    
+    <td width="14%" nowrap class="tabTit">Action</td>
+  </tr>
+<?php 
+	if(count($this->paginator) > 0)
+	{        
+		$i = 1;
+		foreach($this->paginator as $item)
+		{
+			if($item['folder_name'] != 'admin' ) {
+				$cls = "hligh1";
+				if($i%2 == 0 && $i != 0)
+					$cls = "hligh2";
+				$i++;
+?>
+  <tr>
+	<td class="<?php echo $cls; ?>"><?php echo $item['layout_name']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['folder_name']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['title']; ?></td>        
+	<td class="<?php echo $cls; ?>"><?php echo $item['sections']; ?></td>        
+	<td class="<?php echo $cls; ?>" align="center" nowrap>
+     <a href="/admin/layout/edit/layout/<?php echo $item['layout_name'];?>" title="Edit">
+         <i class="icon-edit"></i>
+     </a> 
+     <a href="/admin/layout/delete/layout/<?php echo $item['layout_name'];?>" title="Delete" onclick="return confirm('sure?');">
+        <i class="icon-remove"></i>
+     </a>
+	</td>
+  </tr>
+ <?php
+			}
+        }
+    }
+  ?>    
+</table>
+<br />
+<p>
+	
+</p>
+<br />
+<p style="text-align: center;">
+<?php echo $this->paginationControl($this->paginator, 'Sliding', Zend_View_Helper_PaginationControl::getDefaultViewPartial()); ?>
+</p>  
+</div>

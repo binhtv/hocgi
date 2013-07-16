@@ -1,0 +1,95 @@
+<div id="centerCont"> 
+<strong>ExtView >> </strong> List
+<br />
+<form name="frmLayout" id="frmLayout" action="/admin/extview/list" method="post"  enctype="multipart/form-data">
+	<table width="100%" border="0" cellspacing="0" cellpadding="3" class="mainTab" style="border: 1px solid #DDDDDD;   padding: 10px;">
+		<tr>
+			<td width="1%"><label for="name">Name</label></td>
+			<td width="30%">   
+			   <input type="text" name="name" id="name" 
+			   value="<?php echo $this->postData['name']; ?>" style="width:200px" maxlength="50" title="B?n ph?i nh?p t�n" class="required">
+			</td>
+		</tr>		
+		<tr>
+			<td colspan="4" align="left">
+				<input type="submit" value="Search" />
+				<input type="reset" value="Reset" />
+			</td>
+		</tr> 
+	</table>
+<br />
+<input type="button" class="button" value=" Create New" onclick="window.location.href='/admin/extview/edit/viewid'">
+<table border="0" cellspacing="0" cellpadding="0" class="mainTab" width="100%">
+  <tr>
+  	<td width="10%" class="tabTit">ExtViewid</td>
+    <td width="26%" class="tabTit">ExtView Name</td>
+	<td width="15%" class="tabTit">Callback</td>	
+	<td width="15%" class="tabTit">Params</td>
+    <td width="14%" class="tabTit">Action</td>
+  </tr>
+<?php 
+	if(count($this->paginator) > 0)
+	{        
+		$i = 1;
+		foreach($this->paginator as $item)
+		{
+			$cls = "hligh1";
+			if($i%2 == 0 && $i != 0)
+				$cls = "hligh2";
+			$i++;	
+			$arrParams = array();
+			if($item['params'] != ''){
+				$arrParams = unserialize($item['params']);
+			}			
+			$strParams = '';
+			if(is_array($arrParams) && count($arrParams) > 0){
+				foreach($arrParams as $key => $value){
+					$strParams .= '{' . $key . ':' . $value . '}';
+				}
+			}
+			
+?>
+  <tr>
+  	<td class="<?php echo $cls; ?>"><?php echo $item['extviewid']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['extviewname']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['callback']; ?></td>	
+	<td class="<?php echo $cls; ?>"><?php echo $strParams; ?></td>
+	<td class="<?php echo $cls; ?>" align="center">
+     <a id="edit" onClick="onClickEdit()" href="/admin/extview/edit/viewid/<?php echo $item['extviewid'];?>">
+        <img src="/images/admin/edit.png" alt="Edit" title="Edit" />
+     </a> 
+     <a href="/admin/extview/delete/viewid/<?php echo $item['extviewid'];?>">
+        <img src="/images/admin/delete.png" alt="Delete" title="Delete" onclick="return showConFirmBox();"/>
+     </a>
+	</td>
+  </tr>
+ <?php
+        }
+    }
+  ?>    
+</table>
+<br />
+<p>
+	
+</p>
+<br />
+<p style="text-align: center;">
+<?php if(isset($this->paginator) && $this->paginator != null) echo $this->paginationControl($this->paginator, 'Sliding', Zend_View_Helper_PaginationControl::getDefaultViewPartial()); ?>
+</p>  
+</form>
+</div>
+<script src="/js/admin/jquery.cookie.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#paginationControl a").click(function(){
+			var href = $(this).attr('href');
+			$("form#frmLayout").attr('action', href);
+			$("form#frmLayout").submit();
+			return false;
+		});
+	});
+	function onClickEdit() {
+		$.cookie('name', '<?php echo $this->postData['name']; ?>',{ path: '/admin/extview' });
+  		$.cookie('page', '<?php echo $this->page; ?>',{ path: '/admin/extview' });
+	}
+</script>

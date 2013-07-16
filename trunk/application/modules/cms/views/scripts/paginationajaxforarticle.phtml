@@ -1,0 +1,68 @@
+<?php if ($this->totalItemCount > $this->itemCountPerPage): ?>
+ <div class="PagingWrapper">		
+	<div class="PagingControl">
+		<div class="CenterWrapper">
+			 <!-- First page link -->
+			<?php if (isset($this->previous)): ?>
+				  <a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $this->first;?>');return false;" href="javascript:void(0);" class="PagingFirstPageLnk paginationajaxformaga" >&laquo;</a>
+			<?php else: ?>
+					<span class="disabled PagingFirstPageLnk paginationajaxformaga">&laquo;</span>
+			<?php endif; ?>
+			
+			 <!-- Previous page link -->    
+			<?php if (isset($this->previous)): ?>
+				  <a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $this->previous;?>');return false;" class="PagingPrevPageLnk paginationajaxformaga">&lsaquo;</a>
+			<?php else: ?>
+				<span class="disabled PagingPrevPageLnk paginationajaxformaga">&lsaquo;</span>
+			<?php endif; ?>
+		
+			<ul class="PageList">
+				<!-- Last page link -->
+				<?php if($this->firstPageInRange > ($this->first + 1)) : ?>					
+					<li><a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $this->first;?>');return false;" href="javascript:void(0);"><?php echo  ($this->first); ?></a></li>
+					<li><a onclick="Article.load('<?php echo $this->category;?>','<?php echo ($this->first + 1);?>');return false;" href="javascript:void(0);"><?php echo ( $this->first +1); ?></a></li>
+					<li>...</li>				
+				<?php elseif($this->firstPageInRange == ($this->first + 1)) : ?>
+					<li><a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $this->first;?>');return false;" href="javascript:void(0);"><?php echo  ($this->first); ?></a></li>
+					<!--  li>...</li-->
+				<?php endIf;?>	
+				
+				<!-- Numbered page links -->
+				<?php foreach ($this->pagesInRange as $page): ?>
+					<?php if ($page != $this->current):  ?>
+						<li><a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $page;?>');return false;" href="javascript:void(0);"><?php echo  $page; ?></a></li>
+					<?php else: ?>
+						<li><span><?php echo $page; ?></span></li>
+					<?php endif; ?>
+				<?php endforeach; ?>	
+							
+				<!-- Last page link -->
+				<?php if($page == ($this->last-1)) : ?>					
+						<!-- li>...</li -->				
+						<li><a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $this->last;?>');return false;" href="javascript:void(0);"><?php echo  $this->last; ?></a></li>
+				<?php elseif($page < ($this->last-1)) : ?>					
+						<li>...</li>				
+						<li><a onclick="Article.load('<?php echo $this->category;?>', '<?php echo ($this->last - 1);?>');return false;" href="javascript:void(0);"><?php echo  ($this->last - 1); ?></a></li>
+						<li><a onclick="Article.load('<?php echo $this->category;?>', '<?php echo $this->last;?>');return false;" href="javascript:void(0);"><?php echo  $this->last; ?></a></li>
+				<?php endif; ?>
+			</ul>		
+			
+			  <!-- Next page link -->
+			<?php if (isset($this->next)): ?>
+				<a onclick="Article.load('<?php echo $this->category;?>', '<?php echo ($this->next);?>');return false;" href="javascript:void(0);" class="PagingNextPageLnk paginationajaxformaga">&rsaquo;</a>
+			<?php else: ?>
+				<span class="disabled PagingNextPageLnk paginationajaxformaga">&rsaquo;</span>
+			<?php endif; ?>
+			
+		
+			<!-- Last page link -->
+			<?php if (isset($this->next)): ?>
+				  <a onclick="Article.load('<?php echo $this->category;?>', '<?php echo ($this->last);?>'); return false;" href="javascript:void(0);" class="PagingLastPageLnk paginationajaxformaga">&raquo;</a>
+			<?php else: ?>
+				<span class="disabled PagingLastPageLnk paginationajaxformaga">&raquo;</span>
+			<?php endif; ?>
+
+		</div>
+	</div>
+</div>
+<?php endif; ?>

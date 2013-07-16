@@ -1,0 +1,20 @@
+<?php if(count($this->courses) == 0) {?>
+<div>Không có khóa học nào</div>
+<?php }?>
+<?php foreach($this->courses as $course):?>
+	<li class="course_top clearfix">
+		<a class="aImg59" href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>">
+		<img src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image']?>" width="59" height="48" alt="<?php echo $course['image'];?>"/></a>
+		<div class="course_place fl">
+			<a href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>" class="title">
+				<?php echo $course['name']?></a>
+			<p><?php echo $course['center_name']?></p>
+		</div>
+		<div class="course_at fl"><?php echo $course['city']?></div>
+		<?php if($this->currentId != $course['id']):?>
+    		<div class="ccomparse fr">
+    			<a class="btn_compare" href="javascript:void(0);" data-course-id="<?php echo $course['id']?>">So sánh</a>
+    		</div>
+		<?php endif;?>
+	</li>
+<?php endforeach;?>
