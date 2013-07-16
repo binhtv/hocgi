@@ -1,0 +1,17 @@
+<h2 class="partner-title">Đối tác liên kết</h2>
+<?php if(is_array($this->banners)) {?>
+<div class="list-partner-border">
+      <div  class="list-partner clearfix">
+        <ul id="foo4">
+        <?php foreach ($this->banners as $banner) :?>
+	          <li style="width:<?php echo $banner['width'];?>">
+	          	<a href="<?php echo $banner['link']?>" target="_blank">
+					<img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 
+						width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>"/>
+				</a>
+	          </li>
+          <?php endforeach;?>
+        </ul>
+      </div>
+</div>
+<?php }?>

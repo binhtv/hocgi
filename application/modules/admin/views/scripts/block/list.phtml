@@ -1,0 +1,121 @@
+<div id="centerCont">
+<strong>Block >> </strong> List
+<br />
+<form name="frmLayout" id="frmLayout" action="/admin/block/list" method="post"  enctype="multipart/form-data">
+	<table width="100%" border="0" cellspacing="0" cellpadding="3" class="table">
+		<tr>
+		<td width="1%"><label for="description">Description</label></td>
+			<td width="30%">   
+			   <input type="text" name="description" id="description" 
+			   value="<?php echo $this->postData['description']; ?>" style="width:200px" maxlength="50" title="Bạn phải nhập tên description" class="required">
+			</td>
+			
+			<td width="1%"><label for="layout_name">Name</label></td>
+			<td width="30%">   
+			   <input type="text" name="layout_name" id="layout_name" 
+			   value="<?php echo $this->postData['layout_name']; ?>" style="width:200px" maxlength="50" title="Bạn phải nhập tên" class="required">
+			</td>			
+		</tr>
+		<tr>
+		 <td width="1%"><label>Layout</label></td>
+		 <td> 
+			<select name="layout" id="layout">
+				<option value="0">All Category</option>
+			<?php foreach($this->layouts as $layout_item ) :?>			
+				<option value="<?php echo $layout_item['layout_name']?>" <?php echo ($this->postData['layout'] == $layout_item['layout_name']) ? "selected='selected'" : ""; ?>><?php echo $layout_item['layout_name']?></option> 
+			<?php endForeach;?>
+			</select>
+		 </td>
+		</tr> 
+		<tr>
+			<td colspan="4" align="left">
+				<input type="submit" value="Search" />
+				<input type="reset" value="Reset" />
+				
+			</td>
+		</tr> 
+	</table>
+<input type="button" class="button" value=" Create New" onclick="window.location.href='/admin/block/edit/layout/<?php echo $this->layout;?>/blockid'">
+<table border="0" cellspacing="0" cellpadding="0" class="table table-bordered" width="100%">
+  <tr>
+  	<td width="20%" class="tabTit">Description</td>
+    <td width="10%" class="tabTit">Section</td>    
+	<td width="16%" class="tabTit">Layout Name</td>
+	<td width="10%" class="tabTit">Module</td>
+	<td width="10%" class="tabTit">Delta</td>
+    <td width="14%" class="tabTit">Ordering</td>    
+	<td width="10%" class="tabTit">Status</td>    
+    <td width="16%" class="tabTit">Action</td>
+  </tr>
+<?php 
+	if(count($this->paginator) > 0)
+	{        
+		$i = 1;
+		foreach($this->paginator as $item)
+		{
+			if(true) {
+				$cls = "hligh1";
+				if($i%2 == 0 && $i != 0)
+					$cls = "hligh2";
+				$i++;
+				$img = ($item['status'] == '1')?'icon-ok-circle':'icon-ban-circle';
+?>
+  <tr>
+  	<td class="<?php echo $cls; ?>"><?php echo $item['description']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['section']; ?></td>
+	<td class="<?php echo $cls; ?>"><?php echo $item['layout']; ?></td>
+	<td align="center" class="<?php echo $cls; ?>"><?php echo $item['module']; ?></td>
+	<td align="center" class="<?php echo $cls; ?>"><?php echo $item['delta']; ?></td>
+	<td class="<?php echo $cls; ?>" align="center"><?php echo $item['weight']; ?></td>        
+	<td class="<?php echo $cls; ?>" align="center">
+		<i class="<?php echo $img?>"></i>
+	</td>        
+	<td class="<?php echo $cls; ?>" align="center">
+     <a id="edit" onClick="onClickEdit()" href="/admin/block/edit/blockid/<?php echo $item['blockid'];?>">
+        <i class="icon-edit"></i>
+     </a> 
+     <a href="/admin/block/delete/blockid/<?php echo $item['blockid'];?>" onclick="return confirm('sure?');">
+         <i class="icon-remove"></i>
+     </a>
+	</td>
+  </tr>
+ <?php
+			}
+        }
+    }
+  ?>    
+</table>
+<br />
+<p>
+
+</p>
+<br />
+<p style="text-align: center;">
+<?php
+	if(count($this->paginator) > 0){
+		echo $this->paginationControl($this->paginator, 'Sliding', Zend_View_Helper_PaginationControl::getDefaultViewPartial());
+	}
+?>
+</p>  
+</form>
+</div>
+<script src="/js/admin/jquery.cookie.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$("#paginationControl a").click(function(){
+			var href = $(this).attr('href');
+			$("form#frmLayout").attr('action', href);
+			$("form#frmLayout #layout_name").attr('value', '<?php echo $this->postData['layout_name']; ?>');
+			$("form#frmLayout #description").attr('value', '<?php echo $this->postData['description']; ?>');			
+			
+			$("form#frmLayout").submit();
+			return false;
+		});
+	});
+	function onClickEdit() {
+		$.cookie('layout_name', '<?php echo $this->postData['layout_name']; ?>',{ path: '/admin/block' });
+  		$.cookie('description', '<?php echo $this->postData['description']; ?>',{ path: '/admin/block' });
+  		$.cookie('layout', '<?php echo $this->postData['layout']; ?>',{ path: '/admin/block' });
+  		$.cookie('page', '<?php echo $this->page; ?>',{ path: '/admin/block' });
+	}
+</script>

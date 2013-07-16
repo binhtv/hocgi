@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?php echo $this->render('meta-data.phtml'); ?>
+<?php echo $this->layout()->_section['style']; ?>
+</head>
+
+<body>
+<a name="toppage" href="#"></a>
+<div id="wapper"> 
+  <!-- header-->
+  <div id="header">
+    <?php echo $this->layout()->_section['header']?>
+  </div>
+  <!-- end header--> 
+  <!-- header-down-->
+  <div class="header-down">
+    <?php require_once ('main_navigation.phtml');?>
+  </div>
+  <!-- end header-down-->
+  <div id="wapper_container" class="container clearfix">    
+    <div class="banner_mid"> 
+    	<?php echo $this->layout()->_section['banner_mid'];?> 
+    </div>
+    <!-- content-->
+    <div id="content" class="clearfix">
+     <div class="content">
+     <!-- moi ngay cuon sach-->
+     	<div class="top_book clearfix">
+	     	<div class="list_top_book fl">
+	        	<?php echo $this->layout()->content;?>
+	        </div>
+	        <div class="col_adv_book fr" style="padding: 0;">
+	            <?php echo $this->layout()->_section['banner_right'];?>
+            </div>
+        </div>
+     <!-- end moi ngay cuon sach-->
+     <!-- bestseller-->
+     	<?php echo $this->layout()->_section['best_sale']?>
+     <!--end bestseller-->
+     <!-- documentary -->
+     <div class="box-documentary clearfix">
+     	<?php echo $this->layout()->_section['documentary']?>
+     </div>
+     <!-- end documentary-->
+     </div>
+    </div>
+    <!-- end content--> 
+    
+    <!-- footer-->
+    <div id="footer" class="clearfix">
+      <?php echo $this->layout()->_section['footer'];?>
+    </div>
+    <!-- end footer--> 
+  </div>
+</div>
+<?php require_once('script.phtml'); ?>
+<?php echo $this->layout()->_section['script'];?>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<div class="divMenu container clearfix ">
+      <ul  class="ulMenu clearfix">
+        <li class="home current"><a href="<?php echo $this->serverUrl();?>" title="Trang chủ"><span><img src="<?php Utils_Global::get('imgUrl')?>/images/home.png" width="31" align="middle" /></span></a>
+          <div class="sub_menusite">
+            <ul class="submenu clearfix" id="menu">     
+             <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 7), 'course_category_page');?>" class="<?php echo $this->khoaChuyenDe?>">Khóa chuyên đề</a></li>
+              <li>
+                  <a href="<?php echo $this->serverUrl() . $this->url(array('id' => 10), 'course_category_page');?>" class="<?php echo $this->hocNgoaiNgu?>">Học ngoại ngữ</a>
+              </li>
+              <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 11), 'course_category_page');?>" class="<?php echo $this->hocCaoHoc?>">Học cao học</a></li>
+              <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 20), 'course_category_page');?>" class="<?php echo $this->hocKinhTe?>">Học kinh tế</a></li>
+              <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 12), 'course_category_page');?>" class="<?php echo $this->duHoc?>">Du học & Học bổng </a></li>
+              <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 13), 'course_category_page');?>" class="<?php echo $this->keToan?>">Kế toán - Tài chính </a></li>
+              <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 14), 'course_category_page');?>" class="<?php echo $this->kinhDoanh?>">Kinh doanh - Tiếp thị</a></li>
+            </ul>
+          </div>
+        </li>
+        <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 2, 'name_seo' => 'huong-nghiep'), 'category_page');?>" title="Hướng nghiệp" class="<?php echo $this->huongNghiep;?>"><span>Hướng nghiệp</span></a></li>
+        <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 15, 'name_seo' => 'tuyen-sinh'), 'category_page')?>" title="Tuyển sinh 2013" class="<?php echo $this->tuyenSinh;?>"><span>Tuyển sinh 2013 </span></a></li>
+        <li><a href="http://diendan.hocgi.net" title=" Diễn đàn" target="_blank"><span> Diễn đàn </span></a></li>
+        <li><a href="<?php echo $this->serverUrl() . $this->url(array(), 'thu_vien')?>" title="Thư viện " class="<?php echo $this->thuVien?>"><span>Thư viện </span></a></li>
+        <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 17, 'name_seo' => 'viec-lam'), 'category_page')?>" title="Việc làm " class="<?php echo $this->viecLam?>"><span>Việc làm </span></a></li>
+        <li><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 8), 'fun_category_page');?>" title="Cười" class="<?php echo $this->cuoi;?>"><span>Cười</span></a></li>
+      </ul>
+      <div class="date_time"><?php echo date('D, d-m-Y h:i:s',  time())?></div>
+</div>

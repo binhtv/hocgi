@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<?php echo $this->render('meta-data.phtml'); ?>
+<?php echo $this->layout()->_section['style']; ?>
+</head>
+<body>
+<a name="toppage" href="#"></a>
+<div id="wapper"> 
+  <!-- header-->
+  <div id="header">
+    <?php echo $this->layout()->_section['header']?>
+  </div>
+  <!-- end header--> 
+  <!-- header-down-->
+  <div class="header-down">
+    <?php require_once ('main_navigation.phtml');?>
+  </div>
+  <!-- end header-down-->
+  <div id="wapper_container" class="container clearfix">
+    <div id="topnews" class="clearfix">
+      <!-- ?php echo $this->layout()->_section['topnews'];?-->
+      <?php echo $this->action('top-new-box', 'index', 'cms', array('top' => 1, 'category' => $this->category));?>
+      <?php echo $this->action('top-new-box', 'index', 'cms', array('top' => 2, 'category' => $this->category, 'offset' => 0, 'limit' => 8));?>
+      <?php echo $this->layout()->_section['banner_top']?>
+    </div>
+    <!-- content-->
+    <div id="content" class="clearfix">
+	    <div class="content-center fl" id="article_content">
+	      	<?php echo $this->layout()->_section['content1'];?>
+	    </div>
+	    <div class="content-left fl">
+	    	<?php echo $this->layout()->_section['content2'];?>
+	    </div>
+	    <div class="content-right fr">
+	    	<?php echo $this->layout()->_section['content3'];?>
+	    </div>
+    </div>
+    <!-- end content--> 
+    <!-- footer-->
+    <div id="footer" class="clearfix">
+      <?php echo $this->layout()->_section['footer'];?>
+    </div>
+    <!-- end footer--> 
+  </div>
+</div>
+<?php require_once('script.phtml'); ?>
+<?php echo $this->layout()->_section['script'];?>
+</body>
+</html>

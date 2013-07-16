@@ -1,0 +1,12 @@
+<div class="box-item1">
+	<div class="box-item-title1">
+		<h2 class="h2TS">CLip quan tâm</h2>
+	</div>
+	<div class="video_Content">
+		<?php if(is_array($this->banner)) {?>
+		<iframe width="<?php echo $this->banner['width']?>" height="<?php echo $this->banner['height']?>"
+			src="<?php echo $this->banner['link']?>" frameborder="0"
+			allowfullscreen></iframe>
+		<?php }?>
+	</div>
+</div>

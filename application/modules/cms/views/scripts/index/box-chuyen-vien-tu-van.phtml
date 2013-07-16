@@ -1,0 +1,11 @@
+<div class="relate_folder pd5 clearfix">
+    <h3 class="relate_dolder_title"><a href="<?php echo $this->serverUrl() . $this->url(array('name_seo' => 'dien-gia', 'id' => $this->speakers[0]['category']), 'category_page');?>">>> Chuyên gia tư vấn và diễn giả</a></h3>
+    <div class="relate_dolder_content clearfix"> 
+    	<?php if(is_array($this->speakers)) ;{ 
+    		foreach($this->speakers as $speaker) : ?>
+    		<a class="aImg61" href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $speaker['title_seo'], 'id' => $speaker['id']), 'index_new_detail');?>">
+    			<img width="63" height="45" alt="<?php echo $speaker['image']?>" src="<?php echo $this->staticUrl . $speaker['hash_folder'] . '/' . $speaker['image']?>" />
+    		</a>
+    	<?php endforeach;}?>
+    </div>
+</div>

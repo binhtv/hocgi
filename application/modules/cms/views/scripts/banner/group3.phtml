@@ -1,0 +1,16 @@
+<div class="box-item1">
+    <?php if(is_array($this->banner)) {
+    	foreach($this->banner as $index => $banner) :
+    	if(!$banner['video']) {?>
+        <a href="<?php echo $banner['link']?>" target="_blank" class="<?php echo $index==0?'aImg196':'';?>">
+        	<img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 
+        			width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>"/>
+        </a>
+    <?php } else {?>
+         <iframe width="<?php echo $banner['width']?>" height="<?php echo $banner['height']?>"
+			src="<?php echo $banner['link']?>" frameborder="0"
+			allowfullscreen></iframe>
+    <?php }?>
+    <?php endforeach;?>
+    <?php }?>
+</div>

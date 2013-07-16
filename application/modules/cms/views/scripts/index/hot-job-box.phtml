@@ -1,0 +1,13 @@
+<div class="folder-small rightSmall fr">
+  <div class="folder-active2">
+   	<a class="link-folder" target="_blank" href="<?php echo $this->serverUrl() . $this->url(array('name_seo' => 'viec-lam', 'id' => '17'), 'category_page');?>">Việc làm</a>
+  </div>
+  <?php if(is_array($this->jobs)) {?>
+  <ul class="pm-right clearfix">
+  	<?php foreach($this->jobs as $job) :?>
+     <li><a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' =>$job['title_seo'], 'id' => $job['id']), 'index_new_detail');?>"><?php echo $job['title']?></a>
+     	<br><?php echo $job['short_description']?><span class="<?php echo $job['hot']?'icon-hot' :''?>">&nbsp;</span></li>
+     <?php endforeach;?>
+  </ul>
+  <?php }?>
+</div>

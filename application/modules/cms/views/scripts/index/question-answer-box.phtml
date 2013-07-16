@@ -1,0 +1,17 @@
+<div class="box-item1 box-faqs">
+<?php if(is_array($this->articles)) {?>
+    <div class="box-item-title1">
+    	<h2 class="h2TS">Hỏi đáp</h2>
+    </div>
+    <?php foreach($this->articles as $article) :?>
+    <div class="box-item1-content clearfix">
+    	<div class="img fr">
+    		<img width="100" height="80" src="<?php echo $this->staticUrl . $article['hash_folder'] . '/' . $article['image']?>"  />
+    	</div>
+    	<p><?php echo $article['short_description']?></p>   
+    	<div class="more"><a title="<?php echo $this->readArticle . $this->articles[$i]['title']?>"  
+    				href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>">Đọc tiếp</a></div>             
+    </div>
+<?php endforeach; }?>
+</div>

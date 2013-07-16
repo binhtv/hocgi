@@ -1,0 +1,327 @@
+/* CSS Document */
+html {
+	SCROLLBAR-BASE-COLOR: #CCCCCCC;
+	SCROLLBAR-ARROW-COLOR: #000000;
+}
+
+body {	
+	background:#fff; 		
+	font:12px/18px Arial, Helvetica, sans-serif;
+	color:#333333;
+}
+#wapper{		}	
+.container {
+	width:1024px;
+	margin:0px auto;
+}
+
+/*======================== css su dung cho header ================================*/
+#header{
+	background:url(../images/header.gif) left top repeat-x #fdfdfd;
+}
+#header .header-up{
+	width:755px;}
+#header .box-login{ width:100%; text-align:right; padding:5px 0}	
+box-login ul{ display:inline-block; float:right}
+.box-login li{
+	display:inline-block;
+	float:left;
+	list-style:none;
+	padding-left:5px;
+	position:relative;
+	z-index:9999;
+	height:22px}
+.divDropDown {
+	background:url(../images/arrowT_blue.png) 168px 0px no-repeat;	
+	padding-top:5px;	
+	width:197px;
+	text-align:left;	
+	color:#8c8c8c;
+	}
+.divDropDown form{
+	background:#fff;	
+	padding:10px;
+	border:1px solid #ececec;
+	border-top:2px solid #079ae2;
+	-webkit-box-shadow:  0px 2px 3px rgba(0, 0, 0, 0.7);
+	-moz-box-shadow:    0px 2px 3px rgba(0, 0, 0, 0.7);
+	box-shadow:         0px 2px 3px rgba(0, 0, 0, 0.7);}
+.divDropDown .label{
+	display:block;
+	font-weight:bold;
+	color:#5c5c5c;
+	width:100%;
+	padding-bottom:5px}	
+.divDropDown .forgetpass{ text-align:right; font-weight:normal; display:inline-block; padding-left:25px}
+.divDropDown .forgetpass a{ color:#27a9ec}		
+.divDropDown input[type="text"] ,.divDropDown input[type="password"]{
+	height:22px;
+	line-height:22px;
+	border:1px solid #eaeaea;
+	display:block;
+	width:160px;
+	padding:0 5px
+}
+.divDropDown input[type="text"]:focus , .divDropDown input[type="password"]:focus{
+	border: 1px solid #A3D5EC;    
+border:1px solid #6abde4;
+ -webkit-box-shadow:0 0 5px #6abde4;
+ -moz-box-shadow:0 0 4px #6abde4;
+ box-shadow:0 0 4px #6abde4;
+  outline: none;
+}
+input.exclusive{
+	background:url(../images/bg_bt.png) left -84px repeat-x;
+    border:1px solid #0BA5F0;
+    -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+    display:inline-block;
+    font-weight: bold;
+    padding: 5px 10px;  	
+}
+.box-login .hidden{right:0; top:22px}	
+.hidden{
+	position:absolute;
+	z-index:9999;
+	top:auto	
+}
+
+
+.box_search  .search_bg{
+	background:url(../images/search_bg.png) left top no-repeat;
+	width:367px;
+	height:26px;
+	padding:5px;
+	float:left;
+	margin-right:10px
+}
+.box_search .text-search{
+	width:367px;
+	background:none;
+	border:none;
+	color:#333;
+	height:25px;
+}
+input.button_search {
+	background:url(../images/btn_search.gif) left center repeat-x;
+	color:#fff;
+	font-size:16px;
+	padding:7px 25px;
+	border:none;
+	-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;
+}
+#header .social_plugin{ text-align:right}
+
+
+.header-down{
+	background:url(../images/div_menu.gif) left top repeat-x;
+	height:85px;
+	color:#b4e6f6	
+	
+}
+.header-down .ulMenu{
+	float:left;
+	width:780px;}
+.ulMenu li{
+	display:block;
+	float:left;
+	list-style:none;
+	padding:0 5px;
+	line-height:45px;
+	background:url(../images/menu_mid.gif) right center no-repeat;
+	position:relative;
+}
+.ulMenu li a{
+	color:#fff;
+	font:bold 14px/45px Arial, Helvetica, sans-serif;
+	padding-left:10px;
+	display:block;
+	
+}
+.ulMenu li a span{ padding-right:10px; display:block}
+.ulMenu li a:hover , .ulMenu li a.current{
+	background:url(../images/menu_curL.png) left center no-repeat;
+	text-decoration:none
+}
+.ulMenu li a:hover span, .ulMenu li a.current span{
+	background:url(../images/menu_curR.png) right center no-repeat
+}
+.ulMenu li.home{ padding-left:0; background:none}
+.ulMenu li.home.current a{
+	background:url(../images/homeL.png) left top no-repeat;
+	margin-top:-5px;
+	height:50px
+}
+.ulMenu li.home.current a span{
+	background:url(../images/homeR.png) right top no-repeat;
+	height:50px
+}
+
+.date_time{ font:14px/45px Arial, Helvetica, sans-serif; float:right; width:240px}
+.ulMenu .sub_menusite{
+	position:absolute;
+	width:1024px;
+	height:39px;
+	overflow:hidden;
+	background:#333;
+	left:0;
+	top:45px}
+.ulMenu .sub_menusite li{
+	background:url(../images/white_dot.png) 10px 17px no-repeat;
+	display:block;
+	float:left;
+	padding:0 0 0 20px;	
+	line-height:39px
+}	
+.sub_menusite li a , .ulMenu li.home.current li a{
+	font:normal 14px/24px Arial, Helvetica, sans-serif;
+	height:24px; 
+	padding:0 8px;
+	margin:7px 0;
+}
+
+.ulMenu li.home.current li a.current , .ulMenu li.home.current li a:hover,
+.ulMenu li li a:hover , .ulMenu li li a.current{ 
+background:#666;
+-webkit-border-radius: 5px;
+-moz-border-radius: 5px;
+border-radius: 5px;}
+
+/*======================== css su dung cho slide show ================================*/
+
+#banner-main { min-height:430px}
+
+
+/*======================== css su dung chung cho trang ================================*/
+#wapper_container{
+	border:1px solid #e1e1e1;
+	border-top:none;
+	-webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+-moz-box-shadow:    0px 0px 3px rgba(0, 0, 0, 0.2);
+box-shadow:         0px 0px 3px rgba(0, 0, 0, 0.2);
+}
+#content{ padding-bottom:20px}
+.content-center {
+    float: left;
+    margin: 0 8px 0 0;
+    width: 505px;
+}
+.content-left{
+	width:328px;
+	margin: 0 5px 0 0;
+	overflow:hidden}
+.content-right{ width:169px; margin-right:5px}	
+.content-full-left{ width:710px; margin-left:5px}
+.content-full-right{ width:290px; margin:10px 5px 0 0}
+.content{ padding:10px 0;}
+.content li{ margin-left:15px}
+/*css cho footer*/
+#footer{	
+	border-top:1px solid #e1e1e1;
+	padding:10px 5px 25px;
+	color:#020202
+	
+}
+#footer .faddress{ width:570px}
+#footer .footer_right{ width:400px; text-align:right}
+#footer .footer_right a{ color:#020202; text-decoration:none}
+/*model*/
+#simplemodal-overlay {
+    background: none repeat scroll 0 0 #000000;
+}
+#popup_formregister , #popup_bieuquyet{ background:url(../images/bg_popup.png) repeat; padding:3px;  -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;}
+.login_title{ background:url(../images/login_title.gif) left top repeat-x; height:37px;
+text-align:center; font: bold 16px/37px Arial, Helvetica, sans-serif; color:#fff; text-transform:uppercase
+}
+#simplemodal-container a.modalCloseImg {
+    background: url("../images/close_white.png") no-repeat scroll 0 0 transparent;
+    cursor: pointer;
+    display: inline;
+    height: 18px;
+    position: absolute;
+    right: 10px;
+    top: 8px;
+    width: 18px;
+    z-index: 3200;
+}
+/*register*/
+.form_register { color:#5c5c5c; background:#fff}
+.form_register fieldset{
+	border:none;
+	padding:10px
+}
+.account_title {
+    background: none repeat scroll 0 0 #F6F6F6;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 5px 10px;
+}
+.form_register .label{
+	display: inline-block;
+    font-size: 12px;
+    padding: 6px 15px;
+    text-align: right;
+    width: 130px;}
+.form_register  sup , .error_ms{ color:#ff0000} 	
+.form_register  .textfiled{
+	width:300px
+}
+/*bieu quyet*/
+#popup_bieuquyet .login_title{
+	text-transform:none;
+	text-align:start;
+	padding:0 30px 0 10px;
+	font-size:13px
+}
+#popup_bieuquyet .form_content{ background:#fff; padding: 0  15px 20px; margin-top:-3px}
+.title_danhgia_core {
+    color: #079be3;
+    font: 13px arial;
+    margin: 2px 0 0;
+    padding: 15px 5px;
+	font-weight: bold;
+}
+#popup_bieuquyet .scroll_thongke {  
+    margin: 15px 0;
+    max-height: 300px;   
+    width: 100%;
+}
+#popup_bieuquyet  .scroll_thongke li {  
+/*     margin-bottom: 8px; */
+    overflow: hidden;
+    padding-bottom: 15px;
+}
+.scroll_thongke .block_left{
+	float:left;
+	width:150px;}
+.scroll_thongke .block_right{ float:right; width:80px;}	
+.scroll_thongke li .scroll_color {
+    background: url("../images/cols.gif") no-repeat scroll left top transparent;
+    float: left;
+    height: 7px;
+    margin: 3px 0 0;
+    width: 200px;
+	border-radius: 4px;
+	border: 1px solid #7777F7;
+}
+.txt_number_ketqua {
+    bottom: -15px;
+    color: #ff0000;
+    display: inline-block;
+    font: 400 10px arial;
+    padding: 5px 0 0;
+    position: absolute;
+    right: -10px;
+}
+.scroll_thongke li .scroll_color .bg_center_scroll{ position:relative;background: none repeat scroll 0 0 #dc1a08;
+    float: left;
+    height: 7px;}
+.txt_total_phieu{ text-align:right; color:#0293c1;}	
+.txt_total_phieu .total_number{ color:#ff0000; font-weight:bold}

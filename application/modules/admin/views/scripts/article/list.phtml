@@ -1,0 +1,53 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<a href="/admin/article/edit" style="font-weight: bold">Tạo mới</a>
+<?php if(is_array($this->articles)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Title SEO</th>
+                <th>Category</th>
+                <th>Author</th>
+                <th>Active</th>
+                <th>Update date</th>
+                <th>Created date</th>
+                <th>Action</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->articles as $article) :?>
+             <tr>
+                 <td><?php echo $article['id']?></td>
+                 <td><?php echo $article['title']?></td>
+                 <td><?php echo $article['title_seo']?></td>
+                 <!-- td style="width: 30%"><?php echo $article['short_description']?></td-->
+                 <td style="width: 1%"><?php echo $article['category']?></td>
+                 <td><?php echo $article['author']?></td>
+                 <td>
+                     <?php if($article['active']) {?>
+                     <i class="icon-ok"></i>
+                     <?php } else {?>
+                     <i class="icon-lock"></i>
+                     <?php }?>
+                 </td>
+                 <td><?php echo date('d/m/Y', $article['last_update'])?></td>
+                 <td><?php echo date('d/m/Y', $article['dateline'])?></td>
+                 <td>
+                     <a href="/admin/article/edit/id/<?php echo $article['id']?>">
+                         <i class="icon-edit"></i>
+                     </a>
+                     <a href="/admin/article/delete/id/<?php echo $article['id']?>" onclick="return confirm('sure?');">
+                         <i class="icon-remove"></i>
+                     </a>
+                 </td>
+             </tr>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+      <?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'pagination.phtml', $this->currentUrl);?>
+</div>
+<?php } else {?>
+<div>Không có tin tức nào!</div>
+<?php }?>

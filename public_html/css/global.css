@@ -1,0 +1,196 @@
+*html input{
+overflow: visible; /* remove padding from left/right */
+width:0; /*remove the remaining space in IE6*/
+}
+/* IE7 */
+*:first-child+html input[type="button"]{
+  overflow: visible; /* remove padding from left/right */
+  width:auto !important;
+}
+body {
+ 	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px; 
+} 
+td,th { 
+ 	line-height:18px;
+}
+
+div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,blockquote,pre,form,input,textarea {
+	margin: 0px;
+	padding: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {	
+	font-weight:bold;
+}
+h4{ font-size:12px}
+h3{ font-size:14px}
+h2{ font-size:18px}
+h1{ font-size:24px; line-height:normal}
+.clear {clear: both; font-size: 0px; line-height: 0px; height:0;}
+p {margin:0px;padding:5px 0px;}
+ol,ul {	}
+
+a { text-decoration:none; color:#0293c1}
+a:hover {  color:#ff3300; text-decoration: underline; }
+.small-font{ font-size:11px}
+img { border :0; margin:0; padding:0}
+.hidden{
+	display:none}
+.pd0{ padding:0}
+input {   color: #2a2a2a;}
+.input-warn {border:1px solid #FF0000;line-height:20px;	height:18px;}
+.input-ok { border:1px solid #00CC66; line-height:20px;	height:18px;}
+
+button.btn { border:none;white-space:nowrap; background:none; vertical-align:middle; padding:0; cursor:pointer}
+a.btn , button.btn .btnL{
+	background:url(../images/btn.png) left bottom no-repeat;
+	padding-left:15px;
+	display:inline-block;
+	border:none;	
+	cursor:pointer;
+	color:#5e5e5e;
+	font:bold 13px/28px Arial, Helvetica, sans-serif;	
+	white-space:nowrap;
+	vertical-align:middle;
+	cursor:pointer;	
+}
+
+a.btn span , button.btn .btnL span{ 
+	background:url(../images/btn_right.png) right bottom no-repeat;	
+	padding-right:15px;	
+	vertical-align:middle;
+	display:inline-block
+}
+a.btn:hover, button.btn:hover .btnL{
+	background-position: left 0}
+a.btn:hover span, button.btn:hover .btnL span{
+	background-position:right 0;
+	color:#fff}
+/* OPTIONAL BUTTON STYLES for applying custom look and feel: */		
+input.button{
+	background:#2184ff;
+	border:none;	
+	padding:3px 10px 3px;
+	color:#fff;
+	text-decoration:none;
+	-webkit-border-radius: 2px;
+-moz-border-radius: 2px;
+border-radius: 2px;
+cursor:pointer;
+font-size:11px;
+font-weight:bold
+}
+ .textfiled {
+	border:1px solid #e1e1e1;
+	background:#fff;
+	color:#535353;	
+	line-height:22px;
+	height:22px;
+	font-size:12px;
+	padding:0 5px
+
+}
+.textarea{
+	border:1px solid #e1e1e1;	
+	background:#fff;
+	color:#535353;
+	line-height:18px;
+	overflow:auto;
+	padding:0 5px
+
+}
+.select{ border:1px solid #e1e1e1; padding:2px; height:22px}
+.clearfix:after{clear:both;content:".";display:block;font-size:0;height:0;line-height:0;visibility:hidden;}
+.clearfix{display:block;zoom:1}
+
+.row-fluid:after , .clearBoth {
+    clear: both;
+}
+.row-fluid:before, .row-fluid:after {
+    content: "";
+    display: table;
+}	
+/*\*/
+
+.fl {float:left;}
+.fr {float:right;}
+.top7{ margin-top:7px}
+.pd5{ padding:5px}
+table.std{
+}
+table.std th{
+	background:#f5f5f5;
+	border-top:1px solid #e3e3e3;
+	border-bottom:1px solid #e3e3e3;
+	font:bold 12px/34px Arial, Helvetica, sans-serif;
+	color:#5c5c5c;
+	text-align:center
+}
+table.std td{
+	border-right:1px solid #e5e5e5;
+	border-bottom:1px solid #e5e5e5;
+	padding:10px
+}
+table.std td.borderL , table.std th.borderL{border-left:1px solid #e5e5e5;}
+table.std th.borderR{border-right:1px solid #e5e5e5;}
+
+.mrg0{ margin:0}
+/* -------------------------------------------------------------------
+ format text
+------------------------------------------------------------------- */
+.error{ color:#ff0000}
+.font_err {	color:#FF0000;}
+.font_err a:active , .font_err a:link , .font_err a:visited {  text-decoration: none ; color:#FF0000}
+.font_err a:hover {  color:#FF0000; text-decoration: underline; }
+.price{ color: #c4251e;
+    font-size: 12px}
+
+
+.date_post{ color:#7d7d7d;}
+a.more{ color:#ff3300}
+.viewMoreTS{ width:100%; text-align:right}
+.aViewMoreTS{ text-decoration:underline; color:#ff3300}
+/******************** PHAN TRANG **************/
+
+.fpagination{  	
+  text-align:right;
+  font-size:12px;
+  margin:20px 0 10px
+}
+
+.fpagination a{
+	background: url("../images/page_bg.gif") no-repeat scroll 0 0 transparent;
+	color:#666666;
+	display: inline-block;
+	text-align:center;
+    font-weight: bold;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 1px 0 0;   
+    width: 30px;
+	}
+
+.fpagination a:hover, .fpagination a.current{
+	background: url("../images/page_on.gif") no-repeat scroll 0 0 transparent;
+	text-decoration:none;
+}
+.fpagination a.current{ cursor:default;}
+.pagination_courses{height:15px; padding:10px 0px 10px 0px; margin-right:12px}
+.pagination_courses .PagingWrapper{float: right; width: auto !important;}
+/* .pagination_courses a{ */
+/* 	background:#eaf6f8; */
+/* 	display:inline-block; */
+/* 	height:38px;	 */
+/* 	text-align:center; */
+/* 	margin:0 2px; */
+/* 	padding:0 15px; */
+/* 	color:#0099cc; */
+/* 	font:bold 15px/38px Arial, Helvetica, sans-serif */
+/* } */
+.pagination_courses a:hover , .pagination_courses a.current{ text-decoration:none; color:#fff; background:#0099cc}	
+
+.pagination_book{ text-align:center; padding:5px 0 10px}
+.pagination_book a{ font-weight:bold; color:#212121; padding: 0 3px}

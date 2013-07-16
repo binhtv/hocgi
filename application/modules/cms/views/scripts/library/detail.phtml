@@ -1,0 +1,13 @@
+<?php if(is_array($this->book)) {?>
+<div class="list_book_content clearfix">
+	<div class="book_focus fl">
+		<div class="img_book">
+			<img src="<?php echo $this->staticUrl . $this->book['hash_folder'] . '/' . $this->book['image'] ?>" width="246" height="358" alt="<?php echo $this->book['image']?>"/>
+		</div>
+	</div>
+	<div class="list_book fr">
+	    Giá <p><?php echo $this->book['price']?></p>
+	    <p><?php echo $this->book['short_description']?></p>
+	</div>
+</div>
+<?php }?>

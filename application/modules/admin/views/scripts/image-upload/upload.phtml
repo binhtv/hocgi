@@ -1,0 +1,36 @@
+<div class="upload-image">
+    <div class="row spec-row upload-truyen">
+        <h3>Đăng hình ảnh mới</h3>
+        <form action="/admin/image-upload/save" enctype="multipart/form-data" method="post"> 
+            <p>
+                <label>Chọn file ảnh (không quá 2Mb)</label>
+                <input type="file" name="file" id="file" accept="image/*" title="Chỉ chấp nhận các định dạng hình ảnh (png, jpg, jpge, gif)" <?php echo $this->notAllowUpload?'disabled="disabled"' : ''?>>
+            </p>
+            <p>
+                <label>Tiêu đề của ảnh</label>
+                <input class="text largeWidth" name="Caption" id="caption" type="text" value="<?php echo $this->name;?>" maxlength="255" <?php echo $this->notAllowUpload?'disabled="disabled"' : ''?>>
+            </p>
+            <p>
+                <label for="category">Chọn mục</label>
+                <select id="category" name="category">
+                    <option value="article" <?php echo $this->category=='article'?'selected="selected"':''?>> Tin tức</option>
+                    <option value="course" <?php echo $this->category=='course'?'selected="selected"':''?>> Khóa học</option>
+                </select>
+            </p>
+            <p>
+                <label for="Source">Nguồn của ảnh (không bắt buộc)</label>
+                <input class="text largeWidth" name="Source" id="source" type="text" value="<?php echo $this->source;?>" maxlength="255" <?php echo $this->notAllowUpload?'disabled="disabled"' : ''?>>
+            </p>
+            <div style="color: red; line-height: 20px; height: 30px;" id="errormsg"><?php echo $this->errMessage;?></div>
+            <p class="buttonSet">
+                <button class="buttons submitButton" type="submit" onclick="return TruyenChe.checkValidInput();" <?php echo $this->notAllowUpload?'disabled="disabled"' : ''?>>Đăng ảnh</button>
+                <a class="buttons cancelButtons" href="/">Bỏ qua</a>
+            </p>
+            <?php if($this->succMessage) {?>
+                <div class="alert alert-info" id="msgResult">
+                    <?php echo $this->succMessage?>
+                </div>
+            <?php }?>
+        </form>
+    </div><!--end row-->     
+</div>

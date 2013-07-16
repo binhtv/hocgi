@@ -1,0 +1,35 @@
+<div class="folder-small fl">
+    <div class="folder-title"> 
+    	<a href="<?php echo $this->serverUrl() . $this->url(array('id' => 8), 'fun_category_page');?>" class="link-folder">Cười</a> 
+    </div>
+    <?php if(is_array($this->articles)) {?>
+    <div class="folder-content folder-smallcontent clearfix">
+         <div class="eachStory">
+              <a title="<?php echo $this->readArticle . $this->articles[0]['title'];?>" class="aImg83" href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[0]['title_seo'], 
+	        		  									'id' => $this->articles[0]['id']), 'index_new_detail');?>">
+              	<img width="82" height="62" src="<?php echo $this->staticUrl . $this->articles[0]['hash_folder'] . '/' . $this->articles[0]['image'];?>" alt="<?php echo $this->articles[0]['image']?>">
+              </a>
+              <h2 class="h2Title"><a href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[0]['title_seo'], 
+	        		  									'id' => $this->articles[0]['id']), 'index_new_detail');?>" class="link-title"><?php echo $this->articles[0]['title']?></a></h2>
+              <h3 class="h3Lead"><?php echo $this->articles[0]['short_description'];?></h3>
+         </div>
+         <ul class="list_substory">
+         <?php for($i = 1; $i < count($this->articles); $i++) {?>
+             <li>
+             	<a title="<?php echo $this->readArticle . $this->articles[$i]['title'];?>"
+             		class="aImg53" href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[$i]['title_seo'], 
+	        		  							'id' => $this->articles[$i]['id']), 'index_new_detail');?>">
+	        		  <img width="53" height="40" src="<?php echo $this->staticUrl . $this->articles[$i]['hash_folder'] . '/' . $this->articles[$i]['image'];?>" alt="<?php echo $this->articles[$i]['image']?>">
+	        	</a>
+                <h2 class="h2Title">
+                	<a title="<?php echo $this->readArticle . $this->articles[$i]['title'];?>"
+                		href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[$i]['title_seo'], 
+	        		  							'id' => $this->articles[$i]['id']), 'index_new_detail');?>" 
+        		  		class="link-title"><?php echo $this->articles[$i]['title']?></a></h2>
+                <h3 class="h3Lead"><?php echo $this->articles[$i]['short_description']?></h3>
+            </li>
+        <?php }?>
+        </ul>
+    </div>
+    <?php }?>
+</div>

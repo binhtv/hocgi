@@ -1,0 +1,17 @@
+<?php 
+if(isset($this->arrSection))
+{
+	echo $this->formSelect('section', 0, array(																					
+											'style'=>'width:100px'
+											), $this->arrSection); 
+}
+else
+{
+?>
+<select name="section" id="sesction" disabled="disabled">
+	<option value="-1">-----</option>
+</select>
+<?php
+}									
+?>
+						

@@ -1,0 +1,70 @@
+<h3><?php echo $this->title?></h3>
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<div class="upload-image">
+<form action="/admin/center/save" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-striped">
+        <tbody>
+             <tr>
+                 <td>Name</td>
+                 <td>
+                     <input type="text" name="name" id="name" value="<?php echo $this->center['name'];?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Contact information</td>
+                 <td>
+                     <textarea type="text" name="contact_info" id="contact_info" cols="200" rows="5" class="mceEditor">
+                         <?php echo $this->center['contact_info'];?>
+                     </textarea>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Image
+                     <?php if($this->center['image']) {?>
+                         <img src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $this->center['hash_folder'] . '/' . $this->center['image']?>" alt="<?php echo $this->center['image']?>" width="50" height="50">
+                     <?php }?>
+                 </td>
+                 <td>
+                     <input type="file" name="file" id="file" accept="image/*" title="Chỉ chấp nhận các định dạng hình ảnh (png, jpg, jpge, gif)">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Address</td>
+                 <td>
+                     <input type="text" name="address" id="address" value="<?php echo $this->center['address']?>"/>
+                 </td>
+             </tr>
+             <tr>
+                 <td>City</td>
+                 <td>
+                     <input type="text" name="city" id="city" value="<?php echo $this->center['city']?>"/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>City code</td>
+                 <td>
+                     <input type="text" name="city_code" id="city_code" value="<?php echo $this->center['city_code']?>"/>
+                 </td>
+             </tr>
+             <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save"/>
+                    <a href="/admin/center/list">Cancel</a>
+                </td> 
+             </tr>
+        </tbody>
+      </table>
+      <input type="hidden" value="<?php echo $this->id?>" name="id" id="id"/>
+</form>
+</div>
+<script type="text/javascript">
+tinymce.init({selector:'textarea',
+	plugins: [
+	          "advlist autolink lists link image charmap print preview anchor",
+	          "searchreplace visualblocks code fullscreen",
+	          "insertdatetime media table contextmenu paste moxiemanager"
+	      ],
+	      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"});
+
+
+</script>

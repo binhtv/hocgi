@@ -1,0 +1,47 @@
+<div id="course_list" class="list_of_courses clearfix">
+<?php if(is_array($this->courses) && count($this->courses) > 0) {?>
+        	<!-- phan trang top-->
+            <div class="pagination_courses">                
+                <?php echo $this->paginationcontrolcourse($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforcourse.phtml', $this->name, $this->tuitionFrom, $this->tuitionTo, $this->city, $this->tab);?>              
+            </div>
+            <!-- end phan trang top-->
+            <div class="grid-courses">
+            	<?php $count = count($this->courses);
+            		for ($i=0; $i<$count; $i+=4) {?>
+            	<div id="top_courses" class="row-courses clearfix">
+            		<?php for($j=$i;($j<$i + 4) && $j<$count;$j++) {
+            		 	$course = $this->courses[$j];?>
+                	<div  class="item-course">
+                    	<div class="img">
+                        	<img src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image']?>" width="235" height="158" alt="<?php echo $course['image']?>" />
+                        	<a class="quick_view" href="javascript:void(0);" data-course-id="<?php echo $course['id']?>">Xem nhanh</a>
+                        </div>
+                        <div class="course_info">
+                            <h1 class="course-title">
+                            	<a href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>">
+                            		<?php echo $course['name']?>
+                            	</a>
+                            </h1>
+                            <div class="date_course">Khai giảng <?php echo date('d-m-Y', $course['opening_date']);?></div>
+                            <div class="place_course">Tại: <?php echo $course['city']?></div>
+                            <div class="small_logo">
+                            	<a href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>">
+                            		<img src="<?php echo Utils_Global::get('staticUrl') .'/center/' . $course['chash_folder'] . '/' . $course['center_logo']?>" width="50" height="40" align="absmiddle" />
+                            		<?php echo $course['center_name'];?>
+                            	</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php }?>                 
+                </div> 
+                <?php }?>
+           </div>
+                <!-- phan trang bottom-->
+                <div class="pagination_courses">                
+                    <?php echo $this->paginationcontrolcourse($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforcourse.phtml', $this->name, $this->tuitionFrom, $this->tuitionTo, $this->city, $this->tab);?>          
+                </div>
+                <!-- end phan trang bottom-->
+    <?php } else {?>
+        <div>Không có khóa học nào!</div>
+    <?php }?>
+</div>  

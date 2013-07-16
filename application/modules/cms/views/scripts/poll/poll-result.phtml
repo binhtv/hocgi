@@ -1,0 +1,35 @@
+<?php if(is_array($this->poll)) {?>
+<div id="popup_bieuquyet" style="display:none;">
+ <div class="login_title clearfix">
+ 		<span class="fl"><img src="<?php echo Utils_Global::get('imgUrl') . '/images/small_logo.png'?>" width="92" alt="hocgi" /></span>
+ 		<span class="fr">Kết quả bình chọn</span>
+ </div>
+ <div class="form_content clearfix">
+ 	<div class="box_width_common"><p class="title_danhgia_core"><?php echo $this->poll['question']?></p></div>
+    
+    <div class="block_left box_width_common">
+            <ul class="scroll_thongke">
+            <?php foreach ($this->poll['choices'] as $choice) :
+            if($choice['content']) {
+                $percent = round(($choice['vote']/$this->poll['total'])*100);
+            ?>
+				<li>
+                    <div class="info_result">
+                        <div class="block_left"><?php echo $choice['content'] ?></div>
+                        <div class="block_right"><label><?php echo $choice['vote']?></label> phiếu</div>
+                        <div class="block_right scroll_color">
+                            <span percent="<?php echo $percent?>" class="bg_center_scroll" style="width: <?php echo $percent?>%;">&nbsp;
+                                <label class="txt_number_ketqua"><?php echo $percent ?>%</label>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            <?php }endforeach;?>
+			</ul>
+            <div class="clear"></div>
+            <p class=" txt_total_phieu"><span style="text-decoration:underline">Tổng cộng:</span> <span class="total_number"><?php echo $this->poll['total']?> phiếu</span></p>
+        </div>
+        
+ </div>
+ </div>
+ <?php }?>

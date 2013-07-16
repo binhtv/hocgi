@@ -1,0 +1,15 @@
+<div class="other_URL">
+    <h2 class="other_title">CÁC TIN BÀI KHÁC</h2>
+    <?php if(is_array($this->articles)) {?>
+    <ul class="list_orther_url clearfix">
+    	<?php foreach ($this->articles as $article) :?>
+       		<li>
+       			<a title="<?php echo $this->readArticle . $article['title']?>" 
+          			href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $article['title_seo'], 
+	        		  																'id' => $article['id']), 'index_new_detail');?>"
+	        		  class="link-othernews"><?php echo $article['title'];?></a>
+       		</li>
+       <?php endforeach;?>
+     </ul>
+     <?php }?>
+</div>

@@ -1,0 +1,101 @@
+<h3><?php echo $this->title?></h3>
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<div class="upload-image">
+<form action="/admin/article/save" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-striped">
+        <tbody>
+             <tr>
+                 <td>Title</td>
+                 <td>
+                     <input type="text" name="title" id="title" value="<?php echo $this->article['title'];?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Author</td>
+                 <td>
+                     <input type="text" name="author" id="author" value="<?php echo $this->article['author']?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Short description</td>
+                 <td>
+                     <textarea type="text" name="short_description" id="short_description" cols="200" rows="5" class="mceEditor">
+                         <?php echo $this->article['short_description'];?>
+                     </textarea>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Full content</td>
+                 <td>
+                     <textarea type="text" name="content" id="content" cols="200" rows="5" class="mceEditor">
+                         <?php echo $this->article['content'];?>
+                     </textarea>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Image
+                     <?php if($this->article['image']) {?>
+                         <img src="<?php echo Utils_Global::get('staticUrl') . '/article/' . $this->article['hash_folder'] . '/' . $this->article['image']?>" alt="<?php echo $this->article['image']?>" width="50" height="50">
+                     <?php }?>
+                 </td>
+                 <td>
+                     <input type="file" name="file" id="file" accept="image/*" title="Chỉ chấp nhận các định dạng hình ảnh (png, jpg, jpge, gif)">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Category</td>
+                 <td>
+                     <select name="category" id="category">
+                         <?php foreach ($this->categories as $category):?>
+                             <option value="<?php echo $category['id']?>" class="optionGroup" <?php echo $this->article['category'] == $category['id']? 'selected="selected"':""?>><?php echo $category['name']?></option>
+                             <?php foreach ($category['childs'] as $child):?>
+                                 <option value="<?php echo $child['id']?>" class="optionChild" <?php echo $this->article['category'] == $child['id']? 'selected="selected"':""?>>--<?php echo $child['name']?></option>
+                             <?php endforeach;?>
+                         <?php endforeach;?>
+                     </select>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Order</td>
+                 <td>
+                     <input type="number" name="order" id="order" value="<?php echo $this->article['order']?>"/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Top</td>
+                 <td>
+                     <input type="number" name="top" id="top" value="<?php echo $this->article['top']?>" />
+                 </td>
+             </tr>
+             <tr>
+                 <td>Active</td>
+                 <td>
+                     <input type="checkbox" name="active" id="active" <?php echo $this->article['active']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Hot</td>
+                 <td>
+                     <input type="checkbox" name="hot" id="hot" <?php echo $this->article['hot']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+             <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save"/>
+                    <a href="/admin/article/list">Cancel</a>
+                </td> 
+             </tr>
+        </tbody>
+      </table>
+      <input type="hidden" value="<?php echo $this->id?>" name="id" id="id"/>
+</form>
+</div>
+<script type="text/javascript">
+tinymce.init({selector:'textarea',
+	plugins: [
+	          "advlist autolink lists link image charmap print preview anchor",
+	          "searchreplace visualblocks code fullscreen",
+	          "insertdatetime media table contextmenu paste"
+	      ],
+	      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"});
+</script>

@@ -1,0 +1,27 @@
+<?php if(is_array($this->documentary)) {?>
+		<?php foreach ($this->documentary as $d) :?>
+		<div class="row_documentary clearfix">
+			<div class="img fl">
+				<a href="javascript:void(0);">
+					<img src="<?php echo $this->staticUrl . $d['hash_folder'] . '/' . $d['image']?>" width="117" height="91" alt="<?php echo $d['image']?>" />
+				</a>
+			</div>
+			<h1>
+				<a href="javascript:void(0)" class="link-title14"><?php echo $d['name']?></a>
+			</h1>
+			<h3 class="h3Lead"><?php echo $d['short_description']?></h3>
+			<div class="documentary_stas">
+				<a href="javascript:void(0);">
+					<img src="<?php echo Utils_Global::get('imgUrl') . '/images/pdf.gif'?>" width="26" height="25" alt="pdf.gif" align="absmiddle" /></a>
+					Ngày:<span class="font_err"><?php echo date('d-m-Y', $d['dateline'])?></span><span>|
+					</span> Lượt xem: <span class="font_err"><?php echo $d['view_count']?></span> <span>|
+					</span> Download:<span class="font_err"><?php echo $d['download_count']?></span>
+			</div>
+		</div>
+		<?php endforeach;?>
+		<!-- phan trang-->
+		<div class="pagination_book">
+			<?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxfordocumentary.phtml', null, $this->type);?>
+		</div>
+		<!-- end phan trang-->
+<?php }?>

@@ -1,0 +1,59 @@
+<script>
+  $(document).ready(function()
+  {
+    $("#frmLayout").validate();
+  });
+</script>
+
+<div id="centerCont"> 
+<strong>Layout >> </strong> Edit
+<br />
+<br />
+<form name="frmLayout" id="frmLayout" action="/admin/layout/save" method="post">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="mainTab">
+<tr>
+ <td class="hligh2" width="20%"><label for="layout_name">Layout Name</label><span class="require">*</span></td>
+ <td class="hligh2">   
+   <input type="text" name="layout_name" id="layout_name" 
+   value="<?php echo $this->objLayout->layout_name; ?>" style="width:200px" maxlength="50"
+   title="Bạn phải nhập tên Layout" class="required">
+   </td>
+</tr>
+<tr>
+ <td class="hligh1"><label for="folder_name">Folder Name</label><span class="require">*</span></td>
+ <td class="hligh1">   
+   <input type="text" name="folder_name" id="folder_name" 
+   value="<?php echo $this->objLayout->folder_name; ?>" style="width:200px" maxlength="50"
+   title="Bạn phải nhập tên Folder" class="required">
+   </td>
+</tr>      
+<tr>
+ <td class="hligh2"><label for="title">Title</label></td>
+ <td class="hligh2">   
+   <input type="text" name="title" id="title" 
+   value="<?php echo $this->objLayout->title; ?>" style="width:200px" maxlength="50">
+   </td>
+</tr>      
+<tr>
+ <td class="hligh1"><label for="sections">Sections</label><span class="require">*</span></td>
+ <td class="hligh1">   
+   <input type="text" name="sections" id="sections" 
+   value="<?php echo $this->objLayout->sections; ?>" style="width:300px" maxlength="150"
+   title="Bạn phải nhập Section" class="required">
+   </td>
+</tr>      
+<tr>
+ <td class="hligh2"><label for="thumb">Thumb</label></td>
+ <td class="hligh2">   
+   <input type="text" name="thumb" id="thumb" value="<?php echo $this->objLayout->folder_name; ?>" 
+   style="width:200px" maxlength="50">
+   </td>
+</tr>      
+</table>
+<br />
+<p>
+<input type="button" name="cancel" value="Cancel" onclick="window.location='/admin/layout/list'"  class="button"/>
+<input type="submit" name="submit" value="Submit" class="button"/>
+<input type="hidden" name="id" value="<?php echo $this->objLayout->layout_name; ?>" />
+</p>
+</form>

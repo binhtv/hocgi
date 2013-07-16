@@ -1,0 +1,33 @@
+<div id="top4" class="fl">
+	<?php if(is_array($this->articles)) {?>
+        <div class="hotnews-content clearfix"> <a href="#" class="frame250_166"> 
+        	<img src="<?php echo $this->staticUrl246x358 . $this->articles[0]['image']?>" width="242" height="160" alt="<?php echo $this->articles[0]['title']?>"/> </a>
+          	<h1 class="titleHN">
+	          	<a title="<?php echo $this->readArticle . $this->articles[0]['title']?>" 
+	          		href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[0]['title_seo'], 
+	        		  																'id' => $this->articles[0]['id']), 'index_new_detail');?>" class="link-topnews">
+        		  	<?php echo $this->articles[0]['title'];?>
+	          	</a>
+          	</h1>
+          	<h2 class="h2leadHN"><?php echo $this->articles[0]['short_description'];?></h2>
+       </div>
+        <div class="top3 clearfix">
+        <?php for ($i=1; $i<count($this->articles); $i++) {?>
+          <div class="t3-content"> 
+          	<a title="<?php echo $this->readArticle . $this->articles[$i]['title']?>"
+          		 href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[$i]['title_seo'], 
+	        		  																'id' => $this->articles[$i]['id']), 'index_new_detail');?>" class="a160_105">
+          	<img src="<?php echo $this->staticUrl160x105 . $this->articles[$i]['image']?>" width="160" height="105" alt="<?php echo $this->articles[$i]['title']?>"></a>
+            <h2 class="h2Title">
+            	<a title="<?php echo $this->readArticle . $this->articles[$i]['title']?>" 
+            		 href="<?php echo $this->serverUrl() . $this->url(array('title_seo' => $this->articles[$i]['title_seo'], 
+	        		  																'id' => $this->articles[$i]['id']), 'index_new_detail');?>" class="link-title">
+	        		<?php echo $this->articles[$i]['title'];?>
+        		</a>
+              </h2>
+          </div>
+          <?php }?>
+          </div>
+        </div>
+    <?php }?>
+</div>

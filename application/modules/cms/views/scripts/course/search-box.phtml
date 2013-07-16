@@ -1,0 +1,32 @@
+<div id="search-tab-container">
+	<ul id="search-tab-container-nav" class="clearfix">
+		<li class="tabs-selected"><a href="javascript:void(0);" id="course_all_tab"><span>Tất cả</span></a></li>
+		<li><a href="javascript:void(0);" id="course_new_tab" data-tab="new"><span>Khóa học mới</span></a></li>
+		<li><a href="javascript:void(0);" id="course_requested_tab" data-tab="requested"><span>Khóa học theo yêu cầu</span></a></li>
+	</ul>
+	<div class="tab_search_content clearfix">
+		<div id="search_tab1" class="tab">
+			<label for="text-search" class="lb-tabsearch">Tìm kiếm</label>
+			<input type="text" class="text-tab-search" name="f_name" id="f_name"/>
+			<select class="select_tabsearch" name="f_tuition_from" id="f_tuition_from">
+				<option value="">Giá từ ...</option>
+				<option value="3000000">3.000.000 VNĐ</option>
+				<option value="5000000">5.000.000 VNĐ</option>
+				<option value="10000000">10.000.000 VNĐ</option>
+			</select> 
+			<select class="select_tabsearch" name="f_tuition_to" id="f_tuition_to">
+				<option value="">Giá đến...</option>
+				<option value="5000000">5.000.000 VNĐ</option>
+				<option value="10000000">10.000.000 VNĐ</option>
+				<option value="10000000">15.000.000 VNĐ</option>
+			</select> 
+			<select class="select_tabsearch" name="f_city" id="f_city">
+				<option value="">Tỉnh Thành</option>
+				<option value="SG">Tp.HCM</option>
+				<option value="HN">Hà Nội</option>
+				<option value="BD">Bình Dương</option>
+			</select> 
+			<input id="filter_course" type="submit" value="Lọc" class="button_filter" />
+		</div>
+	</div>
+</div>

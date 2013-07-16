@@ -1,0 +1,41 @@
+<div class="box-item1 box-promotion">
+	<div id="tab-container-1">
+		<div class="box-item-title1 clearfix">
+			<ul id="tab-container-1-nav">
+				<li class="tabs-selected"><a href="tab1" class="tab_first">Các khóa học khyễn mãi</a></li>
+				<li class=""><a href="tab2">Khóa học hàng đầu</a></li>
+			</ul>
+		</div>
+		<!-- tab1-->
+		<div class="tab" id="Tab1" style="display: block;">
+			<?php if(is_array($this->courses)) {
+				foreach ($this->courses as $course):
+				?>
+			<div class="promotion_item clearfix">
+				<a href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>" class="aImg73">
+				<img src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image'];?>"
+					width="73" alt="<?php echo $course['name'];?>"></a>
+				<h3 class="h3Lead">
+					<a class="link-othernews" href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>"><?php echo $course['name'];?></a>
+				</h3>
+			</div>
+			<?php endforeach;}?>
+		</div>
+		<!-- end tab 1-->
+		<!-- tab2-->
+		<div class="tab" id="Tab2" style="display: none;">
+		<?php if(is_array($this->bestCourses)) {
+				foreach ($this->bestCourses as $course):
+		?>
+			<div class="promotion_item clearfix">
+				<a href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>" class="aImg73"><img src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image'];?>"
+					width="73" alt="<?php echo $course['name'];?>"></a>
+				<h3 class="h3Lead">
+					<a class="link-othernews" href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>"><?php echo $course['name'];?></a>
+				</h3>
+			</div>
+		<?php endforeach;}?>
+		</div>
+		<!-- end tab 2-->
+	</div>
+</div>

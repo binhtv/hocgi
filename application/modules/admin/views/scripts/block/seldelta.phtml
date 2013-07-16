@@ -1,0 +1,17 @@
+<?php 
+if(isset($this->arrView))
+{
+	echo $this->formSelect('delta', 0, array(																					
+											'style'=>'width:100px'
+											), $this->arrView); 
+}
+else
+{
+?>
+<select name="delta" id="delta" disabled="disabled">
+	<option value="-1">-----</option>
+</select>
+<?php
+}									
+?>
+						

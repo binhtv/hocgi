@@ -1,0 +1,11 @@
+<div class="relate_folder pd5 clearfix">
+  	<h3 class="relate_dolder_title"><a href="<?php echo $this->serverUrl() . $this->url(array('id' => 10), 'course_category_page')?>">>> Những khóa học mới nhất</a></h3>
+    <div class="relate_dolder_content clearfix"> 
+	    <?php if(is_array($this->courses)) { 
+	    		foreach($this->courses as $course) : ?>
+	    		<a class="aImg61" href="<?php echo $this->serverUrl() . $this->url(array('name_seo' => $course['name_seo'], 'id' => $course['id']), 'course_detail');?>">
+	    			<img width="63" height="45" alt="<?php echo $course['image']?>" src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image']?>" />
+	    		</a>
+	    	<?php endforeach;}?>
+    </div>
+</div>
