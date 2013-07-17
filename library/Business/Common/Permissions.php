@@ -47,7 +47,7 @@ class Business_Common_Permissions extends Business_Abstract
 	 */
 	function getDbConnection()
 	{		
-		$db = Globals::getDbConnection('maindb', false);
+		$db = Utils_Global::getDbInstance('admin');
 		return $db;	
 	}
 	
@@ -64,19 +64,9 @@ class Business_Common_Permissions extends Business_Abstract
 
 	public function getList()
 	{
-		$cache = $this->getCacheInstance();
-		$key = $this->getKeyList();
-		$result = $cache->getCache($key);
-		if($result === FALSE)
-		{
-			$db = $this->getDbConnection();
-			$query = "SELECT * FROM " . $this->_tablename . " ORDER BY name";
-			$result = $db->fetchAll($query);
-			if(!is_null($result) && is_array($result))
-			{
-				$cache->setCache($key, $result);
-			}
-		}
+		$db = $this->getDbConnection();
+		$query = "SELECT * FROM " . $this->_tablename . " ORDER BY name";
+		$result = $db->fetchAll($query);
 		return $result;
 	}
 	
@@ -100,21 +90,10 @@ class Business_Common_Permissions extends Business_Abstract
 	
 	public function getPermision($pid)
 	{
-		$cache = $this->getCacheInstance();
-		$key = $this->getKey($pid);
-		$result = $cache->getCache($key);
-		if($result === FALSE)
-		{
-			$db = $this->getDbConnection();
-			$query = "SELECT * FROM " . $this->_tablename . " WHERE pid = ?";
-			$data = array($pid);
-			$result = $db->fetchAll($query, $data);						
-			if(!is_null($result) && is_array($result))
-			{
-				$result = $result[0];
-				$cache->setCache($key, $result);				
-			}			
-		}
+		$db = $this->getDbConnection();
+		$query = "SELECT * FROM " . $this->_tablename . " WHERE pid = ?";
+		$data = array($pid);
+		$result = $db->fetchAll($query, $data);						
 		return $result;		
 	}
 	
@@ -122,12 +101,6 @@ class Business_Common_Permissions extends Business_Abstract
 	{
 		$db = $this->getDbConnection();
 		$result = $db->insert($this->_tablename, $data);
-		if($result)
-		{
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyList();
-			$cache->deleteCache($key);
-		}
 		return $result;		
 	}
 	
@@ -137,15 +110,6 @@ class Business_Common_Permissions extends Business_Abstract
 		$where = array();
 		$where[] = "pid='" . $this->adaptSQL($pid) . "'";		
 		$result = $db->update($this->_tablename, $data, $where);
-		if($result)
-		{
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyList();
-			$cache->deleteCache($key);
-			
-			$key = $this->getKey($pid);
-			$cache->deleteCache($key);
-		}
 		return $result;
 	}
 	
@@ -155,15 +119,7 @@ class Business_Common_Permissions extends Business_Abstract
 		$where = array();
 		$where[] = "pid='" . $this->adaptSQL($pid) . "'";
 		$result = $db->delete($this->_tablename, $where);
-		if($result)
-		{
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyList();
-			$cache->deleteCache($key);
-			
-			$key = $this->getKey($pid);
-			$cache->deleteCache($key);
-		}
+		return $result;
 	}
 	
 }

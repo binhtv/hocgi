@@ -75,7 +75,7 @@ class Business_Common_Users extends Business_Abstract
 	 */
 	function getDbConnection()
 	{		
-		$db    	= Globals::getDbConnection('maindb', false);
+		$db    	= Utils_Global::getDbInstance('admin');
 		return $db;	
 	}
 	
@@ -92,43 +92,19 @@ class Business_Common_Users extends Business_Abstract
 	
 	public function getList()
 	{
-		$cache = $this->getCacheInstance();
-		$key = $this->getKeyList();
-		$result = $cache->getCache($key);
-						
-		if($result === FALSE)
-		{
-			$db = $this->getDbConnection();
-			$query = "SELECT * FROM " . $this->_tablename . " ORDER BY username";
-			$result = $db->fetchAll($query);
-			if(!is_null($result) && is_array($result))
-			{
-				$cache->setCache($key, $result);
-			}
-		}
-		
+		$db = $this->getDbConnection();
+		$query = "SELECT * FROM " . $this->_tablename . " ORDER BY username";
+		$result = $db->fetchAll($query);
 		return $result;		
 	}
 	
 	public function getUserByUid($uid)
 	{
-		$cache = $this->getCacheInstance();
-		$key = $this->getKeyDetail($uid);
-		$result = $cache->getCache($key);
+		$db = $this->getDbConnection();
+		$query = "SELECT * FROM " . $this->_tablename . " WHERE userid = ?";
+		$data = array($uid);
+		$result = $db->fetchAll($query, $data);
 		
-		if($result === FALSE)
-		{
-			$db = $this->getDbConnection();
-			$query = "SELECT * FROM " . $this->_tablename . " WHERE userid = ?";
-			$data = array($uid);
-			$result = $db->fetchAll($query, $data);
-			
-			if(!is_null($result) && is_array($result) && count($result) > 0)
-			{
-				$result = $result[0];
-				$cache->setCache($key, $result);
-			}			
-		}		
 		return $result;
 	}
 	
@@ -158,9 +134,6 @@ class Business_Common_Users extends Business_Abstract
 		if($result)
 		{
 			$lastid = $db->lastInsertId();
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyList();
-			$cache->deleteCache($key);
 		}
 		return $lastid;
 	}
@@ -171,15 +144,6 @@ class Business_Common_Users extends Business_Abstract
 		$where = array();
 		$where[] = "userid='" . parent::adaptSQL($userid) . "'";
 		$result = $db->update($this->_tablename, $data, $where);
-		if($result)
-		{
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyList();
-			$cache->deleteCache($key);
-			
-			$key = $this->getKeyDetail($userid);
-			$cache->deleteCache($key);
-		}
 		return $result;
 	}
 	

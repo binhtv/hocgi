@@ -5,15 +5,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="brand" href="#">Học gì</a>
+          <a class="brand" href="<?php echo $this->serverUrl()?>" target="_blank">Học gì</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">Username</a>
+              Logged in as <span style="color:white;"><?php echo $this->userName?></span>
             </p>
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><a href="<?php echo $this->serverUrl()?>/admin/auth/logout">Logout</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

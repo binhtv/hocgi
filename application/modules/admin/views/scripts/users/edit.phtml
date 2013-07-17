@@ -1,0 +1,58 @@
+
+<div id="centerCont"> 
+<strong>User Management >> </strong> <?php  echo ($this->edited ? "Edit" : "Add"); ?>
+<br />
+<font color=red><?php echo $this->message ?></font>
+<br />
+<form name="frm" id="frm" action="<?php echo $this->form_action; ?>" method="post" onsubmit="get_editor_data();return CheckForm();">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="mainTab">
+<tr>
+ <td class="hligh1"><label for="description">Name</label></td>
+ <td class="hligh1">   
+   <input type="text" name="username" id="username" 
+   value="<?php echo $this->data["username"]; ?>" style="width:400px" maxlength="100" disabled="disabled" />   
+   </td>
+</tr>
+<tr>
+ <td class="hligh2"><label for="description">Passsword</label></td>
+ <td class="hligh2">
+   <input type="password" name="password" id="password" 
+   value="" style="width:400px" maxlength="100"/>   
+   
+   </td>
+</tr>
+<tr>
+ <td class="hligh1"><label for="description">Active</label></td>
+ <td class="hligh1">   
+   <input type="checkbox" name="status" id="status" value="1" <?php echo ($this->data["status"] == 1) ? "checked='checked'" : "" ; ?> />   
+   </td>
+</tr>
+<tr>
+	<td class="hligh2"><label for="description">Roles</label></td>
+ 	<td class="hligh2">   
+	<?php if(!empty($this->roles)):?>
+ 		<select name="roles">
+	    <?php foreach ($this->roles as $roles):?>
+	    	<option <?php echo ($this->data["role_id"] == $roles['id']) ? "selected='selected'":""?> value="<?php echo $roles['id']?>"><?php echo $roles['name'] ?></option>
+	    <?php endForeach;?>   
+ 		</select> 		
+ 	<?php endIf;?> 
+	</td>
+</tr>
+</table>
+<br />
+<p>
+<input type="submit" name="submit" value="Submit" class="button"/>
+<input type="button" name="cancel" value="Cancel" onclick="window.location='<?php echo $this->cancel_btn;?>'"  class="button"/>
+<input type="hidden" name="id" value="<?php echo $this->data["userid"]; ?>" />
+</p>
+
+<script language="javascript">
+function get_editor_data()
+{	
+	return true;
+}
+</script>
+
+
+</form>

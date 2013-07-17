@@ -47,7 +47,7 @@ class Business_Common_Roles extends Business_Abstract
 	 */
 	function getDbConnection()
 	{		
-		$db    	= Globals::getDbConnection('maindb', false);
+		$db    	= Utils_Global::getDbInstance('admin');
 		return $db;	
 	}
 	
@@ -64,21 +64,10 @@ class Business_Common_Roles extends Business_Abstract
 
 	public function getRolesByUser($userid)
 	{
-		$cache = $this->getCacheInstance();		
-		$key = $this->getKeyByUser($userid);
-		$result = $cache->getCache($key);
-		
-		if($result === FALSE)
-		{
-			$db = $this->getDbConnection();
-			$query = "SELECT pid FROM " . $this->_tablename . " WHERE userid = ?";
-			$data = array($userid);
-			$result = $db->fetchAll($query, $data);
-			if(!is_null($result) && is_array($result))
-			{
-				$cache->setCache($key, $result);
-			}
-		}
+		$db = $this->getDbConnection();
+		$query = "SELECT pid FROM " . $this->_tablename . " WHERE userid = ?";
+		$data = array($userid);
+		$result = $db->fetchAll($query, $data);
 		return $result;			
 	}
 	
@@ -113,12 +102,7 @@ class Business_Common_Roles extends Business_Abstract
 		);
 		
 		$result = $db->insert($this->_tablename, $data);
-		if($result)
-		{
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyByUser($userid);
-			$cache->deleteCache($key);
-		}
+		return $result;
 	}
 	
 	public function deleteAllRoleForUser($userid)
@@ -127,12 +111,6 @@ class Business_Common_Roles extends Business_Abstract
 		$where = array();
 		$where[] = "userid='" . parent::adaptSQL($userid) . "'";
 		$result = $db->delete($this->_tablename, $where);
-		if($result)
-		{
-			$cache = $this->getCacheInstance();
-			$key = $this->getKeyByUser($userid);
-			$cache->deleteCache($key);
-		}
 	}
 	
 	
