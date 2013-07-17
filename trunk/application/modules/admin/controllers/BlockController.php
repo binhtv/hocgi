@@ -244,9 +244,9 @@ class Admin_BlockController extends Zend_Controller_Action
 			$arrData['delta'] 		= $this->_request->getPost('delta');
 			$arrData['weight'] 		= $this->_request->getPost('weight');
 			$arrData['section'] 	= $this->_request->getPost('section');
-			$arrData['layout'] 		= $this->_request->getPost('layout');
+			$arrData['layout'] 		= $this->_request->getPost('layout1');
 			$arrData['status']	 	= $this->_request->getPost('status');
-			$layout = $this->_request->getPost('layout');
+			$layout = $this->_request->getPost('layout1');
 			$id = $this->_request->getPost('id');
 			$model->updateBlock($arrData, $id);
 			$this->_redirect('/admin/block/list/layout/' . $layout);

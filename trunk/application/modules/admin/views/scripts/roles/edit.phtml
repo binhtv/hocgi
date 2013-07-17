@@ -1,0 +1,33 @@
+
+<div id="centerCont"> 
+<strong>Roles Management >> </strong> <?php echo ($this->edited ? "Edit" : "Add"); ?>
+<br />
+<font color=red><?php echo $this->message ?></font>
+<br />
+<form name="frm" id="frm" action="<?php echo $this->form_action; ?>" method="post" onsubmit="get_editor_data();return CheckForm();">
+<table width="100%" border="0" cellspacing="0" cellpadding="0" class="mainTab">
+<tr>
+ <td class="hligh1"><label for="description">Role Name</label></td>
+ <td class="hligh1">   
+   <input type="text" name="rolename" id="rolename" 
+   value="<?php echo $this->data["name"]; ?>" style="width:400px" maxlength="100" />
+   <input type="hidden" name="oldname" id="oldname" value="<?php echo $this->data['name']; ?>" />
+   </td>
+</tr>
+</table>
+<br />
+<p>
+<input type="submit" name="submit" value="Submit" class="button"/>
+<input type="button" name="cancel" value="Cancel" onclick="window.location='<?php echo $this->cancel_btn;?>'"  class="button"/>
+<input type="hidden" name="id" value="<?php echo $this->data["id"]; ?>" />
+</p>
+
+<script language="javascript">
+function get_editor_data()
+{	
+	return true;
+}
+</script>
+
+
+</form>

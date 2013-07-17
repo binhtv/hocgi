@@ -1,8 +1,20 @@
 <?php if(is_array($this->banner)) {
-	foreach($this->banner as $banner) :?>
-<a href="<?php echo $banner['link']?>" target="_blank">
-	<img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 
-			width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>"/>
-</a>
+	foreach($this->banner as $banner) :
+        if($banner['video']) {?>
+        <iframe width="<?php echo $banner['width']?>" height="<?php echo $banner['height']?>"
+			src="<?php echo $banner['link']?>" frameborder="0"
+			allowfullscreen></iframe>
+    <?php } elseif($banner['flash']) {?>
+         <embed src="<?php echo $banner['link']; ?>" 
+        height="<?php echo $banner['height'];?>" alt="http://admicro2.vcmedia.vn/images/08va980x90bk.jpg" align="middle" 
+        width="<?php echo $banner['width'];?>" 
+            pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" 
+            allowscriptaccess="always" wmode="transparent" quality="high">
+    <?php } else {?>
+         <a href="<?php echo $banner['link']?>" target="_blank">
+    	    <img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 
+    			width="<?php echo $banner['width'];?>" height="<?php echo $banner['height'];?>"/>
+        </a>
+    <?php }?>
 <?php endforeach;?>
 <?php }?>

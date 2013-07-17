@@ -25,7 +25,7 @@
     // set getUrl for ajax calling
 	$getUrl = '/admin/block/get-section-by-layout';
 	
-	echo $this->formSelect('layout', $this->objBlock->layout, array(
+	echo $this->formSelect('layout1', $this->objBlock->layout, array(
 						'style'=>'width:200px',
 						'onchange'=> "ajaxChangeLayout('$getUrl', this)"						
 						), $this->arrLayout) 

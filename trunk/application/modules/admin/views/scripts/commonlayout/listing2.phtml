@@ -1,0 +1,101 @@
+<?php
+/*
+$fields = array(
+	array("type" => "title", "data" => "username"),
+	array("type" => "title", "data" => "password"),
+	array("type" => "title", "data" => "deptname"),
+	array("type" => "pic", "data" => "username", "param" => array("tu1" => "/images/admin/publish.png" , "tu" => "/images/admin/unpublish.png"))
+);
+*/
+$_title = $this->title;
+$_fields = $this->fields;
+$_data = $this->data;
+$_autoid = $this->autoid;
+$_start = $this->start;
+
+?>
+<table border="0" cellspacing="0" cellpadding="0" class="mainTab" width="99%">
+  <tr>
+	<?php
+if($_autoid)
+{
+	echo ' <td with="50" align="center" style="background:#cccccc;align:center;padding: 6px 0 0;border:1px;border-color: #888888" >No.</td>';
+}
+for($i=0;$i<count($_title);$i++)
+{
+	$arr = explode(':',$_title[$i]);
+	if(count($arr) > 1)
+	{
+		$width = $arr[1];
+		$mytitle = $arr[0];
+	}
+	else
+	{
+		$width = "";
+		$mytitle = $arr[0];
+	}
+	echo '	<td ' . ($width == '' ? '' : 'width="' . $width . '"') . ' style="background:#cccccc;text-align:center;padding: 6px 0 0;border:1px;border-color: 888888">' . $mytitle . '</td>';
+}
+	?>    
+  </tr>
+<?php
+$temp = '';
+
+for($i=0;$i<count($_data);$i++)
+{
+	$temp .= "<tr>";
+	if($_autoid) $temp .= "<td align='center' class='" . ($i % 2 == 0 ? 'hligh1' : 'hligh2') . "'>" . ($_start + $i+1) . "</td>";
+	for($j=0;$j<count($_fields);$j++)
+	{		
+		//type : title, link, picture
+		//data : 
+		$type = $_fields[$j]["type"];
+		$data = $_fields[$j]["data"];
+		$param = $_fields[$j]["param"];
+		if(isset($_fields[$j]["align"])) $align= "align='" . $_fields[$j]["align"] . "' ";
+		else $align = "";
+		if($type == "title")
+		{
+			if(isset($param) && is_array($param))
+			{
+				$param_with_data = array();
+				for($l=0;$l<count($param);$l++)
+				{
+					$param_with_data[] = $_data[$i][$param[$l]];
+				}
+				$temp .= "<td $align class='" . ($i % 2 == 0 ? 'hligh1' : 'hligh2') . "'>" . vsprintf($data,$param_with_data) . "</td>\n";
+			}
+			else
+			{
+				$temp .= "<td $align class='" . ($i % 2 == 0 ? 'hligh1' : 'hligh2') . "'>" . $_data[$i][$data] . "</td>\n";
+			}
+		}		
+		elseif ($type == "pic")
+		{
+			$value = $_data[$i][$data];
+			$pic_src = '';
+			if(array_key_exists($value, $param))
+			{
+				$pic_src = $param[$value];
+			}
+			$temp .= "<td $align class='" . ($i % 2 == 0 ? 'hligh1' : 'hligh2') . "'>" . "<img src=\"". $pic_src . "\" /></td>\n";
+		}
+		elseif ($type == "link")
+		{
+			//data["title"] data["field"] data["link"]
+			$temp .= "<td $align class='" . ($i % 2 == 0 ? 'hligh1' : 'hligh2') . "'>";
+			for($l=0;$l<count($data);$l++)
+			{
+				$link_item = $data[$l];
+				$value = $_data[$i][$link_item["field"]];
+				$temp .= "<a href='" . sprintf($link_item["link"],$value) . "' title='" . $link_item["title"] . "'>" . $link_item["title"] . "</a>&nbsp;&nbsp;&nbsp;";
+			}
+			$temp .= "</td>\n";
+		}
+	}
+	$temp .= "</tr>\n";	
+}
+echo $temp;
+?>
+</table>
+<?php if(count($_data) == 0) echo "no data";?>

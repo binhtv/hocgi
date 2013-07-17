@@ -11,7 +11,7 @@ class Admin_SectionController extends Zend_Controller_Action
 		$identity = $auth->getIdentity();		
 		if($auth->hasIdentity())
 		{ 			
-			$this->view->msgLogin = "Hello <strong>{$identity->username}</strong> <a href=\"/admin/product/clearcache/1\"><font color='red'>[Clear Cache]</font></a> <a href=\"/admin/users/change-pass/id/".$identity->userid."\">[Change password]</a> <a href=\"/admin/auth/logout\">[Logout]</a>";			
+			$this->view->userName = $identity->username;			
 		}
 		else
 		{ 		

@@ -1,0 +1,80 @@
+<?php
+
+function buildUrl($url, $page)
+{
+	$pos = strpos($url,"?");
+	if($pos !== false)
+	{
+		$url .= "&p=" . $page;
+	}
+	else
+	{
+		$url .= "?p=" . $page;
+	}
+	return $url;
+}
+
+$page = $this->current_page;
+$totalpage = $this->total_page;
+$page_range = $this->page_range;
+$url = $this->url;
+
+$start = 0;
+$final = $totalpage;
+$paging = '';
+
+if($totalpage >= 1)
+{
+	if($page > 0)
+	{
+		if($page - $page_range >=0)
+		{
+			$start = $page - $page_range;
+			$paging .= "<div class='number_page'><a href='" . buildUrl($url, $page - 1) . "'> << </a></div>";
+		}
+		else
+		{
+			$paging .= "<div class='number_page'><a href='" . buildUrl($url, $page) . "'> << </a></div>";
+		}
+	}
+	
+	if($totalpage - $page > $page_range)
+	{
+		$final = $page + $page_range;
+	}
+	else
+	{
+		$final = $page + $page_range - 1;
+	}
+	
+	if($final > $totalpage) $final = $totalpage;
+	
+	
+	
+	for($i=$start;$i<$final;$i++)
+	{
+		if($page == $i)
+		{
+			$paging .= "<div class='number_page'><b><a href='" . buildUrl($url, $i) . "'>" . ($i+1) . "</a></b></div>";
+		}
+		else
+		{
+			$paging .= "<div class='number_page'><a href='" . buildUrl($url, $i) . "'>" . ($i+1) . "</a></div>";
+		}
+	}
+	
+	if($page + 1 < $totalpage)
+	{
+		if($totalpage - $page > $page_range)
+		{
+			$paging .= "<div ><a href='" . buildUrl($url, $page+1) . "'> >> </a></div>";
+		}
+		else
+		{
+			$paging .= "<div ><a href='" . buildUrl($url, $totalpage - 1) . "'> >> </a></div>";
+		}
+	}
+}
+if($this->total != 0) $paging .= "(total items : " . $this->total . ")";
+echo $paging . "<br>";
+?>

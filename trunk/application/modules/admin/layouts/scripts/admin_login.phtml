@@ -2,26 +2,39 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="<?php echo IMAGE_URL?>/css/admin/page.css" rel="stylesheet" type="text/css" />
-<link href="<?php echo IMAGE_URL?>/css/admin/formapi.css" rel="stylesheet" type="text/css" />
 <title>Admin Login Page</title>
+<style type="text/css">
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+<?php echo $this->layout()->_section['style']; ?>
+<?php echo $this->layout()->_section['script'];?>
 </head>
 <body>
-<div id="wrapper">
-	<div id="header">
-		<?php echo $this->layout()->_section["header"] ?>
-	</div>
-	
-	<div id="container">
-		<?php echo $this->layout()->content ?>		
-		<?php echo $this->layout()->_section["content"] ?>
-	</div>
-	
-	<div id="footer">
-		<?php echo $this->layout()->_section["footer"] ?>
-	</div>
+<h2>Provide your login information</h2>
+<div class="container-fluid">
+  <div class="row-fluid">
+      <div class="span9">
+          <?php echo $this->layout()->content;?>
+      </div>
+  </div><!--/row-->
+
+  <hr>
+
+  <footer>
+    <p>© hocgi 2013</p>
+  </footer>
 
 </div>
-
 </body>
 </html>

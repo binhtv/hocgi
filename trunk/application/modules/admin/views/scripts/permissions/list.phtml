@@ -1,0 +1,85 @@
+<form name="frmBlock" id="frmBlock" method="post" action="<?php echo $this->url_action;?>"> 
+<strong>Permission List </strong>
+<br>
+<div id="centerCont"> 
+<font color=green><?php echo $this->mess ?></font>
+</div>
+<br>
+<?php  
+	$countPrivilege = count($this->privileges);
+	$countResource = count($this->resources);
+?>
+<div>
+	<input type="button" value="Select All" onclick="javascript:$(':checkbox').attr('checked','checked')" />
+	<input type="button" value="Deselect All" onclick="javascript:$(':checkbox').attr('checked','')" />
+	<input type="button" value="Refresh Resources" onclick="window.location.href='<?php echo $this->btn_refresh ;?>'" />
+</div>
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th valign="middle">Permission</th>
+			<?php foreach($this->privileges as $privilege):?>
+				<th>
+					<label style="width: auto;" for="<?php echo $privilege['name']?>"> <?php echo $privilege['name']?></label>
+					<input type="checkbox" id="<?php echo $privilege['name']?>" class="actionCheckbox"/>
+				</th>	
+			<?php endforeach;?>					
+		</tr>
+	</thead>
+	<?php 	
+		$i = 1;
+		foreach($this->resources as $resource)
+		{		
+			$cls = "odd";
+			if($i%2 == 0 && $i != 0)
+				$cls = "even";
+			$i++;
+		
+	?>
+	<tr class="<?php echo $cls; ?>">
+		<td>
+			<input type="checkbox" id="<?php echo $resource['name']?>" class="resourceCheckbox"/>
+			<label style="width: auto; float: none;" for="<?php echo $resource['name']?>"> <?php echo $resource['name'] ?></label>
+		</td>
+		<?php 
+			$role_privileges = array();
+			foreach($this->permission as $permission){
+				if($permission['resource_name'] == $resource['name']){
+					$role_privileges = explode("|", $permission['permission']);
+					break; 
+				}	
+			};
+			foreach($this->privileges as $privilege){	
+			?>
+		<td>
+			<input type="checkbox" name="privileges[]" class="privileges <?php echo $privilege['name'] ?> <?php echo $resource['name']?>"
+				value="<?php echo  $resource['name']."_".$privilege['name']?>"
+				<?php echo (in_array($privilege['name'],$role_privileges)) ? "checked='checked'" : "" ?>
+			>
+		</td>
+		<?php }?>	
+		<td>
+			<a href="/admin/permissions/deleteresource/id/<?php echo $resource['id'];?>" onclick="return showConFirmBox();" title="Delete">
+				<i class="icon-remove"></i>
+			</a>
+		</td>
+	</tr>
+	<?php 		
+			}?>
+</table>
+
+<br />
+<p>
+	<input type="hidden" name="id" value="<?php echo $this->role_id ?>"/>
+	<input type="submit" class="button" value="Update Permission">
+	<input type="button" class="button" value="Cancel" onclick="window.location.href='<?php echo $this->btn_cancel ;?>'">
+</p>
+</form>
+
+<style>
+.resource{
+	cursor : pointer;
+	color: green;
+	font-weight: bold;
+}
+</style>

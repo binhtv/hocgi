@@ -89,7 +89,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
 		$config = Utils_Global::getConfig('global', 'product');
 		$front = Zend_Controller_Front::getInstance();
 		$front->registerPlugin(new Plugin_StartUp(array()))
-								->registerPlugin(new Plugin_BlockManagement_BlockManagement(array()));
+								->registerPlugin(new Plugin_BlockManagement_BlockManagement(array()))
+								 ->registerPlugin(new Plugin_Perm());
 		$front->setControllerDirectory($config->controllers->toArray());
 		try {
 			$front->throwExceptions(true);
