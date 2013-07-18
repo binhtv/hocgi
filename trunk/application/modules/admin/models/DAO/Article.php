@@ -58,7 +58,7 @@ class Admin_Model_DAO_Article
      * */
 	public function getArticles($options = array()) {
 		$sql = "SELECT `article`.*, `category`.`name` `category_name` ";
-		$from = " FROM `article` INNER JOIN `category` ON `article`.`category` = `category`.`id` ";
+		$from = " FROM `article` LEFT JOIN `category` ON `article`.`category` = `category`.`id` ";
 		$where = " WHERE 1 = 1 ";
 		if($options['top']) {
 			$where .= " AND `top` = {$this->_db->quote($options['top'], 'INTEGER')} ";
@@ -72,7 +72,7 @@ class Admin_Model_DAO_Article
 		if($options['title']) {
 		    $where .= " AND `article`.`title` LIKE '%" . $options['title'] . "%'";
 		}
-		if($options['active'] != -1) {
+		if(isset($options['active']) && $options['active'] != -1) {
 		    $where .= " AND `article`.`active` = {$this->_db->quote($options['active'], 'INTEGER')} ";
 		}
 		if($options['datelineF'] && $options['datelineT']) {
@@ -114,7 +114,7 @@ class Admin_Model_DAO_Article
 		if($options['title']) {
 			$where .= " AND `article`.`title` LIKE '%" . $options['title'] . "%'";
 		}
-		if($options['active'] != -1) {
+		if(isset($options['active']) != -1) {
 		    $where .= " AND `article`.`active` = {$this->_db->quote($options['active'], 'INTEGER')} ";
 		}
 		if($options['datelineF'] && $options['datelineT']) {
