@@ -1,5 +1,6 @@
 <?php
 
+use Zend\Crypt\Utils;
 class Admin_ArticleController extends Zend_Controller_Action
 {
     private $_config = null;
@@ -35,6 +36,14 @@ class Admin_ArticleController extends Zend_Controller_Action
     public function listAction() {
         $page = intval(Utils_Global::$params['page']);
         $limit = intval(Utils_Global::$params['limit']);
+        $id = Utils_Global::$params['id'];
+        $title = Utils_Global::$params['title'];
+        $category = Utils_Global::$params['category'];
+        $active = trim(Utils_Global::$params['active']);
+        $datelineF = strtotime(Utils_Global::$params['datelineF']);
+        $datelineT = strtotime(Utils_Global::$params['datelineT']);
+        $sortBy = Utils_Global::$params['sort_by'];
+        $sortDir = Utils_Global::$params['sort_dir'];
         if($limit <= 0) {
             $limit = 10;
         }
@@ -42,17 +51,33 @@ class Admin_ArticleController extends Zend_Controller_Action
             $page = 1;
         }
         
-        $modelArticle = Admin_Model_Article::factory();
-        $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit);
-        $articles = $modelArticle->getArticles($options);
+        $modelCategory = Admin_Model_Category::factory();
+        $categories = $modelCategory->getCategories();
         
+        $modelArticle = Admin_Model_Article::factory();
+        $options = array('id' => $id, 'title' => $title, 'category' => $category, 'active' => $active,
+                        'datelineF' => $datelineF, 'datelineT' => $datelineT, 'order' => $sortBy, 'by' => $sortDir?'DESC':'ASC',
+                            'offset' => ($page - 1) * $limit, 'limit' => $limit);
+        $articles = $modelArticle->getArticles($options);
+        $sortByCol = 'sortBy'.$sortBy;
+        $this->view->{$sortByCol} = 1;
+        $this->view->sortDir = $sortDir;
+        if($sortDir) {
+            $this->view->clzzSort = 'icon-chevron-down';
+        } else {
+            $this->view->clzzSort = 'icon-chevron-up';
+        }
+        
+        $options['sort_by'] = $sortBy;
+        $options['sort_dir'] = $sortDir;
+        $this->view->params = $options;
         $this->view->articles = $articles;
+        $this->view->categories = $categories;
         $this->view->title = "Tin tức";
         $this->view->page = $page;
         $this->view->numRowPerPage = $limit;
-        $options = array();
         $this->view->totalItem = $modelArticle->getArticlesCount($options);
-        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array());
+        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?' . http_build_query($options);
     }
     
     public function saveAction() {
@@ -75,12 +100,9 @@ class Admin_ArticleController extends Zend_Controller_Action
             $hot = 1;
         }
         $auth = Zend_Auth::getInstance();
-        $userName = $auth->getIdentity();
-        $userName = 'binhtv';
+        $userName = $auth->getIdentity()->username;
         if(!$userName) {
-            Utils_Global::$params['errMessage'] = 'Vui lòng đăng nhập!';
-            $this->_forward('edit', 'article', 'admin');
-            return;
+            $this->_redirect('/admin/auth');
         }
         if(!Utils_CommonFunction::getNameSeo($title)) {
         	Utils_Global::$params['errMessage'] = 'Vui lòng nhập tên bài hợp lệ!';

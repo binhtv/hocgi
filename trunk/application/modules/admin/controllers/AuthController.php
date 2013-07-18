@@ -8,7 +8,10 @@ class Admin_AuthController extends Zend_Controller_Action
 	}
 	
 	public function indexAction() {
-	    
+	    $hasIdentity = Zend_Auth::getInstance()->hasIdentity();
+	    if($hasIdentity) {
+	        $this->_redirect('/admin');
+	    }
 	}
 	
     public function loginAction()
