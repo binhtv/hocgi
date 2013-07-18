@@ -1,18 +1,64 @@
 <h3><?php echo $this->title?></h3>
 <div class="upload-image">
+<form action="/admin/article/list" method="get">
+    <h4>Tìm kiếm article</h4>
+    <table class="table table-condensed">
+        <tr>
+            <td><label for="id">Id:</label></td>
+            <td><input type="text" id="id" name="id" value="<?php echo $this->params['id'];?>" /></td>
+            <td><label for="category">Category</label></td>
+            <td>
+                <select id="category" name="category">
+                    <option value="">[Tất cả]</option>
+                    <?php foreach ($this->categories as $category) :?>
+                        <option value="<?php echo $category['id']?>" <?php echo $category['id'] == $this->params['category']?"selected='selected'":""?>> <?php echo $category['name']?></option>
+                    <?php endforeach;?>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <td><label for="title">Title:</label></td>
+            <td><input id="title" name="title" value="<?php echo $this->params['title'];?>" /></td>
+            <td><label for="active">Active</label></td>
+            <td>
+                <select id="active" name="active">
+                    <option value="-1" <?php echo -1 == $this->params['active']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['active']?"selected='selected'":""?>>Active</option>
+                    <option value="0" <?php echo 0 == $this->params['active']?"selected='selected'":""?>>Inactive</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="datelineF">Created:</label></td>
+            <td><input id="datelineF" name="datelineF" value="<?php echo $this->params['datelineF']?date('Y-m-d', $this->params['datelineF']):'';?>" type="text" />YYYY-MM-DD</td>
+            <td><label for="datelineT">Active</label></td>
+            <td>
+                <input id="datelineT" name="datelineT" type="text" value="<?php echo  $this->params['datelineT']?date('Y-m-d', $this->params['datelineT']):'';?>"/>YYYY-MM-DD
+            </td>
+        </tr>
+        
+    </table>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Search</button>
+        </div>
+  </div>
+</form>
 <a href="/admin/article/edit" style="font-weight: bold">Tạo mới</a>
 <?php if(is_array($this->articles)) {?>
     <table class="table table-bordered table-striped">
         <thead>
               <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Title SEO</th>
-                <th>Category</th>
-                <th>Author</th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=id&sort_dir=<?php echo $this->sortDir^1?>">Id <?php if($this->sortByid) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
+                <th>Image</th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=title&sort_dir=<?php echo $this->sortDir^1?>">Title<?php if($this->sortBytitle) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=top&sort_dir=<?php echo $this->sortDir^1?>">Top<?php if($this->sortBytop) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=category&sort_dir=<?php echo $this->sortDir^1?>">Category<?php if($this->sortBycategory) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=order&sort_dir=<?php echo $this->sortDir^1?>">Order<?php if($this->sortByorder) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
                 <th>Active</th>
-                <th>Update date</th>
-                <th>Created date</th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=last_update&sort_dir=<?php echo $this->sortDir^1?>">Update date<?php if($this->sortBylast_update) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
+                <th><a href="<?php echo $this->currentUrl?>&sort_by=dateline&sort_dir=<?php echo $this->sortDir^1?>">Created date<?php if($this->sortBydateline) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
                 <th>Action</th>
               </tr>
         </thead>
@@ -20,11 +66,12 @@
             <?php foreach($this->articles as $article) :?>
              <tr>
                  <td><?php echo $article['id']?></td>
+                 <td><img alt="<?php echo $article['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/article/' . $article['hash_folder'] . '/' . $article['image']?>?>" width="70" height="54"></td>
                  <td><?php echo $article['title']?></td>
-                 <td><?php echo $article['title_seo']?></td>
+                 <td><?php echo $article['top']?></td>
                  <!-- td style="width: 30%"><?php echo $article['short_description']?></td-->
-                 <td style="width: 1%"><?php echo $article['category']?></td>
-                 <td><?php echo $article['author']?></td>
+                 <td style="width: 1%"><?php echo $article['category_name']?></td>
+                 <td><?php echo $article['order']?></td>
                  <td>
                      <?php if($article['active']) {?>
                      <i class="icon-ok"></i>

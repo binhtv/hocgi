@@ -4,14 +4,14 @@
 		<div class="CenterWrapper">
 			 <!-- First page link -->
 			<?php if (isset($this->previous)): ?>
-				  <a href="<?php echo $this->currentUrl . '?page=' . $this->previous?>" class="PagingFirstPageLnk paginationajaxformaga" >&laquo;</a>
+				  <a href="<?php echo $this->currentUrl . '&page=' . $this->previous?>" class="PagingFirstPageLnk paginationajaxformaga" >&laquo;</a>
 			<?php else: ?>
 					<span class="disabled PagingFirstPageLnk paginationajaxformaga">&laquo;</span>
 			<?php endif; ?>
 			
 			 <!-- Previous page link -->    
 			<?php if (isset($this->previous)): ?>
-				  <a href="<?php echo $this->currentUrl . '?page=' . $this->previous?>" class="PagingPrevPageLnk paginationajaxformaga">&lsaquo;</a>
+				  <a href="<?php echo $this->currentUrl . '&page=' . $this->previous?>" class="PagingPrevPageLnk paginationajaxformaga">&lsaquo;</a>
 			<?php else: ?>
 				<span class="disabled PagingPrevPageLnk paginationajaxformaga">&lsaquo;</span>
 			<?php endif; ?>
@@ -19,18 +19,18 @@
 			<ul class="PageList">
 				<!-- Last page link -->
 				<?php if($this->firstPageInRange > ($this->first + 1)) : ?>					
-					<li><a href="<?php echo $this->currentUrl . '?page=' . $this->first?>"><?php echo  ($this->first); ?></a></li>
-					<li><a href="<?php echo $this->currentUrl . '?page=' . ($this->first + 1)?>"><?php echo ( $this->first +1); ?></a></li>
+					<li><a href="<?php echo $this->currentUrl . '&page=' . $this->first?>"><?php echo  ($this->first); ?></a></li>
+					<li><a href="<?php echo $this->currentUrl . '&page=' . ($this->first + 1)?>"><?php echo ( $this->first +1); ?></a></li>
 					<li>...</li>				
 				<?php elseif($this->firstPageInRange == ($this->first + 1)) : ?>
-					<li><a href="<?php echo $this->currentUrl . '?page=' . $this->first?>"><?php echo  ($this->first); ?></a></li>
+					<li><a href="<?php echo $this->currentUrl . '&page=' . $this->first?>"><?php echo  ($this->first); ?></a></li>
 					<!--  li>...</li-->
 				<?php endIf;?>	
 				
 				<!-- Numbered page links -->
 				<?php foreach ($this->pagesInRange as $page): ?>
 					<?php if ($page != $this->current):  ?>
-						<li><a href="<?php echo $this->currentUrl . '?page=' . $page?>"><?php echo  $page; ?></a></li>
+						<li><a href="<?php echo $this->currentUrl . '&page=' . $page?>"><?php echo  $page; ?></a></li>
 					<?php else: ?>
 						<li><span><?php echo $page; ?></span></li>
 					<?php endif; ?>
@@ -39,17 +39,17 @@
 				<!-- Last page link -->
 				<?php if($page == ($this->last-1)) : ?>					
 						<!-- li>...</li -->				
-						<li><a href="<?php echo $this->currentUrl . '?page=' . $this->last?>"><?php echo  $this->last; ?></a></li>
+						<li><a href="<?php echo $this->currentUrl . '&page=' . $this->last?>"><?php echo  $this->last; ?></a></li>
 				<?php elseif($page < ($this->last-1)) : ?>					
 						<li>...</li>				
-						<li><a href="<?php echo $this->currentUrl . '?page=' . ($this->last - 1)?>"><?php echo  ($this->last - 1); ?></a></li>
-						<li><a href="<?php echo $this->currentUrl . '?page=' . $this->last?>"><?php echo  $this->last; ?></a></li>
+						<li><a href="<?php echo $this->currentUrl . '&page=' . ($this->last - 1)?>"><?php echo  ($this->last - 1); ?></a></li>
+						<li><a href="<?php echo $this->currentUrl . '&page=' . $this->last?>"><?php echo  $this->last; ?></a></li>
 				<?php endif; ?>
 			</ul>		
 			
 			  <!-- Next page link -->
 			<?php if (isset($this->next)): ?>
-				<a href="<?php echo $this->currentUrl . '?page=' . $this->next?>" class="PagingNextPageLnk paginationajaxformaga">&rsaquo;</a>
+				<a href="<?php echo $this->currentUrl . '&page=' . $this->next?>" class="PagingNextPageLnk paginationajaxformaga">&rsaquo;</a>
 			<?php else: ?>
 				<span class="disabled PagingNextPageLnk paginationajaxformaga">&rsaquo;</span>
 			<?php endif; ?>
@@ -57,7 +57,7 @@
 		
 			<!-- Last page link -->
 			<?php if (isset($this->next)): ?>
-				  <a href="<?php echo $this->currentUrl . '?page=' . $this->next?>" class="PagingLastPageLnk paginationajaxformaga">&raquo;</a>
+				  <a href="<?php echo $this->currentUrl . '&page=' . $this->next?>" class="PagingLastPageLnk paginationajaxformaga">&raquo;</a>
 			<?php else: ?>
 				<span class="disabled PagingLastPageLnk paginationajaxformaga">&raquo;</span>
 			<?php endif; ?>
