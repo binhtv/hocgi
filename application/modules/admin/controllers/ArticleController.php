@@ -17,7 +17,7 @@ class Admin_ArticleController extends Zend_Controller_Action
         if($id) {//Edit
             $articleModel = Admin_Model_Article::factory();
             $article = $articleModel->getArticles(array('id' => $id)); 
-            $this->view->article = $article;
+            $this->view->article = $article[0];
             $this->view->categories = $categories;
             $this->view->id = $id;
             $this->view->title = "Chỉnh sửa tin tức";
