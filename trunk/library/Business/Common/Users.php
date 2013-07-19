@@ -3,6 +3,7 @@
 class Business_Common_Users extends Business_Abstract
 {
 	private $_tablename = 'cms_users';
+	private $_tableRoleName = 'cms_users_roles';
 	
 	const KEY_LIST = 'cms_users.list';
 	const KEY_DETAIL = 'cms_users.uid.%s';
@@ -53,7 +54,6 @@ class Business_Common_Users extends Business_Abstract
 
 		$username = $identity->username;
 		if($username == "admin") return true;
-		
 		if(in_array($right, self::$_current_rights)) return true;
 		else return false;
 	}
@@ -129,7 +129,6 @@ class Business_Common_Users extends Business_Abstract
 	{
 		$db = $this->getDbConnection();
 		$result = $db->insert($this->_tablename, $data);
-		
 		$lastid = 0;
 		if($result)
 		{
@@ -147,7 +146,7 @@ class Business_Common_Users extends Business_Abstract
 		return $result;
 	}
 	
-//return userid last inserted
+    //return userid last inserted
 	public function deleteUser($id)
 	{		
 		$db = $this->getDbConnection();
@@ -168,18 +167,16 @@ class Business_Common_Users extends Business_Abstract
 		$_roles = Business_Common_Roles::getInstance();
 		
 		$user_roles = $_roles->getRolesByUser($userid);		
-				
 		$user_perm = array();
 		
 		$_permission = Business_Common_Permissions::getInstance();
-		
 		if($user_roles != null && is_array($user_roles) && count($user_roles) > 0)
 		{
 			for($i=0;$i<count($user_roles);$i++)
 			{
 				$pid = $user_roles[$i]['pid'];				
-				$perm = $_permission->getPermision($pid);				
-				$perm = explode(',',$perm['permission']);												
+				$perm = $_permission->getPermision($pid);			
+				$perm = explode('|',$perm[0]['permission']);
 				$user_perm = array_merge($user_perm,$perm);				
 			}
 		}		

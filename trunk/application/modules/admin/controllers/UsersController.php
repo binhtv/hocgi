@@ -38,7 +38,7 @@ class Admin_UsersController extends Zend_Controller_Action
 			}			
 			$data = array();
 			$data['password'] = md5($new_password);
-			$_user->updateUser($userid,$data);
+			$_user->updateUser($userid, $data);
 			$this->view->ok_message = "Password changed.";
 			
 			$this->listAction();
@@ -119,6 +119,7 @@ class Admin_UsersController extends Zend_Controller_Action
 		$roles = $this->_request->getParam('roles');
 		
 		$_user = Business_Common_Users::getInstance();
+// 		$_role = Business_Common_Roles::getInstance();
 		
 		//check username first
 		$user = $_user->getUser($username);
@@ -136,6 +137,7 @@ class Admin_UsersController extends Zend_Controller_Action
 		}	
 	
 		$userid = $_user->addUser($data);
+// 		$result = $_role->addRole($username, $roles);
 		
 		$this->_redirect($this->view->serverUrl() . '/' . "admin/users/list");
 		
@@ -192,6 +194,8 @@ class Admin_UsersController extends Zend_Controller_Action
 		
 		$_user = Business_Common_Users::getInstance();
 		$_user->updateUser($id, $data);
+		$_role = Business_Common_Roles::getInstance();
+		$_role->addRole($id, $roles);
 		
 		//get roles
 		$this->_redirect($this->view->serverUrl() . '/' . "admin/users/list");

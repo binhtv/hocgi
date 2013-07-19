@@ -30,6 +30,10 @@ class Admin_Model_ImageUpload
         $modelImageUpload = Admin_Model_DAO_ImageUpload::factory();
         try {
             $result = $modelImageUpload->insertNewUpload($data);
+            if($result) {//Log
+            	$data['id'] = $result;
+            	Utils_Global::storeBackendLog('insert', $data);
+            }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);
