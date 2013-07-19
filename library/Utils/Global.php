@@ -254,4 +254,29 @@ class Utils_Global extends Zend_Registry
 			return 0;
 		}
 	}
+	
+	/**
+	 * Store backend log
+	 * @param string $type
+	 * @param string $content
+	 * @return true on success, false on failure
+	 * */
+	public static function storeBackendLog($type, $content) {
+	    $auth = Zend_Auth::getInstance();
+	    $identity = $auth->getIdentity();
+	    if($identity) {
+	        $userName = $identity->username;
+	    }
+	    $db = Utils_Global::getDbInstance('admin');
+	    if(is_object($db)) {
+	        $data = array('username' => $userName,
+	                        'type' => $type,
+	                        'content' => json_encode($content),
+	                        'dateline' => time(),
+	        );
+	        $result = $db->insert('cms_backend_log', $data);
+	    }
+	    
+	    return $result;
+	}
 }

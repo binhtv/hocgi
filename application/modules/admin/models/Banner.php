@@ -28,7 +28,13 @@ class Admin_Model_Banner
             $position = $data['position'];
             unset($data['position']);
             $result = $daoBanner->insert($data);
-            $daoBanner->insertPositionBanner($position, $result);
+            $result2 = $daoBanner->insertPositionBanner($position, $result);
+            if($result) {//Log
+                $data['id'] = $result;
+            	Utils_Global::storeBackendLog('insert', $data);
+            	$position['id'] = $result2;
+            	Utils_Global::storeBackendLog('insert', $position);
+            }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);
@@ -50,8 +56,16 @@ class Admin_Model_Banner
             $position = $data['position'];
             unset($data['position']);
         	$result = $daoBanner->update($id, $data);
+    	    if($result) {//Log
+    	    	$data['id'] = $result;
+    	    	Utils_Global::storeBackendLog('update', $data);
+    	    }
         	try {
-        	    $daoBanner->insertPositionBanner($position, $id);
+        	    $result2 = $daoBanner->insertPositionBanner($position, $id);
+        	    if($result2) {//Log
+        	    	$position['id'] = $result2;
+        	    	Utils_Global::storeBackendLog('update', $position);
+        	    }
         	} catch (Exception $exc) {
         	    Utils_Global::storeLog($exc, __FILE__, __LINE__);
         	}
@@ -76,6 +90,10 @@ class Admin_Model_Banner
         $daoArticle = Admin_Model_Article::factory();
         try {
             $result = $daoArticle->delete($id);
+            if($result) {//Log
+    	    	$data['id'] = $result;
+    	    	Utils_Global::storeBackendLog('delete', $data);
+    	    }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);  

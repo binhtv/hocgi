@@ -30,6 +30,10 @@ class Admin_Model_Center
         $daoCenter = Admin_Model_DAO_Center::factory();
         try {
             $result = $daoCenter->insert($data);
+            if($result) {//Log
+            	$data['id'] = $result;
+            	Utils_Global::storeBackendLog('insert', $data);
+            }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);
@@ -53,6 +57,10 @@ class Admin_Model_Center
         $daoCenter = Admin_Model_DAO_Center::factory();
         try {
         	$result = $daoCenter->update($id, $data);
+        	if($result) {//Log
+        		$data['id'] = $result;
+        		Utils_Global::storeBackendLog('update', $data);
+        	}
         } catch (Exception $exc) {
         	prBinh($exc);
         	Utils_Global::storeLog($exc, __FILE__, __LINE__);
@@ -74,6 +82,9 @@ class Admin_Model_Center
         $daoCourse = Admin_Model_DAO_Course::factory();
         try {
             $result = $daoCourse->delete($id);
+            if($result) {//Log
+            	Utils_Global::storeBackendLog('update', array('id' => $id));
+            }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);  

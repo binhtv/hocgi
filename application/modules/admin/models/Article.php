@@ -29,6 +29,10 @@ class Admin_Model_Article
         $daoArticle = Admin_Model_DAO_Article::factory();
         try {
             $result = $daoArticle->insert($data);
+            if($result) {//Log
+                $data['id'] = $result;
+                Utils_Global::storeBackendLog('insert', $data);
+            }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);
@@ -52,6 +56,10 @@ class Admin_Model_Article
         $daoArticle = Admin_Model_DAO_Article::factory();
         try {
         	$result = $daoArticle->update($id, $data);
+        	if($result) {//Log
+        		$data['id'] = $id;
+        		Utils_Global::storeBackendLog('update', $data);
+        	}
         } catch (Exception $exc) {
         	prBinh($exc);
         	Utils_Global::storeLog($exc, __FILE__, __LINE__);
@@ -73,6 +81,9 @@ class Admin_Model_Article
         $daoArticle = Admin_Model_Article::factory();
         try {
             $result = $daoArticle->delete($id);
+            if($result) {//Log
+            	Utils_Global::storeBackendLog('delete', array('id' => $id));
+            }
         } catch (Exception $exc) {
             prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);  
