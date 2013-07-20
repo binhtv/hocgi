@@ -34,6 +34,13 @@ class Admin_ArticleController extends Zend_Controller_Action
     }
     
     public function listAction() {
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        $userName = $identity->username;
+        if($userName == 'admin') {
+            $userName = '';
+        }
+        
         $page = intval(Utils_Global::$params['page']);
         $limit = intval(Utils_Global::$params['limit']);
         $id = Utils_Global::$params['id'];
@@ -55,7 +62,7 @@ class Admin_ArticleController extends Zend_Controller_Action
         $categories = $modelCategory->getCategories();
         
         $modelArticle = Admin_Model_Article::factory();
-        $options = array('id' => $id, 'title' => $title, 'category' => $category, 'active' => $active,
+        $options = array('id' => $id, 'title' => $title, 'category' => $category, 'active' => $active, 'editor' => $userName,
                         'datelineF' => $datelineF, 'datelineT' => $datelineT, 'order' => $sortBy, 'by' => $sortDir?'DESC':'ASC',
                             'offset' => ($page - 1) * $limit, 'limit' => $limit);
         $articles = $modelArticle->getArticles($options);
@@ -117,7 +124,7 @@ class Admin_ArticleController extends Zend_Controller_Action
 //         }
         if($this->_request->isPost()) {
             $data = array();
-            $data = array('editor' => $userName,
+            $data = array(
             		'title' => $title,
             		'title_seo' => $titleSeo,
             		'author' => $author,
@@ -152,6 +159,7 @@ class Admin_ArticleController extends Zend_Controller_Action
             if($id) {
             	$result = $articleModel->update($id, $data);
             } else {
+                $data['editor'] = $userName;
                 if($data['image']) {
                 	$data['dateline'] = time();
                 	$result = $articleModel->insert($data);
