@@ -12,7 +12,5 @@ class Plugin_Perm extends Zend_Controller_Plugin_Abstract
  	           $this->_response->setRedirect('/admin/auth');
  	       }
  	   }
- 	   
-//  	   prBinh(Business_Common_Users::checkRight('banner'));
 	}
 }

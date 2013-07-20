@@ -67,12 +67,14 @@
                      <input type="number" name="top" id="top" value="<?php echo $this->article['top']?>" />
                  </td>
              </tr>
+             <?php if(Business_Common_Users::checkRight('admin')){?>
              <tr>
                  <td>Active</td>
                  <td>
                      <input type="checkbox" name="active" id="active" <?php echo $this->article['active']?'checked="checked"':"";?>/>
                  </td>
              </tr>
+             <?php }?>
               <tr>
                  <td>Hot</td>
                  <td>

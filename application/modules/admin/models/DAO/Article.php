@@ -72,8 +72,13 @@ class Admin_Model_DAO_Article
 		if($options['title']) {
 		    $where .= " AND `article`.`title` LIKE '%" . $options['title'] . "%'";
 		}
-		if(isset($options['active']) && $options['active'] != -1) {
-		    $where .= " AND `article`.`active` = {$this->_db->quote($options['active'], 'INTEGER')} ";
+		if(isset($options['active']) && $options['active']) {
+		    if($options['active'] == 2) {
+		        $active = 0;
+		    } else {
+		        $active = 1;
+		    }
+		    $where .= " AND `article`.`active` = {$this->_db->quote($active, 'INTEGER')} ";
 		}
 		if($options['datelineF'] && $options['datelineT']) {
 		    $where .= " AND `article`.`dateline` >= {$this->_db->quote($options['datelineF'], 'INTEGER')} 
@@ -114,8 +119,13 @@ class Admin_Model_DAO_Article
 		if($options['title']) {
 			$where .= " AND `article`.`title` LIKE '%" . $options['title'] . "%'";
 		}
-		if(isset($options['active']) != -1) {
-		    $where .= " AND `article`.`active` = {$this->_db->quote($options['active'], 'INTEGER')} ";
+	    if(isset($options['active']) && $options['active']) {
+		    if($options['active'] == 2) {
+		        $active = 0;
+		    } else {
+		        $active = 1;
+		    }
+		    $where .= " AND `article`.`active` = {$this->_db->quote($active, 'INTEGER')} ";
 		}
 		if($options['datelineF'] && $options['datelineT']) {
 		    $where .= " AND `article`.`dateline` >= {$this->_db->quote($options['datelineF'], 'INTEGER')}

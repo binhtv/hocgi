@@ -62,14 +62,50 @@ class Admin_Model_DAO_Course
 		                `course_link`, `hot`, `category`, `center_id`, `schedule` ";
 		$from = " FROM `course` ";
 		$where = " WHERE 1 = 1 ";
-		if($options['top']) {
-			$where .= " AND `top` = {$this->_db->quote($options['top'], 'INTEGER')} ";
+		if($options['hot']) {
+		    if($options['hot'] == 2) {
+		        $hot = 0;
+		    } else {
+		        $hot = $options['hot'];
+		    }
+			$where .= " AND `hot` = {$this->_db->quote($hot, 'INTEGER')} ";
+		}
+		if($options['promotion']) {
+		    if($options['promotion'] == 2) {
+		        $promotion = 0;
+		    } else {
+		        $promotion = $options['promotion'];
+		    }
+			$where .= " AND `promotion` = {$this->_db->quote($promotion, 'INTEGER')} ";
 		}
 		if($options['category']) {
 			$where .= " AND `category` = {$this->_db->quote($options['category'], 'INTEGER')} ";	
 		}
+		if($options['categories']) {
+			$where .= " AND `category` IN ({$options['categories']}) ";
+		}
 		if($options['id']) {
 			$where .= " AND `id` = {$this->_db->quote($options['id'], 'INTEGER')} ";
+		}
+		if($options['name']) {
+		    $where .= " AND `name` LIKE '%" . $options['name'] . "%' ";
+		}
+		if($options['active']) {
+		    if($options['active'] == 2) {
+		    	$active = 0;
+		    } else {
+		    	$active = 1;
+		    }
+		    $where .= " AND `active` = {$this->_db->quote($active, 'INTEGER')} ";
+		}
+		if($options['beginingF']) {
+		    $where .= " AND `opening_date` >= {$options['beginingF']} ";
+		}
+		if($options['beginingT']) {
+		    $where .= " AND `opening_date` <= {$options['beginingT']} ";
+		}
+		if($options['center_id']) {
+		    $where .= " AND `center_id` = {$this->_db->quote($options['center_id'], 'INTEGER')} ";
 		}
 		
 		$order = " ORDER BY `id` DESC ";
@@ -82,11 +118,7 @@ class Admin_Model_DAO_Course
 		if(isset($options['offset']) && $options['offset'] >=0 && $options['limit'] >0) {
 			$limit = " limit {$this->_db->quote($options['offset'], 'INTEGER')}, {$this->_db->quote($options['limit'], 'INTEGER')} "; 
 		}
-		if($options['id']) {
-			$result = $this->_db->fetchRow( $sql . $from . $where . $order . $limit );
-		} else {
-			$result = $this->_db->fetchAll ( $sql . $from . $where . $order . $limit );
-		}
+		$result = $this->_db->fetchAll ( $sql . $from . $where . $order . $limit );
 		return $result;
 	}
 	
@@ -99,6 +131,51 @@ class Admin_Model_DAO_Course
 		$sql = "SELECT count(*) as `count` ";
 		$from = " FROM `course` ";
 		$where = " WHERE 1 = 1 ";
+	    if($options['hot']) {
+		    if($options['hot'] == 2) {
+		        $hot = 0;
+		    } else {
+		        $hot = $options['hot'];
+		    }
+			$where .= " AND `hot` = {$this->_db->quote($hot, 'INTEGER')} ";
+		}
+		if($options['promotion']) {
+		    if($options['promotion'] == 2) {
+		        $promotion = 0;
+		    } else {
+		        $promotion = $options['promotion'];
+		    }
+			$where .= " AND `promotion` = {$this->_db->quote($promotion, 'INTEGER')} ";
+		}
+		if($options['category']) {
+			$where .= " AND `category` = {$this->_db->quote($options['category'], 'INTEGER')} ";
+		}
+		if($options['categories']) {
+		    $where .= " AND category IN ({$options['categories']}) ";
+		}
+		if($options['id']) {
+		    $where .= " AND `id` = {$this->_db->quote($options['id'], 'INTEGER')} ";
+		}
+		if($options['name']) {
+		    $where .= " AND `name` = {$this->_db->quote($options['name'])} ";
+		}
+	    if($options['active']) {
+		    if($options['active'] == 2) {
+		    	$active = 0;
+		    } else {
+		    	$active = 1;
+		    }
+		    $where .= " AND `active` = {$this->_db->quote($active, 'INTEGER')} ";
+		}
+		if($options['beginingF']) {
+		    $where .= " AND `opening_date` >= {$this->_db->quote($options['beginingF'], 'INTEGER')} ";
+		}
+		if($options['beginingT']) {
+		    $where .= " AND `opening_date` <= {$this->_db->quote($options['beginingT'], 'INTEGER')} ";
+	    }
+	    if($options['center_id']) {
+	    	$where .= " AND `center_id` = {$this->_db->quote($options['center_id'], 'INTEGER')} ";
+		}
 		$result = $this->_db->fetchOne($sql . $from . $where);
 		return $result;
 	}

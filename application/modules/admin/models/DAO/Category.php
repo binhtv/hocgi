@@ -87,6 +87,24 @@ class Admin_Model_DAO_Category
 	}
 	
 	/**
+	 * Get child categories of parent
+	 * @param integer $id
+	 * @return array
+	 * */
+	public function getChildCategoriesOf($id, $for_course = null) {
+	     $sql = "SELECT * ";
+	     $from = " FROM category ";
+	     $where = " WHERE parent = {$this->_db->quote($id, 'INTEGER')} ";
+	     if($for_course) {
+	         $where .= " AND `for_course` =  1 ";
+	     }
+	     $order = " ORDER BY `order` DESC ";
+	     $result = $this->_db->fetchAll ( $sql . $from . $where . $order );
+	     
+	     return $result;
+	}
+	
+	/**
 	 * Get article count by given options
 	 * @param array $options
 	 * @return integer

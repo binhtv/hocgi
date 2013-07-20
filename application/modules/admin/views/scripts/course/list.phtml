@@ -1,5 +1,81 @@
 <h3><?php echo $this->title?></h3>
 <div class="upload-image">
+<form action="/admin/course/list" method="get">
+    <h4>Tìm kiếm khóa học</h4>
+    <table class="table table-condensed">
+        <tr>
+            <td><label for="id">Id:</label></td>
+            <td><input type="text" id="id" name="id" value="<?php echo $this->params['id'];?>" /></td>
+            <td><label for="category">Category</label></td>
+            <td>
+                <select id="category" name="category">
+                    <option value="">[Tất cả]</option>
+                    <?php foreach ($this->categories as $category): ?>
+                     <option value="<?php echo $category['id']?>" class="optionGroup" <?php echo $this->params['category'] == $category['id']? 'selected="selected"':""?>><?php echo $category['name']?></option>
+                     <?php foreach ($category['childs'] as $child):?>
+                         <option value="<?php echo $child['id']?>" class="optionChild" <?php echo $this->params['category'] == $child['id']? 'selected="selected"':""?>>--<?php echo $child['name']?></option>
+                     <?php endforeach;?>
+                 <?php endforeach;?>
+                </select>
+            </td>
+        </tr>
+        
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input id="name" name="name" value="<?php echo $this->params['name'];?>" /></td>
+            <td><label for="active">Active</label></td>
+            <td>
+                <select id="active" name="active">
+                    <option value="0" <?php echo 0 == $this->params['active']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['active']?"selected='selected'":""?>>Active</option>
+                    <option value="2" <?php echo 2 == $this->params['active']?"selected='selected'":""?>>Inactive</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="hot">Hot</label></td>
+            <td>
+                <select id="hot" name="hot">
+                    <option value="0" <?php echo 0 == $this->params['hot']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['hot']?"selected='selected'":""?>>YES</option>
+                    <option value="2" <?php echo 2 == $this->params['hot']?"selected='selected'":""?>>NO</option>
+                </select>
+            </td>
+            <td><label for="promotion">Promotion</label></td>
+            <td>
+                <select id="promotion" name="promotion">
+                    <option value="0" <?php echo 0 == $this->params['promotion']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['promotion']?"selected='selected'":""?>>YES</option>
+                    <option value="2" <?php echo 2 == $this->params['promotion']?"selected='selected'":""?>>NO</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="beginingF">Opening From:</label></td>
+            <td><input id="beginingF" name="beginingF" value="<?php echo $this->params['beginingF']?date('Y-m-d', $this->params['beginingF']):'';?>" type="text" />YYYY-MM-DD</td>
+            <td><label for="beginingT">To</label></td>
+            <td>
+                <input id="beginingT" name="beginingT" type="text" value="<?php echo  $this->params['beginingT']?date('Y-m-d', $this->params['beginingT']):'';?>"/>YYYY-MM-DD
+            </td>
+        </tr>
+        <tr>
+            <td><label for="center_id">Center</label></td>
+            <td>
+                <select id="center_id" name="center_id">
+                    <option value="">[Tất cả]</option>
+                    <?php foreach ($this->centers as $center) :?>
+                        <option value="<?php echo $center['id']?>" <?php echo $center['id'] == $this->params['center_id']?"selected='selected'":""?>> <?php echo $center['name']?></option>
+                    <?php endforeach;?>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Search</button>
+        </div>
+  </div>
+</form>
 <a href="/admin/course/edit" style="font-weight: bold">Tạo mới</a>
 <?php if(is_array($this->courses)) {?>
     <table class="table table-bordered table-striped">
@@ -27,7 +103,11 @@
                  <td><?php echo $course['id']?></td>
                  <td><?php echo $course['name']?></td>
                  <td><a href="<?php echo $course['course_link']?>" target="_blank">Link</a></td>
-                 <td><img alt="<?php echo $course['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/course/' . $course['hash_folder'] . '/' . $course['image']?>"></td>
+                 <td>
+                     <a class="fancy" href="<?php echo Utils_Global::get('staticUrl') . '/course/' . $course['hash_folder'] . '/' . $course['image']?>">
+                         <img alt="<?php echo $course['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/course/' . $course['hash_folder'] . '/' . $course['image']?>">
+                     </a>
+                 </td>
                  <td><?php echo $course['category']?></td>
                  <td><a href="javascript:void(0)" onclick="alert('under construction');">View detail</a></td>
                  <td><?php echo number_format($course['tuition'], 0, ',', '.');?></td>
