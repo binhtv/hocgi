@@ -1,0 +1,75 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<form action="/admin/backend-log/list" method="get">
+    <h4>Tìm kiếm</h4>
+    <table class="table table-condensed">
+        <tr>
+            <td><label for="username">Username:</label></td>
+            <td><input type="text" id="username" name="username" value="<?php echo $this->params['username'];?>" /></td>
+            <td><label for="table">Type</label></td>
+            <td>
+                <select id="table" name="table">
+                    <option value="" <?php echo "" == $this->params['table']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="article" <?php echo "article" == $this->params['table']?"selected='selected'":""?>>Tin tức</option>
+                    <option value="course" <?php echo "course" == $this->params['table']?"selected='selected'":""?>>Khóa học</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="dateF">Ngày từ:</label></td>
+            <td><input id="dateF" name="dateF" value="<?php echo $this->params['dateF']?date('Y-m-d', $this->params['dateF']):'';?>" type="text" />YYYY-MM-DD</td>
+            <td><label for="dateT">đến</label></td>
+            <td>
+                <input id="dateT" name="dateT" type="text" value="<?php echo  $this->params['dateT']?date('Y-m-d', $this->params['dateT']):'';?>"/>YYYY-MM-DD
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="active">Tình trạng</label>
+                <select id="active" name="active">
+                    <option value="0" <?php echo 0 == $this->params['active']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['active']?"selected='selected'":""?>>Đã duyệt</option>
+                    <option value="2" <?php echo 2 == $this->params['active']?"selected='selected'":""?>>Chưa duyệt</option>
+                </select>
+            </td>
+        </tr>
+        
+    </table>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Search</button>
+        </div>
+  </div>
+</form>
+<?php if(is_array($this->statistics)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>#</th>
+                <th>Username</th>
+                <th>Count</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->statistics as $type => $datas) :?>
+            <tr style="font-weight: bold;">
+                <td colspan="3"><?php echo $type?></td>
+            </tr>
+            <?php
+                if(is_array($datas) && count($datas) > 0) {
+                $i=0; foreach ($datas as $data) :?>
+             <tr>
+                 <td><?php echo ++$i;?></td>
+                 <td><?php echo $data['username']?></td>
+                 <td><?php echo $data['count']?></td>
+             </tr>
+             <?php endforeach;} else {?>
+                 <tr><td colspan="3">Không có dữ liệu!</td></tr>
+             <?php }?>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+</div>
+<?php } else {?>
+<div>Không có dữ liệu!</div>
+<?php }?>
