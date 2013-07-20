@@ -60,6 +60,12 @@ class Admin_Model_DAO_Position
 		$sql = "SELECT `id`, `position_name`, `last_update`, `dateline` ";
 		$from = " FROM `position` ";
 		$where = " WHERE 1 = 1 ";
+		if($options['id']) {
+		    $where .= " AND `id` = {$this->_db->quote($options['id'], 'INTEGER')} ";
+		}
+		if($options['position_name']) {
+		    $where .= " AND `position_name` LIKE '%" . $options['position_name'] . "%' ";
+		}
 		
 		$order = " ORDER BY `id` DESC ";
 		if($options['order'] && $options['by']) {
@@ -70,11 +76,7 @@ class Admin_Model_DAO_Position
 		if(isset($options['offset']) && $options['offset'] >=0 && $options['limit'] >0) {
 			$limit = " limit {$this->_db->quote($options['offset'], 'INTEGER')}, {$this->_db->quote($options['limit'], 'INTEGER')} "; 
 		}
-		if($options['id']) {
-			$result = $this->_db->fetchRow( $sql . $from . $where . $order . $limit );
-		} else {
-			$result = $this->_db->fetchAll ( $sql . $from . $where . $order . $limit );
-		}
+		$result = $this->_db->fetchAll ( $sql . $from . $where . $order . $limit );
 		return $result;
 	}
 	
@@ -87,6 +89,12 @@ class Admin_Model_DAO_Position
 		$sql = "SELECT count(*) as `count` ";
 		$from = " FROM `position` ";
 		$where = " WHERE 1 = 1 ";
+		if($options['id']) {
+			$where .= " AND `id` = {$this->_db->quote($options['id'], 'INTEGER')} ";
+		}
+		if($options['position_name']) {
+			$where .= " AND `position_name` LIKE '%" . $options['position_name'] . "%' ";
+		}
 		$result = $this->_db->fetchOne($sql . $from . $where);
 		return $result;
 	}

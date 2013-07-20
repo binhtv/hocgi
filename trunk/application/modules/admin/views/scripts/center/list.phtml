@@ -22,7 +22,11 @@
              <tr>
                  <td><?php echo $center['id']?></td>
                  <td><?php echo $center['name']?></td>
-                 <td><img width="50" height="50" alt="<?php echo $center['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $center['hash_folder'] . '/' . $center['image']?>"></td>
+                 <td>
+                     <a class="fancy" href="<?php echo Utils_Global::get('staticUrl') . '/center/' . $center['hash_folder'] . '/' . $center['image']?>">
+                         <img width="50" height="50" alt="<?php echo $center['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/center/' . $center['hash_folder'] . '/' . $center['image']?>">
+                     </a>
+                 </td>
                  <td><?php echo $center['contact_info']?></td>
                  <td><?php echo $center['address']?></td>
                  <td><?php echo $center['city']?></td>

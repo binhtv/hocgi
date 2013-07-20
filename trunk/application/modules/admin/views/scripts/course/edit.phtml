@@ -83,12 +83,14 @@
                      <input type="number" name="order" id="order" value="<?php echo $this->course['order']?>"/>
                  </td>
              </tr>
-             <tr>
-                 <td>Active</td>
-                 <td>
-                     <input type="checkbox" name="active" id="active" <?php echo $this->course['active']?'checked="checked"':"";?>/>
-                 </td>
-             </tr>
+             <?php if(Business_Common_Users::checkRight('admin')){?>
+                 <tr>
+                     <td>Active</td>
+                     <td>
+                         <input type="checkbox" name="active" id="active" <?php echo $this->course['active']?'checked="checked"':"";?>/>
+                     </td>
+                 </tr>
+             <?php ?>
               <tr>
                  <td>Best</td>
                  <td>

@@ -23,9 +23,9 @@
             <td><label for="active">Active</label></td>
             <td>
                 <select id="active" name="active">
-                    <option value="-1" <?php echo -1 == $this->params['active']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="0" <?php echo 0 == $this->params['active']?"selected='selected'":""?>>[Tất cả]</option>
                     <option value="1" <?php echo 1 == $this->params['active']?"selected='selected'":""?>>Active</option>
-                    <option value="0" <?php echo 0 == $this->params['active']?"selected='selected'":""?>>Inactive</option>
+                    <option value="2" <?php echo 2 == $this->params['active']?"selected='selected'":""?>>Inactive</option>
                 </select>
             </td>
         </tr>
@@ -66,7 +66,11 @@
             <?php foreach($this->articles as $article) :?>
              <tr>
                  <td><?php echo $article['id']?></td>
-                 <td><img alt="<?php echo $article['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/article/' . $article['hash_folder'] . '/' . $article['image']?>?>" width="70" height="54"></td>
+                 <td>
+                     <a class="fancy" href="<?php echo Utils_Global::get('staticUrl') . '/article/' . $article['hash_folder'] . '/' . $article['image']?>">
+                         <img alt="<?php echo $article['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/article/' . $article['hash_folder'] . '/' . $article['image']?>?>" width="70" height="54">
+                     </a>
+                 </td>
                  <td><?php echo $article['title']?></td>
                  <td><?php echo $article['top']?></td>
                  <!-- td style="width: 30%"><?php echo $article['short_description']?></td-->

@@ -15,7 +15,7 @@ class Admin_AuthController extends Zend_Controller_Action
 	}
 	
     public function loginAction()
-	{		
+	{	
         $request 	= $this->getRequest();
         $registry 	= Zend_Registry::getInstance();
     	$auth		= Zend_Auth::getInstance(); 

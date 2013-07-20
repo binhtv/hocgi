@@ -22,6 +22,8 @@ class Admin_PositionController extends Zend_Controller_Action
         $page = intval(Utils_Global::$params['page']);
         $limit = intval(Utils_Global::$params['limit']);
         $errMessage = Utils_Global::$params['errMessage'];
+        $id = Utils_Global::$params['id'];
+        $name = Utils_Global::$params['position_name'];
         if($page <= 0) {
             $page = 1;
         }
@@ -31,14 +33,18 @@ class Admin_PositionController extends Zend_Controller_Action
         
         $positionModel = Admin_Model_Position::factory();
         $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit);
+        $options['id'] = $id;
+        $options['position_name'] = $name;
 		$result = $positionModel->getPositions($options);
 		$this->view->positions = $result;
 		$this->view->page = $page;
-		$this->view->totalItem = $positionModel->getPositionsCount();
+		$countOptions = array('id' => $id, 'position_name' => $name);
+		$this->view->totalItem = $positionModel->getPositionsCount($options);
 		$this->view->numRowPerPage = $limit;
-		$this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array());
+		$this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?fake=1';
 		$this->view->title = "Position";
 		$this->view->errMessage = $errMessage;
+		$this->view->params = $options;
     }
     
     public function editAction()
@@ -46,7 +52,8 @@ class Admin_PositionController extends Zend_Controller_Action
         $id = Utils_Global::$params['id'];
         if($id) {
             $positionModel = Admin_Model_Position::factory();
-            $this->view->position = $positionModel->getPositions(array('id' => $id));
+            $positions = $positionModel->getPositions(array('id' => $id));
+            $this->view->position = $positions[0];
             $this->view->id = $id;
         }
     }

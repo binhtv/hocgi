@@ -1,5 +1,21 @@
 <h3><?php echo $this->title?></h3>
 <div class="upload-image">
+<form action="/admin/position/list" method="get">
+    <h4>Tìm kiếm Position</h4>
+    <table class="table table-condensed">
+        <tr>
+            <td><label for="id">Id:</label></td>
+            <td><input type="text" id="id" name="id" value="<?php echo $this->params['id'];?>" /></td>
+            <td><label for="position_name">Name:</label></td>
+            <td><input id="position_name" name="position_name" value="<?php echo $this->params['position_name'];?>" /></td>
+        </tr>
+    </table>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Search</button>
+        </div>
+  </div>
+</form>
 <div style="color:red;"><?php echo $this->errMessage;?></div>
 <a href="/admin/position/edit" style="font-weight: bold">Tạo mới</a>
 <?php if(is_array($this->positions)) {?>

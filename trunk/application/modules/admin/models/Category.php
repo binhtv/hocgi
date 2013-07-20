@@ -64,4 +64,23 @@ class Admin_Model_Category
         return $result;
     }
     
+    /**
+     * Get child category by given parent
+     * @param integer $id
+     * @param integer $for_course
+     * @return array
+     * */
+    public function getChildCategoriesOf($id, $for_course) {
+        $result = array();
+        $categoryDao = Admin_Model_DAO_Category::factory();
+        try {
+            $categories = $categoryDao->getChildCategoriesOf($id);
+        } catch (Exception $exc) {
+            prBinh($exc);
+            Utils_Global::storeLog($exc, __FILE__, __LINE__);
+        }
+    
+        return $categories;
+    }
+    
 }

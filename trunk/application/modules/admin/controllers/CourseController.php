@@ -18,7 +18,7 @@ class Admin_CourseController extends Zend_Controller_Action
         if($id) {//Edit
             $courseModel = Admin_Model_Course::factory();
             $course = $courseModel->getCourses(array('id' => $id));
-            $this->view->course = $course;
+            $this->view->course = $course[0];
             $this->view->categories = $categories;
             $this->view->centers = $centers;
             $this->view->id = $id;
@@ -39,6 +39,16 @@ class Admin_CourseController extends Zend_Controller_Action
     public function listAction() {
         $page = intval(Utils_Global::$params['page']);
         $limit = intval(Utils_Global::$params['limit']);
+        $id = Utils_Global::$params['id'];
+        $category = Utils_Global::$params['category'];
+        $name = Utils_Global::$params['name'];
+        $active = Utils_Global::$params['active'];
+        $hot = Utils_Global::$params['hot'];
+        $promotion = Utils_Global::$params['promotion'];
+        $beginF = Utils_Global::$params['beginingF'];
+        $beginT = Utils_Global::$params['beginingT'];
+        $centerId = Utils_Global::$params['center_id'];
+        
         if($limit <= 0) {
             $limit = 10;
         }
@@ -47,16 +57,39 @@ class Admin_CourseController extends Zend_Controller_Action
         }
         
         $modelCourse = Admin_Model_Course::factory();
-        $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit);
+        
+        $centerModel = Admin_Model_Center::factory();
+        $centers = $centerModel->getCenters();
+        $categoryModel = Admin_Model_Category::factory();
+        $categories = $categoryModel->getCategories(array('for_course' => 1));
+        //Get filter by categories if any (parent category)
+        $categorieIds = array($category);
+        $children = $categoryModel->getChildCategoriesOf($category, 1);
+        if(is_array($children)) {
+            foreach ($children as $child) {
+                 $categorieIds[] = $child['id'];       
+            }
+        }
+        $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit,
+                           'id' => $id, 'categories' => implode(',', $categorieIds), 'name' => $name,
+                            'active' => $active, 'beginingF' => $beginF?strtotime($beginF) : 0, 'beginingT' => $beginT?strtotime($beginT) : 0,
+                            'center_id' => $centerId, 'hot' => $hot, 'promotion' => $promotion,
+        );
         $courses = $modelCourse->getCourses($options);
         
         $this->view->courses = $courses;
-        $this->view->title = "Tin tức";
+        $this->view->categories = $categories;
+        $this->view->centers = $centers;
+        $this->view->title = "Khóa học";
         $this->view->page = $page;
         $this->view->numRowPerPage = $limit;
-        $options = array();
+        $countOptions = array('id' => $id, 'categories' => implode(',', $categorieIds), 'name' => $name,
+                            'active' => $active, 'beginingF' => $beginF, 'beginingT' => $beginT,
+                            'centerId' => $centerId,);
         $this->view->totalItem = $modelCourse->getCoursesCount($options);
-        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array());
+        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?active=-1';
+        $options['category'] = $category;
+        $this->view->params = $options;
     }
     
     public function saveAction() {
