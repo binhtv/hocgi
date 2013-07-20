@@ -89,15 +89,6 @@ class Admin_ImageUploadController extends Zend_Controller_Action
         $this->view->name = $name;
         $this->view->source = $source;
         
-        //Check so lan bao
-        $auth = Zend_Auth::getInstance();
-        $userName = $auth->getIdentity();
-        if($userName) {
-            $modelTruyenChe = Vmg_Model_TruyenChe::factory();
-            $count = $modelTruyenChe->getUploadCountToday($userName);
-            $this->view->notAllowUpload = ($count >= $this->_config->upload->maxMangaCount);
-        }
-        
     }
     
     /**

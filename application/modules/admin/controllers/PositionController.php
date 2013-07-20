@@ -41,7 +41,7 @@ class Admin_PositionController extends Zend_Controller_Action
 		$countOptions = array('id' => $id, 'position_name' => $name);
 		$this->view->totalItem = $positionModel->getPositionsCount($options);
 		$this->view->numRowPerPage = $limit;
-		$this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?fake=1';
+		$this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?' . http_build_query($options);
 		$this->view->title = "Position";
 		$this->view->errMessage = $errMessage;
 		$this->view->params = $options;

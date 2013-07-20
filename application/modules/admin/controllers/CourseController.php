@@ -37,6 +37,13 @@ class Admin_CourseController extends Zend_Controller_Action
     }
     
     public function listAction() {
+        $auth = Zend_Auth::getInstance();
+        $identity = $auth->getIdentity();
+        $userName = $identity->username;
+        if($userName == 'admin') {
+        	$userName = '';
+        }
+        
         $page = intval(Utils_Global::$params['page']);
         $limit = intval(Utils_Global::$params['limit']);
         $id = Utils_Global::$params['id'];
@@ -70,7 +77,7 @@ class Admin_CourseController extends Zend_Controller_Action
                  $categorieIds[] = $child['id'];       
             }
         }
-        $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit,
+        $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit, 'editor' => $userName,
                            'id' => $id, 'categories' => implode(',', $categorieIds), 'name' => $name,
                             'active' => $active, 'beginingF' => $beginF?strtotime($beginF) : 0, 'beginingT' => $beginT?strtotime($beginT) : 0,
                             'center_id' => $centerId, 'hot' => $hot, 'promotion' => $promotion,
@@ -83,12 +90,12 @@ class Admin_CourseController extends Zend_Controller_Action
         $this->view->title = "Khóa học";
         $this->view->page = $page;
         $this->view->numRowPerPage = $limit;
-        $countOptions = array('id' => $id, 'categories' => implode(',', $categorieIds), 'name' => $name,
+        $countOptions = array('id' => $id, 'categories' => implode(',', $categorieIds), 'name' => $name, 'editor' => $userName,
                             'active' => $active, 'beginingF' => $beginF, 'beginingT' => $beginT,
                             'centerId' => $centerId,);
         $this->view->totalItem = $modelCourse->getCoursesCount($options);
-        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?active=-1';
         $options['category'] = $category;
+        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?' . http_build_query($options);
         $this->view->params = $options;
     }
     
@@ -121,8 +128,7 @@ class Admin_CourseController extends Zend_Controller_Action
             $active = 1;
         }
         $auth = Zend_Auth::getInstance();
-        $userName = $auth->getIdentity();
-        $userName = 'binhtv';
+        $userName = $auth->getIdentity()->username;
         if(!$userName) {
             Utils_Global::$params['errMessage'] = 'Vui lòng đăng nhập!';
             $this->_forward('edit', 'course', 'admin');
@@ -203,6 +209,7 @@ class Admin_CourseController extends Zend_Controller_Action
             if($id) {
             	$result = $courseModel->update($id, $data);
             } else {
+                $data['username'] = $userName;
                 if($data['image']) {
                 	$data['dateline'] = time();
                 	$result = $courseModel->insert($data);

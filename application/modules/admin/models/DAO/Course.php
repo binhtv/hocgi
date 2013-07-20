@@ -62,6 +62,9 @@ class Admin_Model_DAO_Course
 		                `course_link`, `hot`, `category`, `center_id`, `schedule` ";
 		$from = " FROM `course` ";
 		$where = " WHERE 1 = 1 ";
+		if($options['editor']) {
+			$where .= " AND `editor` = {$this->_db->quote($options['editor'])} ";
+		}
 		if($options['hot']) {
 		    if($options['hot'] == 2) {
 		        $hot = 0;
@@ -131,6 +134,9 @@ class Admin_Model_DAO_Course
 		$sql = "SELECT count(*) as `count` ";
 		$from = " FROM `course` ";
 		$where = " WHERE 1 = 1 ";
+		if($options['editor']) {
+			$where .= " AND `editor` = {$this->_db->quote($options['editor'])} ";
+		}
 	    if($options['hot']) {
 		    if($options['hot'] == 2) {
 		        $hot = 0;

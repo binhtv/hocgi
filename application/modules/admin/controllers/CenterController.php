@@ -48,7 +48,7 @@ class Admin_CenterController extends Zend_Controller_Action
         $this->view->numRowPerPage = $limit;
         $options = array();
         $this->view->totalItem = $modelCenter->getCentersCount($options);
-        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array());
+        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?' . http_build_query($options);
     }
     
     public function saveAction() {
@@ -59,8 +59,7 @@ class Admin_CenterController extends Zend_Controller_Action
         $city = Utils_Global::$params['city'];
         $cityCode = Utils_Global::$params['city_code'];
         $auth = Zend_Auth::getInstance();
-        $userName = $auth->getIdentity();
-        $userName = 'binhtv';
+        $userName = $auth->getIdentity()->username;
         if(!$userName) {
             Utils_Global::$params['errMessage'] = 'Vui lòng đăng nhập!';
             $this->_forward('edit', 'course', 'admin');
