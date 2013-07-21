@@ -2,6 +2,8 @@
 class Admin_Model_Banner
 {    
     private static $_instance;
+    private static $_tableBanner = "banner";
+    private static $_tablePosition = "position";
     
     private function __construct() {
     }
@@ -31,9 +33,9 @@ class Admin_Model_Banner
             $result2 = $daoBanner->insertPositionBanner($position, $result);
             if($result) {//Log
                 $data['id'] = $result;
-            	Utils_Global::storeBackendLog('insert', $data);
+            	Utils_Global::storeBackendLog('insert', self::$_tableBanner, $result, $data);
             	$position['id'] = $result2;
-            	Utils_Global::storeBackendLog('insert', $position);
+            	Utils_Global::storeBackendLog('insert', self::$_tablePosition, $result2, $position);
             }
         } catch (Exception $exc) {
             prBinh($exc);
@@ -58,13 +60,13 @@ class Admin_Model_Banner
         	$result = $daoBanner->update($id, $data);
     	    if($result) {//Log
     	    	$data['id'] = $result;
-    	    	Utils_Global::storeBackendLog('update', $data);
+    	    	Utils_Global::storeBackendLog('update', self::$_tableBanner, $result, $data);
     	    }
         	try {
         	    $result2 = $daoBanner->insertPositionBanner($position, $id);
         	    if($result2) {//Log
         	    	$position['id'] = $result2;
-        	    	Utils_Global::storeBackendLog('update', $position);
+        	    	Utils_Global::storeBackendLog('update', 'position_banner', $result2, $position);
         	    }
         	} catch (Exception $exc) {
         	    Utils_Global::storeLog($exc, __FILE__, __LINE__);
@@ -82,23 +84,6 @@ class Admin_Model_Banner
      * @return true on success, false on failure
      * */
     public function delete($id) {
-        $result = 0;
-        if(!$id) {
-            return 0;
-        }
-        
-        $daoArticle = Admin_Model_Article::factory();
-        try {
-            $result = $daoArticle->delete($id);
-            if($result) {//Log
-    	    	$data['id'] = $result;
-    	    	Utils_Global::storeBackendLog('delete', $data);
-    	    }
-        } catch (Exception $exc) {
-            prBinh($exc);
-            Utils_Global::storeLog($exc, __FILE__, __LINE__);  
-        }
-        
         return $result;
     }
     

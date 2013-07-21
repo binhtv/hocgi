@@ -258,10 +258,12 @@ class Utils_Global extends Zend_Registry
 	/**
 	 * Store backend log
 	 * @param string $type
+	 * @param string $table
+	 * @param integer $relatedId
 	 * @param string $content
 	 * @return true on success, false on failure
 	 * */
-	public static function storeBackendLog($type, $content) {
+	public static function storeBackendLog($type, $table, $relatedId, $content) {
 	    $auth = Zend_Auth::getInstance();
 	    $identity = $auth->getIdentity();
 	    if($identity) {
@@ -271,6 +273,8 @@ class Utils_Global extends Zend_Registry
 	    if(is_object($db)) {
 	        $data = array('username' => $userName,
 	                        'type' => $type,
+	                        'table' => $table,
+	                        'related_id' => $relatedId,
 	                        'content' => json_encode($content),
 	                        'dateline' => time(),
 	        );

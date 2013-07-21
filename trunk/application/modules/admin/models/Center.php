@@ -2,6 +2,7 @@
 class Admin_Model_Center
 {    
     private static $_instance;
+    private static $_table = "center";
     
     private function __construct() {
     }
@@ -32,7 +33,7 @@ class Admin_Model_Center
             $result = $daoCenter->insert($data);
             if($result) {//Log
             	$data['id'] = $result;
-            	Utils_Global::storeBackendLog('insert', $data);
+            	Utils_Global::storeBackendLog('insert', self::$_table, $result, $data);
             }
         } catch (Exception $exc) {
             prBinh($exc);
@@ -58,8 +59,8 @@ class Admin_Model_Center
         try {
         	$result = $daoCenter->update($id, $data);
         	if($result) {//Log
-        		$data['id'] = $result;
-        		Utils_Global::storeBackendLog('update', $data);
+        		$data['id'] = $id;
+        		Utils_Global::storeBackendLog('update', self::$_table, $id, $data);
         	}
         } catch (Exception $exc) {
         	prBinh($exc);
@@ -83,7 +84,7 @@ class Admin_Model_Center
         try {
             $result = $daoCourse->delete($id);
             if($result) {//Log
-            	Utils_Global::storeBackendLog('update', array('id' => $id));
+            	Utils_Global::storeBackendLog('update', self::$_table, $id, array('id' => $id));
             }
         } catch (Exception $exc) {
             prBinh($exc);

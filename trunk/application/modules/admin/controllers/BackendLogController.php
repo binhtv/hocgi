@@ -19,11 +19,11 @@ class Admin_BackendLogController extends Zend_Controller_Action
         $modelBackendLog = Admin_Model_BackendLog::factory();
         $statistics = array();
         if($table) {
-            $options = array('table' => $table, 'dateF' => $dateF, 'dateT' => $dateT, 'active' => $active, 'username' => $userName);
+            $options = array('table' => $table, 'type' => 'insert', 'dateF' => $dateF, 'dateT' => $dateT, 'active' => $active, 'username' => $userName);
             $statistics = $modelBackendLog->getEditorStatistics($options);
             $this->view->params = $options;
         } else {
-            $options = array('dateF' => $dateF, 'dateT' => $dateT, 'active' => $active,'username' => $userName);
+            $options = array('type' => 'insert', 'dateF' => $dateF, 'dateT' => $dateT, 'active' => $active,'username' => $userName);
             $this->view->params = $options;
             $options['table'] = 'article';
             $stArticles = $modelBackendLog->getEditorStatistics($options);

@@ -3,6 +3,7 @@ class Admin_Model_ImageUpload
 {    
     private static $_instance;
     private static $_cacheTimeout = 300;
+    private static $_table = "user_upload";
     
     private function __construct() {
     }
@@ -32,7 +33,7 @@ class Admin_Model_ImageUpload
             $result = $modelImageUpload->insertNewUpload($data);
             if($result) {//Log
             	$data['id'] = $result;
-            	Utils_Global::storeBackendLog('insert', $data);
+            	Utils_Global::storeBackendLog('insert', self::$_table, $result, $data);
             }
         } catch (Exception $exc) {
             prBinh($exc);
