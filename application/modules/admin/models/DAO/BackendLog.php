@@ -29,8 +29,8 @@ class Admin_Model_DAO_BackendLog
     public function getEditorStatistics($options) {
         $table = $options['table'];
         $sql = " SELECT `username`, count(1) `count` ";
-        $from = " FROM `cms_backend_log` tb1 INNER JOIN `{$table}` tb2 ON `tb1`.`username` = `tb2`.`editor` ";
-        $where = " WHERE 1 = 1 ";
+        $from = " FROM `cms_backend_log` tb1 INNER JOIN `{$table}` tb2 ON `tb1`.`related_id` = `tb2`.`id` ";
+        $where = " WHERE `table` = {$this->_db->quote($table)} ";
         $groupBy = "GROUP BY `tb1`.`username` ";
         
         if($options['active'] == 2) {
@@ -39,6 +39,9 @@ class Admin_Model_DAO_BackendLog
             $active = $options['active'];
         }
         
+        if($options['type']) {
+            $where .= " AND `type` = {$this->_db->quote($options['type'])} ";
+        }
         if($options['active']) {
             $where .= " AND `active` = {$this->_db->quote($active, 'INTEGER')} ";
         }

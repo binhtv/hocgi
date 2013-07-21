@@ -209,7 +209,7 @@ class Admin_CourseController extends Zend_Controller_Action
             if($id) {
             	$result = $courseModel->update($id, $data);
             } else {
-                $data['username'] = $userName;
+                $data['editor'] = $userName;
                 if($data['image']) {
                 	$data['dateline'] = time();
                 	$result = $courseModel->insert($data);
@@ -250,7 +250,6 @@ class Admin_CourseController extends Zend_Controller_Action
     			if(!$files['file']['name'] || !preg_match('/jpg|jpeg|gif|png|bmp/', $files['file']['name'])) {
     				return -1;
     			}
-    			 
     			//Check file type is valid or not
     			$allowTypes = $this->_config->upload->acceptedFileTypes->toArray();
     			if(!in_array($files['file']['type'], $allowTypes)) {

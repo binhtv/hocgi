@@ -2,6 +2,7 @@
 class Admin_Model_Article
 {    
     private static $_instance;
+    private static $_table = "article";
     
     private function __construct() {
     }
@@ -31,7 +32,7 @@ class Admin_Model_Article
             $result = $daoArticle->insert($data);
             if($result) {//Log
                 $data['id'] = $result;
-                Utils_Global::storeBackendLog('insert', $data);
+                Utils_Global::storeBackendLog('insert', self::$_table, $result, $data);
             }
         } catch (Exception $exc) {
             prBinh($exc);
@@ -58,7 +59,7 @@ class Admin_Model_Article
         	$result = $daoArticle->update($id, $data);
         	if($result) {//Log
         		$data['id'] = $id;
-        		Utils_Global::storeBackendLog('update', $data);
+        		Utils_Global::storeBackendLog('update', self::$_table, $id, $data);
         	}
         } catch (Exception $exc) {
         	prBinh($exc);
@@ -82,7 +83,7 @@ class Admin_Model_Article
         try {
             $result = $daoArticle->delete($id);
             if($result) {//Log
-            	Utils_Global::storeBackendLog('delete', array('id' => $id));
+            	Utils_Global::storeBackendLog('delete', self::$_table, $id, array('id' => $id));
             }
         } catch (Exception $exc) {
             prBinh($exc);

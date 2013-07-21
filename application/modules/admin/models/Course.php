@@ -2,6 +2,7 @@
 class Admin_Model_Course
 {    
     private static $_instance;
+    private static $_table = "course";
     
     private function __construct() {
     }
@@ -32,7 +33,7 @@ class Admin_Model_Course
             $result = $daoCourse->insert($data);
             if($result) {//Log
             	$data['id'] = $result;
-            	Utils_Global::storeBackendLog('insert', $data);
+            	Utils_Global::storeBackendLog('insert', self::$_table, $result, $data);
             }
         } catch (Exception $exc) {
             prBinh($exc);
@@ -59,7 +60,7 @@ class Admin_Model_Course
         	$result = $daoCourse->update($id, $data);
             if($result) {//Log
             	$data['id'] = $id;
-            	Utils_Global::storeBackendLog('update', $data);
+            	Utils_Global::storeBackendLog('update', self::$_table, $id,  $data);
             }
         } catch (Exception $exc) {
         	prBinh($exc);
@@ -83,7 +84,7 @@ class Admin_Model_Course
         try {
             $result = $daoCourse->delete($id);
             if($result) {//Log
-            	Utils_Global::storeBackendLog('delete', array('id' => $id));
+            	Utils_Global::storeBackendLog('delete', self::$_table, $id, array('id' => $id));
             }
         } catch (Exception $exc) {
             prBinh($exc);
