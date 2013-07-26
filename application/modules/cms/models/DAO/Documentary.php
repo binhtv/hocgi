@@ -28,7 +28,8 @@ class Cms_Model_DAO_Documentary
      * */
 	public function getDocumentary($options = array()) {
 		$sql = "SELECT `id`, `name`, `name_seo`, `author`, `image`, `content`, `hash_folder`, 
-						`short_description`, `content`, `view_count`, `download_count`, `dateline` ";
+						`short_description`, `content`, `view_count`, `download_count`, `dateline`, 
+		                `file_type`,`file_name`,`hash_download_folder`,`file_size` ";
 		$from = " FROM `documentary` ";
 		$where = " WHERE active = 1 ";
 		
@@ -71,5 +72,28 @@ class Cms_Model_DAO_Documentary
 
 		$result = $this->_db->fetchOne($sql . $from . $where);
 		return $result;
+	}
+	
+	/**
+	 * Update view count by given document id
+	 * @param integer $id
+	 * @return true on success, false on failure
+	 * */
+	public function addViewCount($id) {
+	    $sql = "UPDATE `documentary` SET `view_count` = `view_count` + 1 ";
+	    $where = " WHERE `id` = {$this->_db->quote($id, 'INTEGER')} ";
+	    $result = $this->_db->query($sql . $where);
+	    return $result->rowCount();;
+	}
+	/**
+	 * Update download count by given document id
+	 * @param integer $id
+	 * @return true on success, false on failure
+	 * */
+	public function addDownloadCount($id) {
+	    $sql = "UPDATE `documentary` SET `download_count` = `download_count` + 1 ";
+	    $where = " WHERE `id` = {$this->_db->quote($id, 'INTEGER')} ";
+	    $result = $this->_db->query($sql . $where);
+	    return $result->rowCount();
 	}
 }

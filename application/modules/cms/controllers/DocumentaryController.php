@@ -1,5 +1,10 @@
 <?php
 class Cms_DocumentaryController extends Zend_Controller_Action {
+    public function init() {
+        $this->view->metadata = $this->view->metadata('home', array('keyword' => $this->view->keyword),
+        		$this->view->serverUrl() . $canonical);
+    }
+    
 	public function indexAction() {
 		$documentary = array();
 		$page = intval($this->_request->getParam('page'));
@@ -29,7 +34,30 @@ class Cms_DocumentaryController extends Zend_Controller_Action {
 			$this->_helper->layout()->disableLayout();
 			$this->render('content');
 		} else {
-				$this->view->content = $this->view->render('documentary/content.phtml');
+			$this->view->content = $this->view->render('documentary/content.phtml');
 		}
+	}
+	
+	public function detailAction() {
+	    $id = intval(Utils_Global::$params['document_id']);
+	    $documentModel = Cms_Model_Documentary::factory();
+	    $document = $documentModel->getDocumentById($id);
+	    $this->view->document = $document;
+	    $this->view->documentId = $id;
+	    $this->view->downloadUrl = Utils_Global::getConfig('cms', 'site', 'downloadDocumentaryUrl');
+	}
+	
+	public function addViewAction() {
+		$documentId = Utils_Global::$params['document_id'];
+		$documentModel = Cms_Model_Documentary::factory();
+		$result = $documentModel->addViewCount($documentId);
+		$this->_helper->json($result);
+	}
+	
+	public function addDownloadAction() {
+		$documentId = Utils_Global::$params['document_id'];
+		$documentModel = Cms_Model_Documentary::factory();
+		$result = $documentModel->addDownloadCount($documentId);
+		$this->_helper->json($result);
 	}
 }

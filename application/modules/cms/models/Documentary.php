@@ -119,4 +119,64 @@ class Cms_Model_Documentary
 		
 		return $result;
 	}
+	
+	/**
+	 * Get document by given id
+	 * @param integer $id
+	 * @return array
+	 * */
+	public function getDocumentById($id) {
+	    $result = array();
+	    if(!$id) {
+	        return $result;
+	    }
+	    
+	    $cache = Utils_Global::getCacheInstance('cms');
+	    $keyConfig = Utils_Global::getConfig('cache', 'keys', 'keys');
+	    $key = $keyConfig->documentary_select . '_by_id_' . $id;
+	    if(is_object($cache)) {
+	    	$result = $cache->getCache($key);
+	    	if($result) {
+	    		return $result;
+	    	}
+	    }
+	    
+	    $documentaryDao = Cms_Model_DAO_Documentary::factory();
+        $options = array('id' => $id);  
+	    try {
+	    	$result = $documentaryDao->getDocumentary($options);
+	    	if($result && is_object($cache)) {
+	    		$cache->setCache($key, $result);
+	    	}
+	    } catch (Exception $exc) {
+	    	prBinh($exc);
+	    	Utils_Global::storeLog($exc, __FILE__, __LINE__);
+	    }
+	    
+	    return $result;
+	}
+	
+	public function addViewCount($id) {
+	    $documentaryDao = Cms_Model_DAO_Documentary::factory();
+	    try {
+	    	$result = $documentaryDao->addViewCount($id);
+	    } catch (Exception $exc) {
+	    	prBinh($exc);
+	    	Utils_Global::storeLog($exc, __FILE__, __LINE__);
+	    }
+	    
+	    return $result;    
+	}
+	
+	public function addDownloadCount($id) {
+	    $documentaryDao = Cms_Model_DAO_Documentary::factory();
+	    try {
+	    	$result = $documentaryDao->addDownloadCount($id);
+	    } catch (Exception $exc) {
+	    	prBinh($exc);
+	    	Utils_Global::storeLog($exc, __FILE__, __LINE__);
+	    }
+	    
+	    return $result;    
+	}
 }
