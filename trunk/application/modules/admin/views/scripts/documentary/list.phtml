@@ -1,0 +1,102 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<form action="/admin/documentary/list" method="get">
+    <h4>Tìm kiếm tài liệu</h4>
+    <table class="table table-condensed">
+        <tr>
+            <td><label for="id">Id:</label></td>
+            <td><input type="text" id="id" name="id" value="<?php echo $this->params['id'];?>" /></td>
+        </tr>
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input id="name" name="name" value="<?php echo $this->params['name'];?>" /></td>
+            <td><label for="active">Active</label></td>
+            <td>
+                <select id="active" name="active">
+                    <option value="0" <?php echo 0 == $this->params['active']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['active']?"selected='selected'":""?>>Active</option>
+                    <option value="2" <?php echo 2 == $this->params['active']?"selected='selected'":""?>>Inactive</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label for="hot">New</label></td>
+            <td>
+                <select id="new" name="new">
+                    <option value="0" <?php echo 0 == $this->params['new']?"selected='selected'":""?>>[Tất cả]</option>
+                    <option value="1" <?php echo 1 == $this->params['new']?"selected='selected'":""?>>YES</option>
+                    <option value="2" <?php echo 2 == $this->params['new']?"selected='selected'":""?>>NO</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Search</button>
+        </div>
+  </div>
+</form>
+<a href="/admin/documentary/edit" style="font-weight: bold">Tạo mới</a>
+<?php if(is_array($this->documentaries)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>File</th>
+                <th>New</th>
+                <th>Active</th>
+                <th>Order</th>
+                <th>Last update</th>
+                <th>Created date</th>
+                <th>Action</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->documentaries as $documentary) :?>
+             <tr>
+                 <td><?php echo $documentary['id']?></td>
+                 <td><?php echo $documentary['name']?></td>
+                 <td>
+                     <a class="fancy" href="<?php echo Utils_Global::get('staticUrl') . '/documentary/' . $documentary['hash_folder'] . '/' . $documentary['image']?>">
+                         <img width="117" height="89" alt="<?php echo $documentary['image']?>" src="<?php echo Utils_Global::get('staticUrl') . '/documentary/' . $documentary['hash_folder'] . '/' . $documentary['image']?>">
+                     </a>
+                 </td>
+                 <td><a href="<?php echo Utils_Global::get('staticUrl') . '/documentary/files/' . $documentary['hash_download_folder'] . '/' . $documentary['file_name']?>" target="_blank">Link</a></td>
+                 <td>
+                     <?php if($documentary['new']) {?>
+                     YES
+                     <?php } else {?>
+                     NO
+                     <?php }?>
+                 </td>
+                 <td>
+                     <?php if($documentary['active']) {?>
+                     <i class="icon-ok"></i>
+                     <?php } else {?>
+                     <i class="icon-lock"></i>
+                     <?php }?>
+                 </td>
+                 <td>
+                     <?php echo $documentary['order'];?>
+                 </td>
+                 <td><?php echo date('d/m/Y', $documentary['last_update'])?></td>
+                 <td><?php echo date('d/m/Y', $documentary['dateline'])?></td>
+                 <td>
+                     <a href="/admin/documentary/edit/id/<?php echo $documentary['id']?>">
+                         <i class="icon-edit"></i>
+                     </a>
+                     <a href="/admin/documentary/delete/id/<?php echo $documentary['id']?>" onclick="return confirm('sure?');">
+                         <i class="icon-remove"></i>
+                     </a>
+                 </td>
+             </tr>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+      <?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'pagination.phtml', $this->currentUrl);?>
+</div>
+<?php } else {?>
+<div>Không có tài liệu nào!</div>
+<?php }?>

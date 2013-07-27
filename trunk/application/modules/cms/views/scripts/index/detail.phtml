@@ -1,5 +1,6 @@
 <div class="titleHN">
    <a href="<?php echo $this->serverUrl() . $this->url(array('name_seo' => $this->category['name_seo'], 'id' => $this->category['id']), 'category_page');?>"><?php echo $this->category['name']?></a>
 </div>
+<h1 class="Title"><?php echo $this->article['title']?></h1>
 <strong><?php echo $this->article['short_description']?></strong><br/></br>
 <?php echo $this->article['content'];?>

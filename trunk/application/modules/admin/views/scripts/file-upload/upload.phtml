@@ -1,0 +1,25 @@
+<div class="upload-image">
+    <div class="row spec-row upload-truyen">
+        <h3>Đăng File không giới hạn</h3>
+        <form action="/admin/file-upload/save" enctype="multipart/form-data" method="post"> 
+            <p>
+                <label>Chọn file (không quá 10Mb)</label>
+                <input type="file" name="file" id="file">
+            </p>
+            <p>
+                <label>Tiêu đề file</label>
+                <input class="text largeWidth" name="Caption" id="caption" type="text" value="<?php echo $this->name;?>" maxlength="255">
+            </p>
+            <div style="color: red; line-height: 20px; height: 30px;" id="errormsg"><?php echo $this->errMessage;?></div>
+            <p class="buttonSet">
+                <button class="buttons submitButton" type="submit">Đăng file</button>
+                <a class="buttons cancelButtons" href="/">Bỏ qua</a>
+            </p>
+            <?php if($this->succMessage) {?>
+                <div class="alert alert-info" id="msgResult">
+                    <?php echo $this->succMessage?>
+                </div>
+            <?php }?>
+        </form>
+    </div><!--end row-->     
+</div>
