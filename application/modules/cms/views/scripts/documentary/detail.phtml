@@ -4,7 +4,11 @@
 <strong><?php echo $this->document['short_description']?></strong><br/></br>
 <?php echo $this->document['content'];?>
 
-<div id="download">
+<div id="download" style="margin-top: 10px;">
+<?php if($this->downloadUrl && $this->document['hash_download_folder'] && $this->document['file_name']) {?>
     <a href="javascript:void(0);"
          onclick="return Documentary.addDownloadCount('<?php echo $this->document['id']?>', '<?php echo $this->downloadUrl . '/' . $this->document['hash_download_folder'] . '/' . $this->document['file_name'];?>')" title="Tải tài liệu <?php echo $this->document['name'] . ''?>" class="download-btn">Tải về(<?php echo Utils_CommonFunction::formatSizeUnits($this->document['file_size'])?>)</a>
+ <?php } else {?>
+     <a href="javascript:void(0);" title="Tải tài liệu <?php echo $this->document['name'] . ''?>" class="download-btn">Không tìm thấy file</a>
+ <?php }?>
 </div>

@@ -1,0 +1,96 @@
+<h3><?php echo $this->title?></h3>
+<div style="color:red;"><?php echo $this->errMessage;?></div>
+<div class="upload-image">
+<form action="/admin/documentary/save" method="post" enctype="multipart/form-data">
+    <table class="table table-bordered table-striped">
+        <tbody>
+             <tr>
+                 <td>Name</td>
+                 <td>
+                     <input type="text" name="name" id="name" value="<?php echo $this->documentary['name'];?>">
+                 </td>
+             </tr>
+             <tr>
+                 <td>Author</td>
+                 <td>
+                     <input type="text" name="author" id="author" value="<?php echo $this->documentary['author'];?>">
+                 </td>
+             </tr>
+              <tr>
+                 <td>Short description</td>
+                 <td>
+                     <textarea type="text" name="short_description" id="short_description" cols="200" rows="5" style="width: 700px"><?php echo trim($this->documentary['short_description']);?></textarea>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Content</td>
+                 <td>
+                     <textarea type="text" name="content" id="content" cols="200" rows="5" class="mceEditor">
+                         <?php echo $this->documentary['content'];?>
+                     </textarea>
+                 </td>
+             </tr>
+              <tr>
+                 <td>Image
+                     <?php if($this->documentary['image']) {?>
+                         <img src="<?php echo Utils_Global::get('staticUrl') . '/documentary/' . $this->documentary['hash_folder'] . '/' . $this->documentary['image']?>" alt="<?php echo $this->documentary['image']?>" width="50" height="50">
+                     <?php }?>
+                 </td>
+                 <td>
+                     <input type="file" name="file" id="file" accept="image/*" title="Chỉ chấp nhận các định dạng hình ảnh (png, jpg, jpge, gif)">
+                 </td>
+             </tr>
+              <tr>
+                 <td>File association</td>
+                 <td>
+                     <select name="file_associate" id="file_associate">
+                         <?php foreach ($this->files as $file):?>
+                             <option value="<?php echo $file['id']?>" <?php echo $this->documentary['file_id'] == $file['id']? 'selected="selected"':""?>><?php echo $file['name']?></option>
+                         <?php endforeach;?>
+                     </select>
+                 </td>
+             </tr>
+             <tr>
+                 <td>Order</td>
+                 <td>
+                     <input type="number" name="order" id="order" value="<?php echo $this->documentary['order']?>"/>
+                 </td>
+             </tr>
+              <tr>
+                 <td>New</td>
+                 <td>
+                     <input type="checkbox" name="new" id="new" <?php echo $this->documentary['new']?'checked="checked"':"";?>/>
+                 </td>
+             </tr>
+             <?php if(Business_Common_Users::checkRight('admin')){?>
+                 <tr>
+                     <td>Active</td>
+                     <td>
+                         <input type="checkbox" name="active" id="active" <?php echo $this->documentary['active']?'checked="checked"':"";?>/>
+                     </td>
+                 </tr>
+             <?php }?>
+             <tr>
+                <td colspan="2">
+                    <input type="submit" value="Save"/>
+                    <a href="/admin/documentary/list">Cancel</a>
+                </td> 
+             </tr>
+        </tbody>
+      </table>
+      <input type="hidden" value="<?php echo $this->id?>" name="id" id="id"/>
+</form>
+</div>
+<script type="text/javascript">
+tinymce.init({selector:'.mceEditor',
+	relative_urls:false,
+	remove_script_host:false,
+	plugins: [
+	          "advlist autolink lists link image charmap print preview anchor",
+	          "searchreplace visualblocks code fullscreen",
+	          "insertdatetime media table contextmenu paste moxiemanager"
+	      ],
+	      toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"});
+
+
+</script>
