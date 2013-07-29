@@ -140,11 +140,11 @@ class Admin_CourseController extends Zend_Controller_Action
         	return ;
         }
         
-        if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
-            Utils_Global::$params['errMessage'] = 'Vui lòng nhập tên khóa học hợp lệ!';
-            $this->_forward('edit', 'course', 'admin');
-            return;
-        }
+//         if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
+//             Utils_Global::$params['errMessage'] = 'Vui lòng nhập tên khóa học hợp lệ!';
+//             $this->_forward('edit', 'course', 'admin');
+//             return;
+//         }
         if(!$link) {
             Utils_Global::$params['errMessage'] = 'Vui lòng nhập course link!';
             $this->_forward('edit', 'course', 'admin');
@@ -269,7 +269,8 @@ class Admin_CourseController extends Zend_Controller_Action
     
     			$imageUploadPath = $this->createTempFolder($imageUploadPath, $originalImageFileName);
     			$upload->setDestination($imageUploadPath);
-    			 
+    			$wh = explode('x', $this->_config->imageArticleScale);
+    			$upload->addFilter(new Skoch_Filter_File_Resize(array('width' => $wh[0], 'height' => $wh[1], 'keepRatio' => true)));
     			$upload->addFilter('Rename', array('target' => $imageUploadPath . '/' . $imageFileName));
     			$result = $upload->receive();
     			//Tien hanh check type 1 lan nua, make sure day la file hinh

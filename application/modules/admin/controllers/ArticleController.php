@@ -221,7 +221,8 @@ class Admin_ArticleController extends Zend_Controller_Action
     
     			$imageUploadPath = $this->createTempFolder($imageUploadPath, $originalImageFileName);
     			$upload->setDestination($imageUploadPath);
-    			 
+    			$wh = explode('x', $this->_config->imageArticleScale);
+    			$upload->addFilter(new Skoch_Filter_File_Resize(array('width' => $wh[0], 'height' => $wh[1], 'keepRatio' => true)));
     			$upload->addFilter('Rename', array('target' => $imageUploadPath . '/' . $imageFileName));
     			$result = $upload->receive();
     			//Tien hanh check type 1 lan nua, make sure day la file hinh
