@@ -16,6 +16,7 @@ class Admin_UsersController extends Zend_Controller_Action
 	
 	public function changePassSaveAction()
 	{
+	    $this->_helper->layout()->disableLayout();
 		$old_password = $this->_request->getParam('old_password');
 		$new_password = $this->_request->getParam('new_password');
 		$cfm_new_password = $this->_request->getParam('cfm_new_password');

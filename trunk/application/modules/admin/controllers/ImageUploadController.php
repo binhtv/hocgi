@@ -141,10 +141,10 @@ class Admin_ImageUploadController extends Zend_Controller_Action
             $this->_helper->redirector('upload', 'truyen-che', 'vmg', $params);
         }
         
-        if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
-            $params = array('errMessage' => 'Vui lòng nhập tên truyện hợp lệ.', 'source' => $source, 'category' => $category);
-            $this->_helper->redirector('upload', 'truyen-che', 'vmg', $params);
-        }
+//         if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
+//             $params = array('errMessage' => 'Vui lòng nhập tên truyện hợp lệ.', 'source' => $source, 'category' => $category);
+//             $this->_helper->redirector('upload', 'truyen-che', 'vmg', $params);
+//         }
         
         //Check so lan upload lan nua
         if($this->_request->isPost()) {

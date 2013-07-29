@@ -25,8 +25,12 @@ class Cms_IndexController extends Zend_Controller_Action {
 		$this->view->article = $article;
 		$this->view->category = $category;
 		$this->view->articleId = $article['id'];
-		$this->view->metadata = $this->view->metadata('home', array('keyword' => $this->view->keyword),
-				$this->view->serverUrl() . $canonical);
+		
+		$metaInfo = array('article-title' => $article['title'],
+		                    'article-description' => $article['short_description'],
+		);
+		$this->view->metadata = $this->view->metadata('detail-article', $metaInfo,
+				$this->view->serverUrl() . $this->view->url(array()));
 	}
 	
 	public function relatedArticleAction() {

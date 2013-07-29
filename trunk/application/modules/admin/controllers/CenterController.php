@@ -65,11 +65,11 @@ class Admin_CenterController extends Zend_Controller_Action
             $this->_forward('edit', 'course', 'admin');
             return;
         }
-        if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
-            Utils_Global::$params['errMessage'] = 'Vui lòng nhập tên trung tâm hợp lệ!';
-            $this->_forward('edit', 'course', 'admin');
-            return;
-        }
+//         if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
+//             Utils_Global::$params['errMessage'] = 'Vui lòng nhập tên trung tâm hợp lệ!';
+//             $this->_forward('edit', 'course', 'admin');
+//             return;
+//         }
         if(!$contactInfo) {
             Utils_Global::$params['errMessage'] = 'Vui lòng nhập thông tin liên lạc!';
             $this->_forward('edit', 'course', 'admin');
@@ -181,7 +181,7 @@ class Admin_CenterController extends Zend_Controller_Action
     
     			$imageUploadPath = $this->createTempFolder($imageUploadPath, $originalImageFileName);
     			$upload->setDestination($imageUploadPath);
-    			 
+    			$upload->addFilter(new Skoch_Filter_File_Resize(array('width' => 100, 'height' => 100, 'keepRatio' => true)));
     			$upload->addFilter('Rename', array('target' => $imageUploadPath . '/' . $imageFileName));
     			$result = $upload->receive();
     			//Tien hanh check type 1 lan nua, make sure day la file hinh

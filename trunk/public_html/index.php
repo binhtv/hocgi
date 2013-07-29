@@ -39,6 +39,7 @@ $options = array(
 		'autoloadernamespaces' => array(
 				"Plugin" => "Plugin_",
 				"Utils" => "Utils_",
+		        'Skoch' => "Skoch_",
 				"BlockManagement" => "BlockManagement_",
 		        "Business" => "Business_",
 		        "Business_Common" => "Business_Common_",
