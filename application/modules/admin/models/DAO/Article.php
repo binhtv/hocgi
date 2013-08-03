@@ -61,7 +61,7 @@ class Admin_Model_DAO_Article
 		$from = " FROM `article` LEFT JOIN `category` ON `article`.`category` = `category`.`id` ";
 		$where = " WHERE 1 = 1 ";
 		if($options['editor']) {
-		    $where .= " AND `editor` = {$this->_db->quote($options['editor'])} ";
+		    $where .= " AND `editor` LIKE '%{$options['editor']}%' ";
 		}
 		if($options['top']) {
 			$where .= " AND `top` = {$this->_db->quote($options['top'], 'INTEGER')} ";
@@ -111,7 +111,7 @@ class Admin_Model_DAO_Article
 		$from = " FROM `article` ";
 		$where = " WHERE 1 = 1 ";
 		if($options['editor']) {
-			$where .= " AND `editor` = {$this->_db->quote($options['editor'])} ";
+			$where .= " AND `editor` LIKE '%{$options['editor']}%' ";
 		}
 		if($options['top']) {
 			$where .= " AND `top` = {$this->_db->quote($options['top'], 'INTEGER')} ";

@@ -6,10 +6,10 @@
 			allowfullscreen></iframe>
     <?php } elseif($banner['flash']) {?>
          <embed src="<?php echo $banner['link']; ?>" 
-        height="<?php echo $banner['height'];?>" alt="http://admicro2.vcmedia.vn/images/08va980x90bk.jpg" align="middle" 
-        width="<?php echo $banner['width'];?>" 
+                    height="<?php echo $banner['height'];?>" align="middle" 
+                    width="<?php echo $banner['width'];?>" 
             pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" 
-            allowscriptaccess="always" wmode="transparent" quality="high">
+            allowscriptaccess="always" wmode="opaque" quality="high">
     <?php } else {?>
          <a href="<?php echo $banner['link']?>" target="_blank">
     	    <img src="<?php echo $this->staticUrl . $banner['hash_folder'] . '/' . $banner['image'];?>" 

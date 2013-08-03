@@ -37,7 +37,10 @@
                 <input id="datelineT" name="datelineT" type="text" value="<?php echo  $this->params['datelineT']?date('Y-m-d', $this->params['datelineT']):'';?>"/>YYYY-MM-DD
             </td>
         </tr>
-        
+        <tr>
+            <td><label for="editor">Editor:</label></td>
+            <td><input id="editor" name="editor" value="<?php echo $this->params['editor'];?>" /></td>
+        </tr>
     </table>
     <div class="control-group">
         <div class="controls">
@@ -57,6 +60,7 @@
                 <th><a href="<?php echo $this->currentUrl?>&sort_by=category&sort_dir=<?php echo $this->sortDir^1?>">Category<?php if($this->sortBycategory) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
                 <th><a href="<?php echo $this->currentUrl?>&sort_by=order&sort_dir=<?php echo $this->sortDir^1?>">Order<?php if($this->sortByorder) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
                 <th>Active</th>
+                <th>Editor</th>
                 <th><a href="<?php echo $this->currentUrl?>&sort_by=last_update&sort_dir=<?php echo $this->sortDir^1?>">Update date<?php if($this->sortBylast_update) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
                 <th><a href="<?php echo $this->currentUrl?>&sort_by=dateline&sort_dir=<?php echo $this->sortDir^1?>">Created date<?php if($this->sortBydateline) {?><i class="<?php echo $this->clzzSort?>"></i><?php }?></a></th>
                 <th>Action</th>
@@ -83,6 +87,7 @@
                      <i class="icon-lock"></i>
                      <?php }?>
                  </td>
+                 <td><?php echo $article['editor']?></td>
                  <td><?php echo date('d/m/Y', $article['last_update'])?></td>
                  <td><?php echo date('d/m/Y', $article['dateline'])?></td>
                  <td>

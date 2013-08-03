@@ -131,7 +131,7 @@ list-style:none; width:100%}
 .t3-content .h2Title .link-title{ color:#333}
 
 
-.banner_mid{ text-align:center; padding:0 5px 5px}
+.banner_mid{ text-align:center; padding:0 5px 5px;}
 /*folder*/
 /* .folder{ padding-bottom:10px} */
 .folder-small{ width:250px}
@@ -425,7 +425,7 @@ h2.title_comments{ font:bold 12px/18px Arial, Helvetica, sans-serif; color:#568f
 /*comment box*/
 .box-comments{ margin-top:20px}
 .box-comments li{ list-style:none}
-.social-likeboxplugin{ width:215px}
+.social-likeboxplugin{ max-width:235px; margin-bottom: 2px;}
 .social-likeboxplugin li{
 	display:block;
 	float:left;

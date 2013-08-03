@@ -10,6 +10,9 @@ class Plugin_Perm extends Zend_Controller_Plugin_Abstract
  	       $hasIdentity = $auth->hasIdentity();
  	       if(!$hasIdentity) {
  	           $this->_response->setRedirect('/admin/auth');
+ 	       } else {
+ 	           $namespace = new Zend_Session_Namespace('Zend_Auth');
+               $namespace->setExpirationSeconds(60*60);
  	       }
  	   }
 	}
