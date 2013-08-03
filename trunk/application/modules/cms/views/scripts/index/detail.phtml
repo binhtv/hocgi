@@ -4,3 +4,31 @@
 <h1 class="Title"><?php echo $this->article['title']?></h1>
 <strong><?php echo $this->article['short_description']?></strong><br/></br>
 <?php echo $this->article['content'];?>
+<div class="box-comments">
+	<h2 class="title_comments fl">Ý kiến của bạn</h2>
+    	<!-- like -->
+		<div class="social-likeboxplugin fl">
+        	<ul>
+            	<li>
+                	<div class="fb-like" data-href="<?php echo $this->serverUrl() . $this->url(array())?>" data-send="false" data-layout="button_count" data-width="55" data-show-faces="false"></div>
+				</li>
+            	<!-- li>
+                	<a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $this->serverUrl() . $this->url(array())?>" data-via="<?php echo $this->serverUrl()?>" data-lang="en">Tweet</a>
+				</li-->
+				<li>
+				    <div class="g-plusone" data-size="medium"></div>
+				</li>
+            </ul>
+        </div>
+        <!-- end like-->
+    <div class="social_share fr">
+    	Chia sẻ lên <a href="javascript:void(0);" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href), 'facebook-share-dialog', 'width=626,height=436'); return false;"><img src="<?php echo Utils_Global::get('imgUrl')?>/images/16_facebook.gif"   align="absmiddle"/></a> 
+    	<div class="g-plus" data-action="share" data-annotation="none" data-height="15" data-href="<?php echo $this->serverUrl() . $this->url(array())?>">
+    	</div>
+        <!-- share button--> 
+    </div>
+    <div class="clear"></div>
+    <!-- coment content-->
+    <div class="fb-comments" data-href="<?php echo $this->serverUrl() . $this->url(array())?>" data-width="500" data-num-posts="5"></div>
+    <!-- end comment content-->
+</div>

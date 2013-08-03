@@ -45,6 +45,7 @@ class Admin_ArticleController extends Zend_Controller_Action
         $limit = intval(Utils_Global::$params['limit']);
         $id = Utils_Global::$params['id'];
         $title = Utils_Global::$params['title'];
+        $editor = Utils_Global::$params['editor'];
         $category = Utils_Global::$params['category'];
         $active = trim(Utils_Global::$params['active']);
         $datelineF = strtotime(Utils_Global::$params['datelineF']);
@@ -57,7 +58,7 @@ class Admin_ArticleController extends Zend_Controller_Action
         if($page <= 0) {
             $page = 1;
         }
-        
+
         $modelCategory = Admin_Model_Category::factory();
         $categories = $modelCategory->getCategories();
         
@@ -65,6 +66,9 @@ class Admin_ArticleController extends Zend_Controller_Action
         $options = array('id' => $id, 'title' => $title, 'category' => $category, 'active' => $active, 'editor' => $userName,
                         'datelineF' => $datelineF, 'datelineT' => $datelineT, 'order' => $sortBy, 'by' => $sortDir?'DESC':'ASC',
                             'offset' => ($page - 1) * $limit, 'limit' => $limit);
+        if($editor) {
+            $options['editor'] = $editor;
+        }
         $articles = $modelArticle->getArticles($options);
         $sortByCol = 'sortBy'.$sortBy;
         $this->view->{$sortByCol} = 1;
@@ -143,14 +147,31 @@ class Admin_ArticleController extends Zend_Controller_Action
             	$data['image'] = $result['image'];
             	$data['hash_folder'] = $result['hash_folder'];
             } else {//Loi xay ra
-            	if($result == -1) {//Dinh dang file ko hop le
+                if($result==0 && !$id) {
+                	$errMessage = $this->_config->upload->msgImageRequired;
+                	Utils_Global::$params['errMessage'] = $errMessage;
+                	$this->_forward('edit', 'article', 'admin');
+                	return;
+                } else if($result == -1) {//Dinh dang file ko hop le
             		$errMessage = $this->_config->upload->msgInvalidType;
+            		Utils_Global::$params['errMessage'] = $errMessage;
+            		$this->_forward('edit', 'article', 'admin');
+            		return;
             	} else if($result == -2) {//Size vượt quá
             		$errMessage = $this->_config->upload->msgInvalidSize;
+            		Utils_Global::$params['errMessage'] = $errMessage;
+            		$this->_forward('edit', 'article', 'admin');
+            		return;
             	} else if($result == -3) {//File qua nho
             		$errMessage = $this->_config->upload->msgInvalidDemension;
+            		Utils_Global::$params['errMessage'] = $errMessage;
+            		$this->_forward('edit', 'article', 'admin');
+            		return;
             	} else if($result == -4) {
-            	    $errMessage = $this->_config->upload->msgFileNotFound;
+            	    $errMessage = $this->_config->upload->msgFileNotFound;;
+            	    Utils_Global::$params['errMessage'] = $errMessage;
+            	    $this->_forward('edit', 'article', 'admin');
+            	    return;
             	}
             }
                 
@@ -167,8 +188,7 @@ class Admin_ArticleController extends Zend_Controller_Action
             }
             
         }
-        
-        if(!is_array($result) && $result > 0) {
+        if($result > 0) {
         	$params = array('errMessage' => "Thay đổi thành công");
         	$this->_helper->redirector('edit', 'article', 'admin', $params);
         } else {
@@ -197,6 +217,9 @@ class Admin_ArticleController extends Zend_Controller_Action
     		$imageUploadPath    = $this->_config->upload->$key;
     		$imageFileName      = '';
     		if($files['file']) {
+    		    if(!$files['file']['name']) {
+    		        return 0;
+    		    }
     			//Check file valid
     			if(!$files['file']['name'] || !preg_match('/jpg|jpeg|gif|png|bmp/', strtolower($files['file']['name']))) {
     				return -1;

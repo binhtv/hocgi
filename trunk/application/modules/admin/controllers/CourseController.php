@@ -193,14 +193,31 @@ class Admin_CourseController extends Zend_Controller_Action
             	$data['image'] = $result['image'];
             	$data['hash_folder'] = $result['hash_folder'];
             } else {//Loi xay ra
-            	if($result == -1) {//Dinh dang file ko hop le
+            	if($result==0 && !$id) {
+                	$errMessage = $this->_config->upload->msgImageRequired;
+                	Utils_Global::$params['errMessage'] = $errMessage;
+                	$this->_forward('edit', 'article', 'admin');
+                	return;
+                } else if($result == -1) {//Dinh dang file ko hop le
             		$errMessage = $this->_config->upload->msgInvalidType;
+            		Utils_Global::$params['errMessage'] = $errMessage;
+            		$this->_forward('edit', 'course', 'admin');
+            		return;
             	} else if($result == -2) {//Size vượt quá
             		$errMessage = $this->_config->upload->msgInvalidSize;
+            		Utils_Global::$params['errMessage'] = $errMessage;
+            		$this->_forward('edit', 'course', 'admin');
+            		return;
             	} else if($result == -3) {//File qua nho
             		$errMessage = $this->_config->upload->msgInvalidDemension;
+            		Utils_Global::$params['errMessage'] = $errMessage;
+            		$this->_forward('edit', 'course', 'admin');
+            		return;
             	} else if($result == -4) {
             	    $errMessage = $this->_config->upload->msgFileNotFound;
+            	    Utils_Global::$params['errMessage'] = $errMessage;
+            	    $this->_forward('edit', 'course', 'admin');
+            	    return;
             	}
             }
                 
@@ -246,6 +263,9 @@ class Admin_CourseController extends Zend_Controller_Action
     		$imageUploadPath    = $this->_config->upload->$key;
     		$imageFileName      = '';
     		if($files['file']) {
+    		    if(!$files['file']['name']) {
+    		    	return 0;
+    		    }
     			//Check file valid
     			if(!$files['file']['name'] || !preg_match('/jpg|jpeg|gif|png|bmp/', $files['file']['name'])) {
     				return -1;
