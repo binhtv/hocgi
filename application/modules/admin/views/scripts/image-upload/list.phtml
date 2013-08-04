@@ -1,0 +1,61 @@
+<h3><?php echo $this->title?></h3>
+<div class="upload-image">
+<form action="/admin/image-upload/list" method="get">
+    <h4>Tìm kiếm</h4>
+    <table class="table table-condensed">
+        <tr>
+            <td><label for="title">Name:</label></td>
+            <td><input id="title" name="title" value="<?php echo $this->params['title'];?>" /></td>
+            <td><label for="category">Category:</label></td>
+            <td>
+                <select id="category" name="category">
+                    <option value="">[Tất cả]</option>
+                    <option value="article" <?php echo 'article' == $this->params['category']?"selected='selected'":""?>>Article</option>
+                    <option value="course" <?php echo 'course' == $this->params['category']?"selected='selected'":""?>>Course</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn">Search</button>
+        </div>
+  </div>
+</form>
+<a href="/admin/image-upload/upload" style="font-weight: bold">Upload mới</a>
+<?php if(is_array($this->uploads)) {?>
+    <table class="table table-bordered table-striped">
+        <thead>
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Link</th>
+                <th>Category</th>
+                <th>Created date</th>
+              </tr>
+        </thead>
+        <tbody>
+            <?php foreach($this->uploads as $upload) :?>
+             <tr>
+                 <td><?php echo $upload['id']?></td>
+                 <td><?php echo $upload['title']?></td>
+                 <td>
+                     <a class="fancy" href="<?php echo $upload['image_url']?>">
+                         <img width="117" height="89" alt="" src="<?php echo $upload['image_url']?>">
+                     </a>
+                 </td>
+                 <td><textarea rows="3" cols="100" style="width: 450px; font-size: 10px;"><?php echo $upload['image_url']?></textarea></td>
+                 <td>
+                     <?php echo $upload['category'];?>
+                 </td>
+                 <td><?php echo date('d/m/Y', $upload['dateline'])?></td>
+             </tr>
+             <?php endforeach;?>
+        </tbody>
+      </table>
+      <?php echo $this->paginationcontrol2($this->page, $this->totalItem, $this->numRowPerPage, 'pagination.phtml', $this->currentUrl);?>
+</div>
+<?php } else {?>
+<div>Không có hình ảnh nào!</div>
+<?php }?>
