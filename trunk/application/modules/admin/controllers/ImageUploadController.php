@@ -11,51 +11,6 @@ class Admin_ImageUploadController extends Zend_Controller_Action
     
     public function indexAction()
     {
-        $page = SGN_Application::$params['page'];
-        $limit = intval(SGN_Application::$params['limit']);
-        if($limit <= 0) {
-            $limit = 8;
-        }
-        if(!$page) {
-            $page = 1;
-        }
-        
-        $modelCategory = Vmg_Model_Category::factory();
-        $category = $modelCategory->getCategoryById(5);
-        $this->view->categoryDesc = $category['description'];
-        
-        $modelManga = Vmg_Model_Manga::factory();
-        $modelCategory = Vmg_Model_Category::factory();
-        $mangas = $modelManga->getTruyenChe(($page - 1) * $limit, $limit);
-        //Tang luot view
-        $this->addViewCount($mangas);
-
-        $category = $modelCategory->getCategoryById(5);
-        $this->view->mangas = $mangas;
-        $this->view->seoPrefix = SGN_Application::getConfig('vmg', 'site')->seoPrefix;
-        $this->view->page = $page;
-        
-        $nextManga = $modelManga->getTruyenChe($page * $limit, $limit);
-        $this->view->showPagination = (count($mangas) == $limit) && count($nextManga) > 0;
-        
-        //Metadata
-        $metaInfo = array(
-                'category_name' => trim($category['name']),
-                'category_name_seo' => trim($category['name_seo']),
-                'page' => $page,
-        );
-        
-        if($page <= 1) {
-            $canonical = $this->view->serverUrl() . $this->view->url(array(), 'vmg_truyen_che_all');
-        } else {
-            $canonical = $this->view->serverUrl() . $this->view->url(array('page' => $page), 'vmg_truyen_che_pagination');
-        }
-        
-        if(!$page || $page <= 1) {
-            $this->view->metadata = $this->view->metadata('category', $metaInfo, $canonical);
-        } else {
-            $this->view->metadata = $this->view->metadata('category_pagination', $metaInfo, $canonical);
-        }
     }
     
     
@@ -92,30 +47,44 @@ class Admin_ImageUploadController extends Zend_Controller_Action
     }
     
     /**
-     * Filter by user
+     * List of images
      * */
-    public function userAction() {
-        $userName = SGN_Session::get('username');
-        $page = SGN_Application::$params['page'];
-        $limit = intval(SGN_Application::$params['limit']);
+    public function listAction() {
+        $page = intval(Utils_Global::$params['page']);
+        $limit = intval(Utils_Global::$params['limit']);
+        $title = Utils_Global::$params['title'];
+        $category = Utils_Global::$params['category'];
+        $username = Utils_Global::$params['username'];
+        $filterUsernames = array();
+        if(!$username) {
+            $auth = Zend_Auth::getInstance();
+            $identity = $auth->getIdentity();
+            $userName = $identity->username;
+            $filterUsernames = array("'binhtv'", "'" . $userName . "'");
+        }
+        
         if($limit <= 0) {
-            $limit = 8;
+        	$limit = 10;
         }
-        if(!$page) {
-            $page = 1;
+        if($page <= 0) {
+        	$page = 1;
         }
         
-        if(!$userName) {
-            $this->_redirect($this->view->serverUrl() . $this->view->url(array('cat' => 5), 'vmg_truyen_che_all'));
+        $imageUploadModel = Admin_Model_ImageUpload::factory();
+        $options = array('title' => $title, 'category' => $category, 'offset' => ($page - 1) * $limit, 'limit' => $limit);
+        if($username) {
+            $options['username'] = $username;
         }
-        $modelTruyenChe = Vmg_Model_TruyenChe::factory();
-        $mangas = $modelTruyenChe->selectUserUpload(($page - 1) * $limit, $limit, $userName);
-        $this->view->mangas = $mangas;
-        $this->view->seoPrefix = SGN_Application::getConfig('vmg', 'site')->seoPrefix;
+        if($filterUsernames) {
+            $options['usernames'] = implode(',', $filterUsernames);
+        }
+        $uploads = $imageUploadModel->getImageUploads($options);
+        $this->view->uploads = $uploads;
         $this->view->page = $page;
-        
-        $nextManga = $modelTruyenChe->selectUserUpload($page * $limit, $limit, $userName);
-        $this->view->showPagination = (count($mangas) == $limit) && count($nextManga) > 0;
+        $this->view->numRowPerPage = $limit;
+        $this->view->totalItem = $imageUploadModel->getImageUploadsCount($options);
+        $this->view->currentUrl = $this->view->serverUrl() . $this->view->url(array()) . '?' . http_build_query($options);
+        $this->view->params = $options;
     }
     
     /**
@@ -129,8 +98,8 @@ class Admin_ImageUploadController extends Zend_Controller_Action
         $nameSeo = Utils_CommonFunction::getNameSeo($name);
         
         $auth = Zend_Auth::getInstance();
-        $userName = $auth->getIdentity();
-        $userName = 'binhtv';
+        $identity = $auth->getIdentity();
+        $userName = $identity->username;
         if(!$userName) {
             $params = array('errMessage' => 'Vui lòng đăng nhập!', 'name' => $name, 'category' => $category);
             $this->_helper->redirector('upload', 'truyen-che', 'vmg', $params);
@@ -155,6 +124,7 @@ class Admin_ImageUploadController extends Zend_Controller_Action
                 $modelImageUpload = Admin_Model_ImageUpload::factory();
 	            $uploadInfo = array('username' => $userName,
 	                                'title' => $name,
+	                                'category' => $category,
 	                                'name_seo' => $nameSeo,
 	                                'image_url' => $result['full_url'],
 	                                'image_path' => $result['full_path'],

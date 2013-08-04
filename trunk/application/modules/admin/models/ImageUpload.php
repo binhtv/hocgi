@@ -42,4 +42,39 @@ class Admin_Model_ImageUpload
         
         return $result;
     }
+    
+    /**
+     * Get image upload by given optoions
+     * @param array $options
+     * @return array
+     * */
+    public function getImageUploads($options = array()) {
+        $modelImageUpload = Admin_Model_DAO_ImageUpload::factory();
+        try {
+        	$result = $modelImageUpload->getImageUploads($options);
+        } catch (Exception $exc) {
+        	prBinh($exc);
+        	Utils_Global::storeLog($exc, __FILE__, __LINE__);
+        }
+        
+        return $result;
+    }
+    
+    /**
+     * Get uploads count by given options
+     * @param array $options
+     * @return array
+     * */
+    public function getImageUploadsCount($options = array()) {
+    	$count = 0;
+    	$modelImageUpload = Admin_Model_DAO_ImageUpload::factory();
+    	try {
+    		$count = $modelImageUpload->getImageUploadsCount($options);
+    	} catch (Exception $exc) {
+    		prBinh($exc);
+    		Utils_Global::storeLog($exc, __FILE__, __LINE__);
+    	}
+    
+    	return $count;
+    }
 }

@@ -216,7 +216,7 @@ class Admin_CenterController extends Zend_Controller_Action
     				unlink($imageUploadPath . '/' . $imageFileName);
     				return -1;
     			}
-    			if($imageSize[0] < $this->_config->upload->dimentionW || $imageSize[1] < $this->_config->upload->dimentionH) {
+    			if($imageSize[0] < $this->_config->uploadcenter->dimentionW || $imageSize[1] < $this->_config->uploadcenter->dimentionH) {
     				unlink($imageUploadPath . '/' . $imageFileName);
     				return -3;
     			}
