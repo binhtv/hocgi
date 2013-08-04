@@ -28,7 +28,7 @@ class Cms_Model_DAO_Article
      * */
 	public function getArticles($options = array()) {
 		$sql = "SELECT `id`, `title`, `title_seo`, `category`, `short_description`,
-						`content`, `image`, `hash_folder`, `hot` ";
+						`content`, `image`, `hash_folder`, `hot`, `last_update` ";
 		$from = " FROM `article` ";
 		$where = " WHERE active = 1 ";
 		if($options['top']) {

@@ -119,7 +119,7 @@ class Admin_ImageUploadController extends Zend_Controller_Action
         if($this->_request->isPost()) {
             $data = array();
             
-            $result = $this->uploadTempImage($category);
+            $result = $this->uploadTempImage($category, $nameSeo);
             if(is_array($result) && $result) {//Luu thong tin upload
                 $modelImageUpload = Admin_Model_ImageUpload::factory();
 	            $uploadInfo = array('username' => $userName,
@@ -161,7 +161,7 @@ class Admin_ImageUploadController extends Zend_Controller_Action
      * @return 0: lỗi ko xác định, -1: file type ko phù hợp, -2: size vượt quá quy định
      * 
      * */
-    public function uploadTempImage($category) {
+    public function uploadTempImage($category, $nameSeo = null) {
         try{
             $upload = new Zend_File_Transfer_Adapter_Http();
             $files = $upload->getFileInfo();
@@ -190,7 +190,7 @@ class Admin_ImageUploadController extends Zend_Controller_Action
                 $originalImageFileName = str_replace(' ', '', basename($imagePath));
                 $imageFileName = $originalImageFileName;
                 $ext = pathinfo($imageFileName, PATHINFO_EXTENSION);
-                $imageFileName = md5(time() . $imageFileName);
+                $imageFileName = time() . '_' . $nameSeo;
                 $imageFileName = $imageFileName . '.' . $ext;
             
                 $imageUploadPath = $this->createTempFolder($imageUploadPath, $originalImageFileName);
