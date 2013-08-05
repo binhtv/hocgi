@@ -12,6 +12,8 @@ class Admin_CenterController extends Zend_Controller_Action
     public function editAction() {
         $id = trim(Utils_Global::$params['id']);
         $centerModel = Admin_Model_Center::factory();
+        $cityModel = Admin_Model_City::factory();
+        $cities = $cityModel->getCities();
         if($id) {//Edit
             $center = $centerModel->getCenters(array('id' => $id));
             $this->view->center = $center;
@@ -26,6 +28,8 @@ class Admin_CenterController extends Zend_Controller_Action
             $this->view->title = "Tạo trung tâm mới";
             $this->view->errMessage = Utils_Global::$params['errMessage'];
         }
+        
+        $this->view->cities = $cities;
     }
     
     public function listAction() {
@@ -41,7 +45,6 @@ class Admin_CenterController extends Zend_Controller_Action
         $modelCenter = Admin_Model_Center::factory();
         $options = array('offset' => ($page - 1) * $limit, 'limit' => $limit);
         $centers = $modelCenter->getCenters($options);
-        
         $this->view->centers = $centers;
         $this->view->title = "Tin tức";
         $this->view->page = $page;
@@ -57,37 +60,26 @@ class Admin_CenterController extends Zend_Controller_Action
         $contactInfo = Utils_Global::$params['contact_info'];
         $address = Utils_Global::$params['address'];
         $city = Utils_Global::$params['city'];
-        $cityCode = Utils_Global::$params['city_code'];
         $auth = Zend_Auth::getInstance();
         $userName = $auth->getIdentity()->username;
         if(!$userName) {
             Utils_Global::$params['errMessage'] = 'Vui lòng đăng nhập!';
-            $this->_forward('edit', 'course', 'admin');
+            $this->_forward('edit', 'center', 'admin');
             return;
         }
-//         if(!preg_match("/^[^<>\'\"\/;`%@&#*?!~|]*$/", $name)) {
-//             Utils_Global::$params['errMessage'] = 'Vui lòng nhập tên trung tâm hợp lệ!';
-//             $this->_forward('edit', 'course', 'admin');
-//             return;
-//         }
         if(!$contactInfo) {
             Utils_Global::$params['errMessage'] = 'Vui lòng nhập thông tin liên lạc!';
-            $this->_forward('edit', 'course', 'admin');
+            $this->_forward('edit', 'center', 'admin');
             return;
         }
         if(!$address) {
             Utils_Global::$params['errMessage'] = 'Vui lòng nhập địa chỉ!';
-            $this->_forward('edit', 'course', 'admin');
+            $this->_forward('edit', 'center', 'admin');
             return;
         }
         if(!$city) {
             Utils_Global::$params['errMessage'] = 'Vui lòng nhập city!';
-            $this->_forward('edit', 'course', 'admin');
-            return;
-        }
-        if(!$cityCode) {
-            Utils_Global::$params['errMessage'] = 'Vui lòng nhập city code!';
-            $this->_forward('edit', 'course', 'admin');
+            $this->_forward('edit', 'center', 'admin');
             return;
         }
         if($this->_request->isPost()) {
@@ -96,7 +88,6 @@ class Admin_CenterController extends Zend_Controller_Action
             		'contact_info' => $contactInfo,
                     'address' => $address,
                     'city' => $city,
-                    'city_code' => $cityCode,
                     'last_update' => time(),
             );
             

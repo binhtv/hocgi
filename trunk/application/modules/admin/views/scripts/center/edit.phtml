@@ -37,13 +37,11 @@
              <tr>
                  <td>City</td>
                  <td>
-                     <input type="text" name="city" id="city" value="<?php echo $this->center['city']?>"/>
-                 </td>
-             </tr>
-              <tr>
-                 <td>City code</td>
-                 <td>
-                     <input type="text" name="city_code" id="city_code" value="<?php echo $this->center['city_code']?>"/>
+                    <select id="city" name="city">
+                        <option value="1" <?php echo 0 == $this->params['city']?"selected='selected'":""?>>TP Hồ Chí Minh</option>
+                        <option value="2" <?php echo 1 == $this->params['city']?"selected='selected'":""?>>Hà Nội</option>
+                        <option value="3" <?php echo 2 == $this->params['city']?"selected='selected'":""?>>Bình Dương</option>
+                    </select>
                  </td>
              </tr>
              <tr>

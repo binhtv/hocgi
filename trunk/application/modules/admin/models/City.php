@@ -1,5 +1,5 @@
 <?php
-class Admin_Model_Center
+class Admin_Model_City
 {    
     private static $_instance;
     private static $_table = "center";
@@ -8,7 +8,7 @@ class Admin_Model_Center
     }
     
     /**
-     * @return Admin_Model_Center
+     * @return Admin_Model_City
      * */
     public static function factory() {
     	if(self::$_instance == null) {
@@ -19,7 +19,7 @@ class Admin_Model_Center
     }
     
     /**
-     * Insert center
+     * Insert city
      * @param array $data
      * @return 1 on success, 0 on failure
      * */
@@ -95,21 +95,20 @@ class Admin_Model_Center
     }
     
     /**
-     * Get Centers by given condition
+     * Get city by given condition
      * @param array $options
      * @return array
      * */
-    public function getCenters($options = array()) {
-        $centers = array();
-        $daoCenter = Admin_Model_DAO_Center::factory();
+    public function getCities($options = array()) {
+        $cities = array();
+        $daoCity = Admin_Model_DAO_City::factory();
         try {
-            $centers = $daoCenter->getCenters($options);
+            $cities = $daoCity->getCities($options);
         } catch (Exception $exc) {
-            prBinh($exc);
             Utils_Global::storeLog($exc, __FILE__, __LINE__);
         }
         
-        return $centers;
+        return $cities;
     }
     
     /**
@@ -135,6 +134,7 @@ class Admin_Model_Center
             !$data['contact_info'] ||
              !$data['address']||
             !$data['city'] ||
+            !$data['city_code'] ||
             ($isUpdate?false:!$data['hash_folder'])||
             ($isUpdate?false:!$data['image'])) {
             return false;
