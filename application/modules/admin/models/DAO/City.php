@@ -1,11 +1,11 @@
 <?php
-class Admin_Model_DAO_Center
+class Admin_Model_DAO_City
 {    
     private $_db;
     private static $_instance = null;
     
     /**
-     * @return Admin_Model_DAO_Center
+     * @return Admin_Model_DAO_City
      * */
     public static function factory() {
     	if(self::$_instance == null) {
@@ -52,22 +52,22 @@ class Admin_Model_DAO_Center
    }
    
    /**
-     * Get list of centers by given options
+     * Get list of cities by given options
      * @param array $options
      * @return array
      * */
-	public function getCenters($options = array()) {
-		$sql = "SELECT `center`.`id`, `center`.`name`, `image`, `contact_info`, `address`, `hash_folder`, `last_update`, `dateline`, `city`.`name` as `city_name`, `city`.`id` as `city_id` ";
-		$from = " FROM `center` INNER JOIN `city` ON `center`.`city` = `city`.`id` ";
+	public function getCities($options = array()) {
+		$sql = "SELECT * ";
+		$from = " FROM `city` ";
 		$where = " WHERE 1 = 1 ";
 		
 		if($options['id']) {
-			$where .= " AND `center`.`id` = {$this->_db->quote($options['id'], 'INTEGER')} ";
+			$where .= " AND `id` = {$this->_db->quote($options['id'], 'INTEGER')} ";
 		}
 		
-		$order = " ORDER BY `center`.`id` DESC ";
+		$order = " ORDER BY `id` DESC ";
 		if($options['order'] && $options['by']) {
-			$order = " ORDER BY `center`.`{$options['order']}` {$options['by']} ";
+			$order = " ORDER BY `{$options['order']}` {$options['by']} ";
 		}
 		
 		$limit = "";

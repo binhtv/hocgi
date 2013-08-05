@@ -11,7 +11,6 @@
                 <th>Contact Information</th>
                 <th>Address</th>
                 <th>City</th>
-                <th>City code</th>
                 <th>Last update</th>
                 <th>Created</th>
                 <th>Action</th>
@@ -29,10 +28,7 @@
                  </td>
                  <td><?php echo $center['contact_info']?></td>
                  <td><?php echo $center['address']?></td>
-                 <td><?php echo $center['city']?></td>
-                 <td>
-                     <?php echo $center['city_code'];?>
-                 </td>
+                 <td><?php echo $center['city_name']?></td>
                  <td><?php echo date('d/m/Y', $center['last_update'])?></td>
                  <td><?php echo date('d/m/Y', $center['dateline'])?></td>
                  <td>
