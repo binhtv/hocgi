@@ -14,6 +14,9 @@
             <!-- text-->
             <div class="mid-content">
             	<?php echo $this->course['content']; ?>
+            	<div style="font-weight: bold;">Học phí: <?php echo number_format($this->course['tuition'], 0, ',', '.'); ?> VNĐ</div>
+            	<div style="font-weight: bold;">Lịch học</div>
+            	<?php echo $this->course['schedule'];?>
             </div>
     </div>
 <?php }?>

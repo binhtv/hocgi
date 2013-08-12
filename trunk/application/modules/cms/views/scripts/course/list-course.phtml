@@ -2,7 +2,7 @@
 <?php if(is_array($this->courses) && count($this->courses) > 0) {?>
         	<!-- phan trang top-->
             <div class="pagination_courses">                
-                <?php echo $this->paginationcontrolcourse($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforcourse.phtml', $this->name, $this->tuitionFrom, $this->tuitionTo, $this->city, $this->tab);?>              
+                <?php echo $this->paginationcontrolcourse($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforcourse.phtml', $this->name, $this->tuitionFrom, $this->tuitionTo, $this->city, $this->tab, $this->category);?>              
             </div>
             <!-- end phan trang top-->
             <div class="grid-courses">
@@ -38,7 +38,7 @@
            </div>
                 <!-- phan trang bottom-->
                 <div class="pagination_courses">                
-                    <?php echo $this->paginationcontrolcourse($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforcourse.phtml', $this->name, $this->tuitionFrom, $this->tuitionTo, $this->city, $this->tab);?>          
+                    <?php echo $this->paginationcontrolcourse($this->page, $this->totalItem, $this->numRowPerPage, 'paginationajaxforcourse.phtml', $this->name, $this->tuitionFrom, $this->tuitionTo, $this->city, $this->tab,$this->category);?>          
                 </div>
                 <!-- end phan trang bottom-->
     <?php } else {?>

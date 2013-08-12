@@ -4,6 +4,7 @@
 //    header('Location: /Maintenance.htm');
 //}
 ob_start();
+session_start();
 define('DS', DIRECTORY_SEPARATOR);
 // Define path to application directory
 defined('APPLICATION_BASE')

@@ -80,6 +80,7 @@ class Cms_CourseController extends Zend_Controller_Action {
 		$this->view->tuitionTo = $tuitionTo;
 		$this->view->city = $city;
 		$this->view->tab = $tab;
+		$this->view->category = $category;
 		if(Utils_Global::get('isAjax')) {
 			$this->_helper->layout()->disableLayout();
 		}

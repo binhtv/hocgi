@@ -22,7 +22,7 @@ body {
 #header .header-up{
 	width:755px;}
 #header .box-login{ width:100%; text-align:right; padding:5px 0}	
-box-login ul{ display:inline-block; float:right}
+.box-login ul{ display:inline-block; float:right}
 .box-login li{
 	display:inline-block;
 	float:left;
@@ -38,7 +38,7 @@ box-login ul{ display:inline-block; float:right}
 	text-align:left;	
 	color:#8c8c8c;
 	}
-.divDropDown form{
+.divDropDown .form{
 	background:#fff;	
 	padding:10px;
 	border:1px solid #ececec;
@@ -70,6 +70,7 @@ border:1px solid #6abde4;
  box-shadow:0 0 4px #6abde4;
   outline: none;
 }
+
 input.exclusive{
 	background:url(../images/bg_bt.png) left -84px repeat-x;
     border:1px solid #0BA5F0;
@@ -81,6 +82,19 @@ input.exclusive{
     display:inline-block;
     font-weight: bold;
     padding: 5px 10px;  	
+}
+a.exclusive, a.exclusive:hover, a.exclusive:visited, a.exclusive:active{
+	background:url(../images/bg_bt.png) left -84px repeat-x;
+    border:1px solid #0BA5F0;
+    -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+    color: #fff;
+    cursor: pointer;;
+    display:inline-block;
+    font-weight: bold;
+    padding: 5px 10px;
+	text-decoration: none;  	
 }
 .box-login .hidden{right:0; top:22px}	
 .hidden{
@@ -135,6 +149,7 @@ border-radius: 5px;
 	line-height:45px;
 	background:url(../images/menu_mid.gif) right center no-repeat;
 	position:relative;
+	z-index:1000
 }
 .ulMenu li a{
 	color:#fff;
@@ -252,7 +267,7 @@ text-align:center; font: bold 16px/37px Arial, Helvetica, sans-serif; color:#fff
     z-index: 3200;
 }
 /*register*/
-.form_register { color:#5c5c5c; background:#fff}
+.form_register { color:#5c5c5c; background:#fff; min-width: 700px;}
 .form_register fieldset{
 	border:none;
 	padding:10px
@@ -269,7 +284,7 @@ text-align:center; font: bold 16px/37px Arial, Helvetica, sans-serif; color:#fff
     padding: 6px 15px;
     text-align: right;
     width: 130px;}
-.form_register  sup , .error_ms{ color:#ff0000} 	
+.form_register  sup , .error_ms{ color:#ff0000; display: none;} 	
 .form_register  .textfiled{
 	width:300px
 }
@@ -300,8 +315,10 @@ text-align:center; font: bold 16px/37px Arial, Helvetica, sans-serif; color:#fff
 }
 .scroll_thongke .block_left{
 	float:left;
-	width:150px;}
-.scroll_thongke .block_right{ float:right; width:80px;}	
+	width:150px;
+	color:#ff0000
+}
+.scroll_thongke .block_right{ float:right; width:80px;color:#ff0000; padding-left:5px}	
 .scroll_thongke li .scroll_color {
     background: url("../images/cols.gif") no-repeat scroll left top transparent;
     float: left;

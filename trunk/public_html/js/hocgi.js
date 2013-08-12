@@ -41,6 +41,10 @@ Utils.hideMask = function() {
 	$('#BoxOverlay').remove();
 };
 
+Utils.checkValidEmail = function(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
 
 if(typeof Article == 'undefined') {
@@ -84,10 +88,10 @@ if(typeof Course.HandleFunction == 'undefined') {
 	Course.HandleFunction = {};
 };
 Course.tab = '';
-Course.load = function(page, name, tuition_from, tuition_to, city, tab, keySearch) {
+Course.load = function(page, name, tuition_from, tuition_to, city, tab, category, keySearch) {
 	var url = '/cms/course/list-course';
 	var data = 'id=' + category +'&page=' + page + '&name=' + name + '&from=' + tuition_from + '&to=' + tuition_to + '&city=' + city + '&tab=' + tab;
-	if(typeof keySearch != 'undefined' || keySearch != '') {
+	if(typeof keySearch != 'undefined' && keySearch != '') {
 		url = '/cms/search/index';
 		data = {page:page, keySearch:keySearch};
 	}
