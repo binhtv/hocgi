@@ -1,0 +1,115 @@
+<div id="popup_formregister" style="display:none">
+  <div class="login_title clearBoth">Đăng ký thành viên hocgi.net</div>
+  <div class="form_register" id="form_register">
+    <fieldset>
+      <div class="form_content clearfix">
+        <div class="account_title">Thông tin tài khoản</div>
+        <div class="form_text">
+        	<p>
+                <label for="username" class="label"> <sup>(*)</sup>Tên truy cập</label>
+                <input type="text" class="textfiled" id="username" name="username">
+                <span class="error_ms" id="err_username">Tên đăng nhập không được trống</span>
+            </p>
+           <p>
+                <label for="password" class="label"><sup>(*)</sup>Mật khẩu </label>
+                <input type="password" class="textfiled" id="password" name="password">  
+				<span class="error_ms" id="err_password">Mật khẩu không được trống</span>            
+            </p>
+           <p>
+                <label for="r_password" class="label"><sup>(*)</sup>Xác nhận mật khẩu</label>
+                <input type="password" class="textfiled" id="r_password" name="r_password">                
+				<span class="error_ms" id="err_r_password">Nhập lại mật khẩu không khớp</span>
+            </p>
+            <p>
+                <label for="email" class="label"><sup>(*)</sup>E-mail</label>
+                <input type="text" class="textfiled" id="email" name="email">               
+				<span class="error_ms" id="err_email">Nhập email hợp lệ</span>
+            </p>
+             <p>
+                <label for="r_email" class="label"><sup>(*)</sup>Xác nhận E-mail</label>
+                <input type="text" class="textfiled" id="r_email" name="r_email">   
+				<span class="error_ms" id="err_r_email">Nhập lại email không khớp</span>           
+            </p>          
+            
+             <p class="account_title">Thông tin cá nhân</p>
+             <p class="required text">
+                <label for="fullname" class="label"> <sup>(*)</sup>Họ và tên</label>
+                <input type="text" class="textfiled" id="fullname" name="fullname">                 
+				<span class="error_ms" id="err_fullname">Họ tên không được trống</span>
+            </p>      
+            <p>
+				<span class="label">Giới tính</span>
+                        <input type="radio" value="1" id="id_gender1" name="id_gender" checked="checked">
+                        <label class="top" for="id_gender1">Nam</label>
+                        <input type="radio" value="2" id="id_gender2" name="id_gender">
+                        <label class="top" for="id_gender2">Nữ</label>		
+                        <span class="error_ms" id="err_id_gender">Vui lòng chọn giới tính</span>					
+			</p>
+            <p>		
+            	<span class="label">Ngày sinh</span>
+			<select name="day" id="day">
+				<option value="">Ngày</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+                <option value="16">16</option>
+                <option value="17">17</option>
+                <option value="18">18</option>
+                <option value="19">19</option>
+                <option value="20">20</option>
+                <option value="21">21</option>
+                <option value="22">22</option>
+                <option value="23">23</option>
+                <option value="24">24</option>
+                <option value="25">25</option>
+                <option value="26">26</option>
+                <option value="27">27</option>
+                <option value="28">28</option>
+                <option value="29">29</option>
+                <option value="30">30</option>
+                <option value="31">31</option>
+			</select>
+			
+			<select name="month" id="month">
+				<option value="">Tháng</option>
+                <option value="1">January</option>
+                <option value="2">February</option>
+                <option value="3">March</option>
+                <option value="4">April</option>
+                <option value="5">May</option>
+                <option value="6">June</option>
+                <option value="7">July</option>
+                <option value="8">August</option>
+                <option value="9">September</option>
+                <option value="10">October</option>
+                <option value="11">November</option>
+                <option value="12">December</option>
+			</select>
+			<select name="year" id="year">
+				<option value="">Năm</option>		
+				<?php for ($from = 1950; $from < 2010; $from++) {?>						
+                <option value="<?php echo $from?>"><?php echo $from?></option>
+                <?php }?>
+			</select>
+			</p>  
+			<p  style="padding-left:250px; text-align:left">
+				<input type="submit" class="exclusive" value="Đăng ký" id="registerAccountButton"/>
+               
+            </p>           
+        </div>
+      </div>
+    </fieldset>
+  </div>
+</div>

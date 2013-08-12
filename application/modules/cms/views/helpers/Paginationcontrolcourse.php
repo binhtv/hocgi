@@ -13,7 +13,7 @@ class cms_View_Helper_Paginationcontrolcourse
 
 	public $view;
 	
-	public function paginationcontrolcourse($currentPageNumber, $totalItem, $numRowPerPage, $partial = null, $name=null, $tuition_from = null, $tuition_to = null, $city=null, $tab=null, $keySearch=null)
+	public function paginationcontrolcourse($currentPageNumber, $totalItem, $numRowPerPage, $partial = null, $name=null, $tuition_from = null, $tuition_to = null, $city=null, $tab=null, $category = null, $keySearch=null)
 	{
 		$pages->totalItemCount = $totalItem;
 		$pages->first            = 1;
@@ -79,6 +79,7 @@ class cms_View_Helper_Paginationcontrolcourse
 			$pages->to = $tuition_to;
 			$pages->city = $city;
 			$pages->tab = $tab;
+			$pages->category = $category;
 			$pages->keySearch = $keySearch;
 		}
 	

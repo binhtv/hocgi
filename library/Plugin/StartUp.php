@@ -19,6 +19,7 @@ class Plugin_StartUp extends Zend_Controller_Plugin_Abstract
 		Utils_Global::set('imgUrl', $siteConfig->imgUrl);
 		Utils_Global::set('staticUrl', $siteConfig->staticUrl);
 		Utils_Global::set('templateVariables', array());
+		Utils_Global::set('username', $_SESSION['username']);
 		foreach ($this->_request->getParams() as $key => $value) {
 			Utils_Global::$params[$key] = $value;
 		}

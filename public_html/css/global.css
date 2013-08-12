@@ -200,3 +200,7 @@ tr.odd {
 tr.odd {
 /* 	background-color: #E4DFDF; */
 }
+
+.f_login a, .f_login a:hover, .f_login a:visited, .f_login a:active {
+	text-decoration: none !important;
+}
