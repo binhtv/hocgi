@@ -96,6 +96,7 @@ class Cms_CourseController extends Zend_Controller_Action {
 		$this->view->metadata = $this->view->metadata('home', array('keyword' => $this->view->keyword),
 				$this->view->serverUrl() . $canonical);
 		Utils_Global::$params['category'] = $course['category'];
+		Utils_Global::$params['course_name'] = $course['name'];
 		if(Utils_Global::get('isAjax')) {
 		    $this->_helper->layout()->disableLayout();
 		    $this->view->isAjax = 1;
@@ -118,19 +119,18 @@ class Cms_CourseController extends Zend_Controller_Action {
 	
 	public function courseComparisonAction() {
 		$limit = intval(Utils_Global::$params['limit']);
-		$name = Utils_Global::$params['name'];
+		$name = Utils_Global::$params['course_name'];
 		$tuitionFrom = intval(Utils_Global::$params['from']);
 		$tuitionTo = intval(Utils_Global::$params['to']);
-		$name = Utils_Global::$params['name'];
 		$city = Utils_Global::$params['city'];
 		$category = Utils_Global::$params['category'];
 		if($limit <= 0) {
-			$limit = 7;
+			$limit = 8;
 		}
 		$courseModel = Cms_Model_Course::factory();
-		$options = array('category' => $category, 'name' => $name, 'tuition_from' => $tuitionFrom,
+		$options = array('category' => $category, 'tuition_from' => $tuitionFrom,
 						'tuition_to' => $tuitionTo, 'city' => $city); 
-		$courses = $courseModel->getCourses(0, $limit, $options);
+		$courses = $courseModel->searchFullText($name, 0, $limit, $options);
 		$this->view->courses = $courses;
 		$this->view->staticUrl = Utils_Global::get('staticUrl') . '/course/';
 		$this->view->currentId = Utils_Global::$params['id'];

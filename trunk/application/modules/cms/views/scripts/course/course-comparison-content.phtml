@@ -1,7 +1,11 @@
 <?php if(count($this->courses) == 0) {?>
 <div>Không có khóa học nào</div>
 <?php }?>
-<?php foreach($this->courses as $course):?>
+<?php foreach($this->courses as $course):
+    if($course['id'] == $this->currentId) {
+        continue;
+    }
+?>
 	<li class="course_top clearfix">
 		<a class="aImg59" href="<?php echo $this->serverUrl() . $this->url(array('id' => $course['id'], 'name_seo' => $course['name_seo']), 'course_detail');?>">
 		<img src="<?php echo $this->staticUrl . $course['hash_folder'] . '/' . $course['image']?>" width="59" height="48" alt="<?php echo $course['image'];?>"/></a>
@@ -10,7 +14,20 @@
 				<?php echo $course['name']?></a>
 			<p><?php echo $course['center_name']?></p>
 		</div>
-		<div class="course_at fl"><?php echo $course['city']?></div>
+		<div class="course_place fl" style="margin-left: -55px;">
+		    <?php echo number_format($course['tuition'], 0, ',', '.'); ?> VNĐ
+		</div>
+		<div class="course_at fl">
+		    <?php if($course['city'] == 1) {
+		        echo "TP Hồ Chí Minh";
+		    } else if($course['city'] == 2) {
+                echo "Hà Nội";
+            } else if($course['city'] == 3) {
+                echo "Bình Dương";
+            } else {
+                echo "Tỉnh thành khác";
+            }?>
+		    </div>
 		<?php if($this->currentId != $course['id']):?>
     		<div class="ccomparse fr">
     			<a class="btn_compare" href="javascript:void(0);" data-course-id="<?php echo $course['id']?>">So sánh</a>

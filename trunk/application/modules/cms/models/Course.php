@@ -141,13 +141,14 @@ class Cms_Model_Course
 	 * @param string $keySearch
 	 * @param integer $offset
 	 * @param integer $limit
+	 * @param array $options
 	 * @return array
 	 * */
-	public function searchFullText($keySearch, $offset=0, $limit=10) {
+	public function searchFullText($keySearch, $offset=0, $limit=10, $options=null) {
 	    $result = array();
 	    try {
 	        $courseDao = Cms_Model_DAO_Course::factory();
-	        $result = $courseDao->searchFullText($keySearch, $offset, $limit);
+	        $result = $courseDao->searchFullText($keySearch, $offset, $limit, $options);
 	    } catch (Exception $exc) {
 	        prBinh($exc);
 	        Utils_Global::storeLog($exc, __FILE__, __LINE__);
