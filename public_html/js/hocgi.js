@@ -152,14 +152,14 @@ Course.HandleFunction.handleClickTabCourse = function(e) {
 	$('li.tabs-selected').removeClass('tabs-selected');
 	$(this).parent().addClass('tabs-selected');
 	Course.tab = tab;
-	Course.load(1, '', '', '', '', tab);
+	Course.load(1, '', '', '', '', tab, category);
 };
 Course.HandleFunction.handleClickFilterCourse = function(e) {
 	var name = $('#f_name').val();
 	var from = $('#f_tuition_from').val();
 	var to = $('#f_tuition_to').val();
 	var city = $('#f_city').val();
-	Course.load(1, name, from, to, city);
+	Course.load(1, name, from, to, city, Course.tab, category);
 };
 
 Course.HandleFunction.handleClickFilterDetailCourse = function(e) {

@@ -38,7 +38,7 @@ class Cms_Model_DAO_Course
 			$where .= " AND promotion = 1 ";
 		}
 		if($options['city']) {
-			$where .= " AND `center`.`city_code` LIKE '%{$options['city']}%' ";
+			$where .= " AND `center`.`city` LIKE '%{$options['city']}%' ";
 		}
 		if($options['tuition_from']) {
 			$where .= " AND tuition >= {$this->_db->quote($options['tuition_from'], 'INTEGER')} ";
@@ -128,17 +128,34 @@ class Cms_Model_DAO_Course
 	 * @param string $k
 	 * @param integer $offset
 	 * @param integer $limit
+	 * @param array $options
 	 * @return array
 	 * */
-	public function searchFullText($k, $offset, $limit) {
+	public function searchFullText($k, $offset, $limit, $options = null) {
 	    $searchSql = "SELECT `course`.`id`, `course`.`name`, `name_seo`, `course`.`image`, `content`, `course`.`hash_folder`,`tuition`, `course_link`, `category`,
 		                    `opening_date`, `city`, `center`.`name` `center_name`, `center`.`image` `center_logo`, `center`.`hash_folder` `chash_folder`, `contact_info` 
-	                    FROM `course` INNER JOIN `center` ON `course`.`center_id` = `center`.`id` WHERE active = 1
-                	    and ( MATCH (`course`.`name`) AGAINST ({$this->_db->quote("*$k*")}) OR `course`.`name` LIKE {$this->_db->quote("%$k%")})
-                	    or ( MATCH (content) AGAINST ({$this->_db->quote("*$k*")}) OR content LIKE {$this->_db->quote("%$k%")})
-                	    ORDER BY `course`.`dateline` DESC 
-	                    LIMIT $offset , $limit ";
-	    $result = $this->_db->fetchAll ( $searchSql );
+	                    FROM `course` INNER JOIN `center` ON `course`.`center_id` = `center`.`id` ";
+	    $where = " WHERE active = 1
+                	    and ( MATCH (`course`.`name`) AGAINST ({$this->_db->quote("*$k*")})) ";
+	    if($options) {
+    	    if($options['category']) {
+    			$where .= " AND category = {$this->_db->quote($options['category'], 'INTEGER')} ";
+    		}
+    		if($options['city']) {
+    			$where .= " AND `center`.`city_code` = '%{$options['city']}%' ";
+    		}
+    		if($options['tuition_from']) {
+    			$where .= " AND tuition >= {$this->_db->quote($options['tuition_from'], 'INTEGER')} ";
+    		}
+    		if($options['tuition_to']) {
+    			$where .= " AND tuition <= {$this->_db->quote($options['tuition_to'], 'INTEGER')} ";
+    		}
+	    }
+// 	    $orderBy = " ORDER BY `course`.`dateline` DESC ";
+	    $limit =  " LIMIT $offset , $limit ";
+// 	    echo $searchSql . $where . $orderBy . $limit;
+// 	    die;
+	    $result = $this->_db->fetchAll ( $searchSql . $where . $limit );
 	    return $result;
 	}
 	
